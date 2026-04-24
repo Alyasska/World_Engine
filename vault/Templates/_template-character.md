@@ -3,41 +3,40 @@ id: char-
 type: character
 title: ""
 aliases: []           # other names, titles, epithets
-canonState: draft
+canonState: draft     # canon | draft | alt | legend | retired
 
 # Identity
 species: human
-gender: ""
+role: ""              # protagonist | antagonist | supporting | background
+faction: ""           # primary faction slug (null if none)
+
+# Biography
+birthPlace: ""        # Place slug
+currentPlace: ""      # Place slug
 birthDate: ""
 deathDate: ""         # leave blank if alive
 
-# Affiliations
-birthPlace: ""        # Place slug
-currentPlace: ""      # Place slug
-institutions: []      # Institution slugs (faction, religion, guild)
-allegiances: []       # broader loyalties
-
 # Traits
 traits: []            # personality traits, 3-5 words
+arc: ""               # one-sentence character arc
+
+# Web summary — becomes the description field in web/data/characters.json
+description: ""       # one-paragraph summary for the web detail panel
+
+# Connections (slugs — these fields mirror the JSON contract directly)
+linkedPlaces: []      # significant places in their story
+linkedEvents: []      # Event slugs they participated in
+linkedStories: []     # Story slugs they appear in
+
+# Vault-only fields (not parsed to JSON in Phase 1)
+gender: ""
 abilities: []         # skills, powers, notable capabilities
 flaws: []
-
-# Narrative
-arc: ""               # one-sentence character arc
-role: ""              # protagonist | antagonist | supporting | background
-
-# Map
-mapRefs: []           # key locations associated with this character
-# - cellId: "azgaar-cell-XXXX"
-
-# Connections
-linkedStories: []     # Story slugs they appear in
-linkedEvents: []      # Event slugs they participated in
+allegiances: []       # broader loyalties beyond primary faction
 linkedCharacters: []  # notable relationships (reference by slug)
-linkedPlaces: []      # significant places in their story
 
 # Meta
-sourceStatus: authored
+sourceStatus: authored  # authored | generated | imported | template
 tags: []
 notes: ""
 ---

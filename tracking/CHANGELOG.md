@@ -4,6 +4,33 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-24] Phase 2A — Obsidian data contract alignment
+
+**Branch:** `phase-2a-obsidian-data-contract`
+
+**Added:**
+- `docs/OBSIDIAN_DATA_CONTRACT.md` — canonical field contract for Place, Character, Event, Story; field mapping tables; list of resolved mismatches; Phase 2B parser scope
+- `vault/Places/vareth.md` — first real vault Place entry using aligned template
+- `vault/Characters/aran-voss.md` — first real vault Character entry
+- `vault/Events/siege-of-vareth.md` — first real vault Event entry
+- `vault/Stories/the-first-winter.md` — first real vault Story entry
+
+**Changed:**
+- `vault/Templates/_template-place.md` — `currentFaction`→`faction`; `significantEvents`→`linkedEvents`; `mapRef` structure to `{x, y, cellId}`; added `layer`, `description`; vault-only fields clearly marked
+- `vault/Templates/_template-character.md` — added `faction`, `description`; vault-only fields clearly marked
+- `vault/Templates/_template-event.md` — `chronology: {era, date}`→flat `era`+`date`; added `chronoPosition`; `affectedPlaces`→`linkedPlaces`; added `description`
+- `vault/Templates/_template-story.md` — `chronology: {era}`→flat `era`+`date`; added `chronoPosition`, `logline`, `description`, `linkedCharacters`; `additionalPlaces`→`linkedPlaces`
+- `tracking/MILESTONES.md` — Phase 2 split into 2A (complete), 2B, 2C
+- `tracking/NEXT_ACTIONS.md` — updated for Phase 2B
+- `PROJECT_INDEX.md` — added link to OBSIDIAN_DATA_CONTRACT.md
+
+**What was aligned:**
+- All four templates now use the same field names as `web/data/*.json`
+- A future parser script can copy frontmatter fields to JSON with no renaming
+- Fields that are vault-only (rich detail) are clearly marked and excluded from the contract
+
+---
+
 ## [2026-04-24] Phase 1 correction — Remove workspace-vault, use repo root as project Obsidian vault
 
 **Changed:**

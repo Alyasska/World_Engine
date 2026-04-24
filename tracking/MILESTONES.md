@@ -76,10 +76,37 @@ Track phase completion here. A phase is complete only when the Visual Confirmati
 
 ---
 
-## Phase 2 — Vault↔Map Link + Real Map Engine (Planned)
-**Status:** 🔲 Not started  
-**Goal:** (1) Script that parses `vault/*.md` YAML frontmatter → `web/data/*.json` automatically. (2) Decide on MapLibre vs continued SVG approach. (3) Clicking a map marker links to the actual vault Markdown entry.  
-**Visual Confirmation:** Edit a Place in `vault/Places/`, run the script, reload the map — the updated description appears in the detail panel without touching the JSON manually.
+## Phase 2A — Obsidian Data Contract Alignment
+**Status:** ✅ Complete
+**Branch:** `phase-2a-obsidian-data-contract`
+**Goal:** Align vault templates and web JSON to a shared field contract so a future parser can convert Markdown frontmatter to JSON with no field renaming. No parser yet — alignment only.
+
+**Checklist:**
+- [x] `docs/OBSIDIAN_DATA_CONTRACT.md` — canonical field contract for all four types
+- [x] Updated `vault/Templates/_template-place.md` — `faction`, `linkedEvents`, `layer`, `description`, `mapRef.x/y`
+- [x] Updated `vault/Templates/_template-character.md` — added `faction`, `description`
+- [x] Updated `vault/Templates/_template-event.md` — flat `era`/`date`/`chronoPosition`, `linkedPlaces`
+- [x] Updated `vault/Templates/_template-story.md` — flat `era`/`date`/`chronoPosition`, `linkedPlaces`, `logline`, `description`, `linkedCharacters`
+- [x] Sample vault note: `vault/Places/vareth.md`
+- [x] Sample vault note: `vault/Characters/aran-voss.md`
+- [x] Sample vault note: `vault/Events/siege-of-vareth.md`
+- [x] Sample vault note: `vault/Stories/the-first-winter.md`
+- [x] `PROJECT_INDEX.md` updated with contract doc link
+- [x] tracking files updated
+
+---
+
+## Phase 2B — Vault→JSON Parser Script (Planned)
+**Status:** 🔲 Not started
+**Goal:** Script that reads vault `.md` YAML frontmatter and writes `web/data/*.json` automatically. First real end-to-end test of the data contract.
+**Visual Confirmation:** Edit `vault/Places/vareth.md`, run the script, reload the map — updated description appears in the detail panel without touching JSON manually.
+
+---
+
+## Phase 2C — Map Engine Decision (Planned)
+**Status:** 🔲 Not started
+**Goal:** Decide whether to introduce MapLibre + Azgaar tiles or continue with the SVG approach. Add vault→marker link (clicking a marker opens the vault entry).
+**Visual Confirmation:** Click a map marker → vault entry opens in VS Code or browser preview.
 
 ---
 

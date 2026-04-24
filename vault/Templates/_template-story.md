@@ -3,34 +3,34 @@ id: story-
 type: story
 title: ""
 aliases: []
-canonState: draft
-# canon | draft | alt | legend | retired
+canonState: draft     # canon | draft | alt | legend | retired
 
-# Time
-chronology:
-  era: ""
-  startDate: ""
-  endDate: ""
+# Time — flat fields to match JSON contract
+era: ""               # age-founding | long-wars | etc.
+date: ""              # human-readable date or range: "Year 12–13, The Long Wars"
+chronoPosition: 0.0   # float 0.0–1.0, position on chronology bar
 
 # Spatial
-primaryPlace: ""        # references vault/Places/[slug].md
-additionalPlaces: []    # list of Place slugs
+primaryPlace: ""      # main Place slug
+linkedPlaces: []      # all Place slugs visited in the story
 
-# People & groups
-protagonists: []        # Character slugs
+# People
+protagonists: []      # Character slugs
 antagonists: []
-participants: []
-institutions: []        # Institution slugs
+participants: []      # other involved Character slugs
 
-# Map
-mapRefs: []
-# - cellId: "azgaar-cell-XXXX"
-# - coords: { x: 0, y: 0 }
+# Web summary — these fields go directly to web/data/stories.json
+logline: ""           # one-sentence hook shown in the web detail panel
+description: ""       # one-paragraph summary
 
-# Connections
-linkedEvents: []        # Event slugs that this story depicts or references
-linkedLore: []
-linkedSystems: []
+# Connections (slugs — these fields mirror the JSON contract directly)
+linkedEvents: []      # Event slugs depicted or referenced
+linkedCharacters: []  # all Character slugs in this story
+
+# Vault-only fields (not parsed to JSON in Phase 1)
+institutions: []      # Institution slugs involved
+linkedLore: []        # Lore entries this story draws on
+linkedSystems: []     # World system slugs (magic, economy, etc.)
 
 # Meta
 sourceStatus: authored  # authored | generated | imported | template
