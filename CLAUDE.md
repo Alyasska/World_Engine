@@ -4,8 +4,9 @@
 - **Project:** World Engine — private long-term worldbuilding system
 - **Repo:** https://github.com/Alyasska/World_Engine
 - **Local root:** `C:\mirror\мое\world_engine`
-- **Vault (Obsidian):** `C:\mirror\мое\world_engine\vault\`
-- **Phase:** 0 (bootstrap) → tracking in `tracking/MILESTONES.md`
+- **Creative vault (Obsidian):** `C:\mirror\мое\world_engine\vault\` — fictional world content
+- **Project vault (Obsidian):** `C:\mirror\мое\world_engine\workspace-vault\` — software dev management
+- **Phase:** 1 complete → tracking in `tracking/MILESTONES.md`
 
 ## Architecture Principles
 1. **Map-first, not CRUD-first.** Never start with database schemas. Start with visual output.
@@ -19,10 +20,17 @@
 - `tracking/` — milestones, next actions, changelog (update these as you work)
 - `terminology/` — canonical definitions for worldbuilding terms used in this project
 - `skills/` — reusable agent behavior guides
-- `vault/` — Obsidian-compatible Markdown knowledge base
-- `web/` — static preview and future frontend; GitHub Pages root
+- `vault/` — **creative** Obsidian vault: Stories, Characters, Places, Events, Lore (fictional world)
+- `workspace-vault/` — **project** Obsidian vault: phases, agent notes, decisions, prompts (dev management)
+- `web/` — static frontend; GitHub Pages root; contains `data/` (static JSON), `engine.js`, `index.html`
 - `references/` — external links, snippets, and non-code research assets
-- `scripts/` — utility scripts (data generation, file scaffolding, etc.)
+- `scripts/` — utility scripts (vault→JSON parser, file scaffolding, etc.)
+
+## Two-Vault Rule
+**Never mix creative lore with development notes.**
+- Fictional content (characters, stories, places, lore) → `vault/`
+- Dev content (phases, decisions, agent notes, prompts) → `workspace-vault/`
+- See `docs/OBSIDIAN_VSCODE_WORKFLOW.md` for setup and editing rules
 
 ## Agent Behavior Rules
 - Always update `tracking/CHANGELOG.md` when completing a task that changes files.
@@ -36,9 +44,10 @@
 
 ## Visual Confirmation Rule
 Every milestone must end with a visually confirmable output:
-- Phase 0: `web/index.html` deployed via GitHub Pages
-- Phase 1: Azgaar map embedded or iframe-previewed
-- Phase 2+: interactive MapLibre layer visible in browser
+- Phase 0: `web/index.html` deployed via GitHub Pages ✅
+- Phase 1: Pan/zoom map, clickable markers, detail panel, layer toggles all working at GitHub Pages URL ✅
+- Phase 2: Edit a vault entry → run script → reload page → updated data visible
+- Phase 3+: Interactive MapLibre layer with scrubable chronology
 
 ## What NOT to Do
 - Do not create a database schema before Phase 2

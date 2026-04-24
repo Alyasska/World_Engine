@@ -54,3 +54,30 @@ This document records every significant technical decision made in this project,
 **Rationale:** Azgaar's Fantasy Map Generator took years to build. MapLibre is maintained by a large community. Building replacements wastes time and produces inferior results.  
 **Protocol:** All candidates documented in `docs/OPEN_SOURCE_REPOS.md` before any import. License must be verified. Integration risk must be assessed.  
 **Trade-off:** Dependency on external projects. Mitigated by preferring MIT/Apache-licensed tools and wrapping them in thin adapter layers.
+
+---
+
+## AD-007 — Vanilla JS + Static SVG for Phase 1 Interaction Model
+**Date:** 2026-04-24  
+**Decision:** Phase 1 uses vanilla JS + hand-crafted SVG + static JSON. No MapLibre, no Vite, no npm dependencies.  
+**Rationale:** The goal of Phase 1 is to prove the interaction model (pan/zoom, clickable markers, detail panel, layer toggles, chronology bar) before committing to a specific map engine. MapLibre requires GeoJSON/tile data and a bundler — adding those before the interaction model is validated increases risk without benefit. If the interaction model is wrong, we haven't invested in MapLibre integration. If it's right, porting to MapLibre is a clean, well-scoped Phase 2 task.  
+**Trade-off:** The SVG world is hand-crafted, not procedurally generated. Cities are at approximate positions. Phase 2 will replace this with Azgaar-exported GeoJSON + MapLibre rendering.  
+**Revisit at:** Phase 2, when real geographic data (Azgaar JSON export) is available and MapLibre integration is the clear next step.
+
+---
+
+## AD-008 — Two-Vault Obsidian Architecture
+**Date:** 2026-04-24  
+**Decision:** Maintain two separate Obsidian vaults in the same Git repository: `vault/` for creative worldbuilding content, `workspace-vault/` for software project management.  
+**Rationale:** Mixing fictional lore with development notes in a single Obsidian graph causes clutter: the agent handoff note should not appear next to "Chapter 3 of The First Winter." Different mental contexts require different tools. Independent commits: a lore writing session should not pollute the development commit history.  
+**Trade-off:** Two Obsidian windows to open instead of one. Documented in `docs/OBSIDIAN_VSCODE_WORKFLOW.md` with setup instructions for both.  
+**Constraint:** `workspace-vault/` uses Obsidian `[[wikilinks]]` only for internal cross-references within that vault. Links to project files outside the vault use standard Markdown links.
+
+---
+
+## AD-009 — Static JSON as Phase 1 Data Bridge
+**Date:** 2026-04-24  
+**Decision:** Hand-authored static JSON files in `web/data/` (places, characters, events, stories) serve as the Phase 1 data layer. No backend, no parser, no database.  
+**Rationale:** Proves the correct data shape before building the vault→JSON parser. Fields mirror vault YAML frontmatter exactly (id, type, title, aliases, linkedPlaces, linkedCharacters, linkedEvents, chronology, canonState, mapRefs). Phase 2 script will parse `vault/*.md` and auto-generate these same JSON files.  
+**Trade-off:** Manual maintenance during Phase 1. Accepted — Phase 1 has a small, fixed dataset (8 places, 4 characters, 6 events, 3 stories).  
+**Revisit at:** Phase 2. When vault entries exceed ~20, manual JSON maintenance becomes unsustainable.

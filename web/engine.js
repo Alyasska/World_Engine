@@ -1,0 +1,654 @@
+'use strict';
+
+// ═══════════════════════════════════════════════════════════
+// WORLD ENGINE — Phase 1 Interactive Engine
+// Vanilla JS only. No external dependencies.
+// Works on GitHub Pages (/World_Engine/) and local server.
+// Local file:// won't work due to fetch() — use VS Code Live Server.
+// ═══════════════════════════════════════════════════════════
+
+const ZOOM_MIN = 0.35;
+const ZOOM_MAX = 4.5;
+
+const state = {
+  zoom: 1,
+  panX: 0,
+  panY: 0,
+  isDragging: false,
+  dragStartX: 0,
+  dragStartY: 0,
+  panStartX: 0,
+  panStartY: 0,
+  activeLayers: new Set(['geography', 'political', 'narrative']),
+  selectedId: null,
+  activeEra: 'long-wars',
+  data: { places: [], characters: [], events: [], stories: [] }
+};
+
+// ── DOM refs (set after DOMContentLoaded) ─────────────────
+let mapViewport, mapCanvas, markersGroup, panelWelcome, panelDetail;
+let chronoTrack, eraDisplay;
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+async function init() {
+  mapViewport  = document.getElementById('mapViewport');
+  mapCanvas    = document.getElementById('mapCanvas');
+  markersGroup = document.getElementById('markersGroup');
+  panelWelcome = document.getElementById('panelWelcome');
+  panelDetail  = document.getElementById('panelDetail');
+  chronoTrack  = document.getElementById('chronoTrack');
+  eraDisplay   = document.getElementById('eraDisplay');
+
+  await loadData();
+  centerMap();
+  renderMarkers();
+  renderChronology();
+  setupPanZoom();
+  setupLayerToggles();
+  setupZoomButtons();
+  setupChronoEvents();
+}
+
+// ══════════════════════════════════════════════════════════
+// DATA LOADING
+// ══════════════════════════════════════════════════════════
+async function loadData() {
+  try {
+    const [places, characters, events, stories] = await Promise.all([
+      fetch('./data/places.json').then(r => { if (!r.ok) throw r; return r.json(); }),
+      fetch('./data/characters.json').then(r => { if (!r.ok) throw r; return r.json(); }),
+      fetch('./data/events.json').then(r => { if (!r.ok) throw r; return r.json(); }),
+      fetch('./data/stories.json').then(r => { if (!r.ok) throw r; return r.json(); })
+    ]);
+    state.data = { places, characters, events, stories };
+    document.getElementById('dataStatus').textContent = `${places.length} places · ${characters.length} characters · ${events.length} events · ${stories.length} stories`;
+  } catch (err) {
+    console.warn('[engine] Data fetch failed. Run via a local server (VS Code Live Server recommended).', err);
+    document.getElementById('dataStatus').textContent = 'Data load failed — open via local server';
+    document.getElementById('dataStatus').style.color = '#e07070';
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// PAN & ZOOM
+// ══════════════════════════════════════════════════════════
+function applyTransform() {
+  mapCanvas.style.transform =
+    `translate(${state.panX}px, ${state.panY}px) scale(${state.zoom})`;
+}
+
+function centerMap() {
+  const vp = mapViewport.getBoundingClientRect();
+  // SVG canvas size: 1000 x 620
+  state.panX = Math.round((vp.width  - 1000) / 2);
+  state.panY = Math.round((vp.height - 620)  / 2);
+  state.zoom = 1;
+  applyTransform();
+}
+
+function zoomAt(clientX, clientY, newZoom) {
+  const rect = mapViewport.getBoundingClientRect();
+  const mx = clientX - rect.left;
+  const my = clientY - rect.top;
+  const ratio = newZoom / state.zoom;
+  state.panX = mx - ratio * (mx - state.panX);
+  state.panY = my - ratio * (my - state.panY);
+  state.zoom = newZoom;
+  applyTransform();
+}
+
+function setupPanZoom() {
+  mapViewport.style.cursor = 'grab';
+
+  // Mouse drag
+  mapViewport.addEventListener('mousedown', e => {
+    if (e.target.closest('[data-place-id]')) return;
+    state.isDragging = true;
+    state.dragStartX = e.clientX;
+    state.dragStartY = e.clientY;
+    state.panStartX  = state.panX;
+    state.panStartY  = state.panY;
+    mapViewport.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!state.isDragging) return;
+    state.panX = state.panStartX + (e.clientX - state.dragStartX);
+    state.panY = state.panStartY + (e.clientY - state.dragStartY);
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!state.isDragging) return;
+    state.isDragging = false;
+    mapViewport.style.cursor = 'grab';
+  });
+
+  // Scroll zoom (towards cursor)
+  mapViewport.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.14 : 0.88;
+    const next   = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, state.zoom * factor));
+    zoomAt(e.clientX, e.clientY, next);
+  }, { passive: false });
+
+  // Touch pan (single finger)
+  let lastTouchX = 0, lastTouchY = 0;
+  mapViewport.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  mapViewport.addEventListener('touchmove', e => {
+    if (e.touches.length === 1) {
+      state.panX += e.touches[0].clientX - lastTouchX;
+      state.panY += e.touches[0].clientY - lastTouchY;
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
+      applyTransform();
+    }
+    e.preventDefault();
+  }, { passive: false });
+}
+
+function setupZoomButtons() {
+  document.getElementById('btnZoomIn').addEventListener('click', () => {
+    const cx = mapViewport.getBoundingClientRect().width  / 2;
+    const cy = mapViewport.getBoundingClientRect().height / 2;
+    zoomAt(cx + mapViewport.getBoundingClientRect().left,
+           cy + mapViewport.getBoundingClientRect().top,
+           Math.min(ZOOM_MAX, state.zoom * 1.3));
+  });
+
+  document.getElementById('btnZoomOut').addEventListener('click', () => {
+    const cx = mapViewport.getBoundingClientRect().width  / 2;
+    const cy = mapViewport.getBoundingClientRect().height / 2;
+    zoomAt(cx + mapViewport.getBoundingClientRect().left,
+           cy + mapViewport.getBoundingClientRect().top,
+           Math.max(ZOOM_MIN, state.zoom * 0.77));
+  });
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    centerMap();
+    clearDetail();
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// LAYER TOGGLES
+// ══════════════════════════════════════════════════════════
+function setupLayerToggles() {
+  document.querySelectorAll('[data-layer]').forEach(btn => {
+    const layer = btn.dataset.layer;
+
+    // Chronology toggle controls the bar visibility
+    if (layer === 'chronology') {
+      btn.addEventListener('click', () => {
+        const bar = document.getElementById('chronoBar');
+        const on  = bar.classList.toggle('layer-hidden');
+        btn.classList.toggle('active', !on);
+        btn.setAttribute('aria-pressed', String(!on));
+      });
+      return;
+    }
+
+    btn.addEventListener('click', () => {
+      const isActive = state.activeLayers.has(layer);
+      if (isActive) {
+        state.activeLayers.delete(layer);
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      } else {
+        state.activeLayers.add(layer);
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+      }
+
+      // Toggle SVG groups
+      document.querySelectorAll(`.svg-layer-${layer}`).forEach(g => {
+        g.classList.toggle('layer-hidden', !state.activeLayers.has(layer));
+      });
+
+      // Also filter visible markers
+      updateMarkerVisibility();
+    });
+  });
+}
+
+function updateMarkerVisibility() {
+  document.querySelectorAll('[data-place-id]').forEach(el => {
+    const layer = el.dataset.markerLayer;
+    const visible = !layer || state.activeLayers.has(layer);
+    el.classList.toggle('layer-hidden', !visible);
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// PLACE MARKERS
+// ══════════════════════════════════════════════════════════
+const PLACE_TYPE_ICON = {
+  city:     { shape: 'circle', r: 7, ring: true  },
+  fortress: { shape: 'diamond',        ring: false },
+  town:     { shape: 'circle', r: 5, ring: false },
+  ruins:    { shape: 'ruins',          ring: false },
+  village:  { shape: 'circle', r: 3, ring: false },
+  landmark: { shape: 'circle', r: 4, ring: false }
+};
+
+const FACTION_COLORS = {
+  'northern-reach': '#6a9ac8',
+  'the-compact':    '#c8a044',
+  'free-coast':     '#6aaa88',
+  'null':           '#7a7870'
+};
+
+function markerColor(place) {
+  if (!state.activeLayers.has('political') || !place.faction) return '#c8a96e';
+  return FACTION_COLORS[place.faction] || '#c8a96e';
+}
+
+function renderMarkers() {
+  markersGroup.innerHTML = '';
+  state.data.places.forEach(place => {
+    const { x, y } = place.mapRef;
+    const icon = PLACE_TYPE_ICON[place.placeType] || PLACE_TYPE_ICON.village;
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('data-place-id',     place.id);
+    g.setAttribute('data-marker-layer', place.layer);
+    g.setAttribute('class', `place-marker marker-${place.placeType}`);
+    g.setAttribute('transform', `translate(${x},${y})`);
+    g.style.cursor = 'pointer';
+
+    const color = markerColor(place);
+
+    if (icon.shape === 'circle') {
+      if (icon.ring) {
+        // Outer ring
+        const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        ring.setAttribute('r', String(icon.r + 4));
+        ring.setAttribute('fill', 'none');
+        ring.setAttribute('stroke', color);
+        ring.setAttribute('stroke-width', '1.5');
+        ring.setAttribute('opacity', '0.4');
+        g.appendChild(ring);
+      }
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('r', String(icon.r));
+      dot.setAttribute('fill', color);
+      dot.setAttribute('stroke', '#0d0e12');
+      dot.setAttribute('stroke-width', '1');
+      g.appendChild(dot);
+
+    } else if (icon.shape === 'diamond') {
+      const d = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      d.setAttribute('points', '0,-7 5,0 0,7 -5,0');
+      d.setAttribute('fill', color);
+      d.setAttribute('stroke', '#0d0e12');
+      d.setAttribute('stroke-width', '1');
+      g.appendChild(d);
+
+    } else if (icon.shape === 'ruins') {
+      // Broken X for ruins
+      ['M -5,-5 L 5,5', 'M 5,-5 L -5,5'].forEach(dStr => {
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        l.setAttribute('d', dStr);
+        l.setAttribute('stroke', '#9a7a5a');
+        l.setAttribute('stroke-width', '2');
+        l.setAttribute('stroke-linecap', 'round');
+        g.appendChild(l);
+      });
+      const rc = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      rc.setAttribute('r', '3');
+      rc.setAttribute('fill', 'none');
+      rc.setAttribute('stroke', '#9a7a5a');
+      rc.setAttribute('stroke-width', '1.5');
+      rc.setAttribute('stroke-dasharray', '2,2');
+      g.appendChild(rc);
+    }
+
+    // Invisible hit area (easier to click small markers)
+    const hit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    hit.setAttribute('r', '14');
+    hit.setAttribute('fill', 'transparent');
+    g.appendChild(hit);
+
+    // Label
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('class', 'marker-label');
+    const labelY = (icon.ring ? 20 : 16);
+    label.setAttribute('y', String(labelY));
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('fill', '#c8b898');
+    label.setAttribute('font-size', place.placeType === 'city' ? '11' : '9.5');
+    label.setAttribute('font-family', 'Georgia, serif');
+    label.setAttribute('pointer-events', 'none');
+    label.textContent = place.title;
+    g.appendChild(label);
+
+    g.addEventListener('click', e => {
+      e.stopPropagation();
+      showPlaceDetail(place.id);
+    });
+
+    // Tooltip on hover
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = `${place.title} (${place.placeType})`;
+    g.appendChild(title);
+
+    markersGroup.appendChild(g);
+  });
+
+  // Click on map background clears selection
+  document.getElementById('worldSvg').addEventListener('click', e => {
+    if (!e.target.closest('[data-place-id]')) clearDetail();
+  });
+
+  updateMarkerVisibility();
+}
+
+function updateMarkerSelection(id) {
+  document.querySelectorAll('.place-marker').forEach(m => {
+    m.classList.toggle('marker-selected', m.dataset.placeId === id);
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// DETAIL PANEL
+// ══════════════════════════════════════════════════════════
+function showPlaceDetail(placeId) {
+  const place = state.data.places.find(p => p.id === placeId);
+  if (!place) return;
+
+  state.selectedId = placeId;
+  updateMarkerSelection(placeId);
+
+  const linkedChars    = place.linkedCharacters
+    ? state.data.characters.filter(c => place.linkedCharacters.includes(c.id))
+    : [];
+  const linkedEvts     = place.linkedEvents
+    ? state.data.events.filter(e => place.linkedEvents.includes(e.id))
+    : [];
+  const linkedStories  = place.linkedStories
+    ? state.data.stories.filter(s => place.linkedStories.includes(s.id))
+    : [];
+
+  const canonBadge = canonBadgeHTML(place.canonState);
+  const factionLabel = place.faction
+    ? `<span class="detail-faction" style="color:${FACTION_COLORS[place.faction]}">${factionName(place.faction)}</span>`
+    : '<span class="detail-faction muted">Independent</span>';
+
+  const eraText = place.chronology
+    ? `<p class="detail-era">${place.chronology.status || ''} · ${place.chronology.founded || ''}</p>`
+    : '';
+
+  panelDetail.innerHTML = `
+    <div class="detail-header">
+      <h2 class="detail-title">${place.title}</h2>
+      <div class="detail-meta">
+        <span class="detail-type-badge badge-${place.placeType}">${placeTypeLabel(place.placeType)}</span>
+        ${canonBadge}
+      </div>
+      ${factionLabel}
+      ${eraText}
+    </div>
+    <p class="detail-description">${place.description}</p>
+
+    ${linkedChars.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Characters</h3>
+      <ul class="detail-link-list">
+        ${linkedChars.map(c => `
+          <li class="detail-link-item" data-char-id="${c.id}">
+            <span class="link-icon">👤</span>
+            <span class="link-name">${c.title}</span>
+            <span class="link-sub">${c.role}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedEvts.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Events</h3>
+      <ul class="detail-link-list">
+        ${linkedEvts.map(ev => `
+          <li class="detail-link-item" data-event-id="${ev.id}">
+            <span class="link-icon">⚡</span>
+            <span class="link-name">${ev.title}</span>
+            <span class="link-sub">${ev.date}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedStories.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Stories</h3>
+      <ul class="detail-link-list">
+        ${linkedStories.map(s => `
+          <li class="detail-link-item" data-story-id="${s.id}">
+            <span class="link-icon">📖</span>
+            <span class="link-name">${s.title}</span>
+            <span class="link-sub muted">${s.logline}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${place.aliases?.length ? `
+    <div class="detail-section detail-aliases">
+      <span class="muted">Also known as: </span>${place.aliases.join(' · ')}
+    </div>` : ''}
+  `;
+
+  panelWelcome.hidden = true;
+  panelDetail.hidden  = false;
+
+  // Wire linked item clicks
+  panelDetail.querySelectorAll('[data-event-id]').forEach(el => {
+    el.addEventListener('click', () => showEventDetail(el.dataset.eventId));
+  });
+}
+
+function showEventDetail(eventId) {
+  const ev = state.data.events.find(e => e.id === eventId);
+  if (!ev) return;
+
+  const linkedPlaces = ev.linkedPlaces
+    ? state.data.places.filter(p => ev.linkedPlaces.includes(p.id))
+    : [];
+  const linkedChars  = ev.participants
+    ? state.data.characters.filter(c => ev.participants.includes(c.id))
+    : [];
+
+  const canonBadge = canonBadgeHTML(ev.canonState);
+
+  panelDetail.innerHTML = `
+    <button class="detail-back" id="detailBack">← Back to place</button>
+    <div class="detail-header">
+      <h2 class="detail-title">${ev.title}</h2>
+      <div class="detail-meta">
+        <span class="detail-type-badge badge-event">${ev.eventType}</span>
+        ${canonBadge}
+      </div>
+      <p class="detail-era">${ev.date} · ${ev.era === 'age-founding' ? 'Age of Founding' : ev.era === 'long-wars' ? 'The Long Wars' : 'Post-Collapse'}</p>
+    </div>
+    <p class="detail-description">${ev.description}</p>
+
+    ${ev.consequences?.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Consequences</h3>
+      <ul class="detail-consequences">
+        ${ev.consequences.map(c => `<li>${c}</li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedChars.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Participants</h3>
+      <ul class="detail-link-list">
+        ${linkedChars.map(c => `
+          <li class="detail-link-item">
+            <span class="link-icon">👤</span>
+            <span class="link-name">${c.title}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedPlaces.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Locations</h3>
+      <ul class="detail-link-list">
+        ${linkedPlaces.map(p => `
+          <li class="detail-link-item clickable" data-place-id="${p.id}">
+            <span class="link-icon">📍</span>
+            <span class="link-name">${p.title}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+  `;
+
+  document.getElementById('detailBack')?.addEventListener('click', () => {
+    if (state.selectedId) showPlaceDetail(state.selectedId);
+    else clearDetail();
+  });
+
+  panelDetail.querySelectorAll('[data-place-id]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => showPlaceDetail(el.dataset.placeId));
+  });
+
+  panelDetail.hidden  = false;
+  panelWelcome.hidden = true;
+}
+
+function clearDetail() {
+  state.selectedId = null;
+  updateMarkerSelection(null);
+  panelDetail.hidden  = true;
+  panelWelcome.hidden = false;
+}
+
+// ══════════════════════════════════════════════════════════
+// CHRONOLOGY BAR
+// ══════════════════════════════════════════════════════════
+const ERAS = [
+  { id: 'age-founding', label: 'Age of Founding', start: 0,    end: 0.33, color: '#3a5070' },
+  { id: 'long-wars',    label: 'The Long Wars',   start: 0.33, end: 0.72, color: '#503a3a', active: true },
+  { id: 'post-collapse',label: 'Post-Collapse',   start: 0.72, end: 1.0,  color: '#2a3535' }
+];
+
+function renderChronology() {
+  if (!chronoTrack) return;
+  chronoTrack.innerHTML = '';
+
+  // Era bands
+  ERAS.forEach(era => {
+    const band = document.createElement('div');
+    band.className = `chrono-era${era.active ? ' active' : ''}`;
+    band.style.left  = `${era.start * 100}%`;
+    band.style.width = `${(era.end - era.start) * 100}%`;
+    band.style.background = era.color;
+    band.dataset.eraId = era.id;
+
+    const label = document.createElement('span');
+    label.className = 'era-name';
+    label.textContent = era.label;
+    band.appendChild(label);
+
+    band.addEventListener('click', () => selectEra(era.id));
+    chronoTrack.appendChild(band);
+  });
+
+  // Event dots
+  state.data.events.forEach(ev => {
+    const dot = document.createElement('div');
+    dot.className = `chrono-event-dot chrono-era-${ev.era}`;
+    dot.style.left = `${ev.chronoPosition * 100}%`;
+    dot.setAttribute('title', `${ev.title} — ${ev.date}`);
+    dot.dataset.eventId = ev.id;
+
+    const tip = document.createElement('div');
+    tip.className = 'chrono-event-tip';
+    tip.textContent = ev.title;
+    dot.appendChild(tip);
+
+    dot.addEventListener('click', e => {
+      e.stopPropagation();
+      showEventDetail(ev.id);
+      // Scroll panel to top
+      panelDetail.scrollTop = 0;
+    });
+
+    chronoTrack.appendChild(dot);
+  });
+
+  // Current era cursor
+  const cursor = document.createElement('div');
+  cursor.id        = 'chronoCursor';
+  cursor.className = 'chrono-cursor';
+  cursor.style.left = `${(0.33 + 0.72) / 2 * 100}%`;
+  chronoTrack.appendChild(cursor);
+
+  updateEraDisplay('long-wars');
+}
+
+function selectEra(eraId) {
+  state.activeEra = eraId;
+  document.querySelectorAll('.chrono-era').forEach(el => {
+    el.classList.toggle('active', el.dataset.eraId === eraId);
+  });
+  updateEraDisplay(eraId);
+
+  // Move cursor to center of selected era
+  const era = ERAS.find(e => e.id === eraId);
+  if (era) {
+    const cursor = document.getElementById('chronoCursor');
+    if (cursor) cursor.style.left = `${(era.start + era.end) / 2 * 100}%`;
+  }
+
+  // Filter event dots: dim events not in this era
+  document.querySelectorAll('.chrono-event-dot').forEach(dot => {
+    dot.classList.toggle('dot-inactive', dot.classList[1].replace('chrono-era-', '') !== eraId);
+  });
+}
+
+function updateEraDisplay(eraId) {
+  if (!eraDisplay) return;
+  const era = ERAS.find(e => e.id === eraId);
+  eraDisplay.textContent = era ? era.label : '';
+}
+
+function setupChronoEvents() {
+  // Allow clicking on the track background to deselect
+  chronoTrack?.addEventListener('click', e => {
+    if (!e.target.closest('.chrono-event-dot') && !e.target.closest('.chrono-era')) {
+      document.querySelectorAll('.chrono-event-dot').forEach(d => d.classList.remove('dot-inactive'));
+      updateEraDisplay(state.activeEra);
+    }
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════
+function placeTypeLabel(t) {
+  return { city: 'City', fortress: 'Fortress', town: 'Town', ruins: 'Ruins', village: 'Village', landmark: 'Landmark' }[t] || t;
+}
+
+function factionName(f) {
+  return { 'northern-reach': 'Northern Reach', 'the-compact': 'The Compact', 'free-coast': 'Free Coast' }[f] || f;
+}
+
+function canonBadgeHTML(state) {
+  const map = { canon: ['canon-badge', 'Canon'], draft: ['draft-badge', 'Draft'], alt: ['alt-badge', 'Alt'], legend: ['legend-badge', 'Legend'] };
+  const [cls, label] = map[state] || ['draft-badge', state];
+  return `<span class="${cls}">${label}</span>`;
+}
+
+// ══════════════════════════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', init);

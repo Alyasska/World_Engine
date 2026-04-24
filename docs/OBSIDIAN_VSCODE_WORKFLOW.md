@@ -86,8 +86,38 @@ Use standard Markdown links (`[text](file.md)`) for cross-references that need t
 ## Quick Reference — Open Both Tools
 
 ```
-VS Code:  Open C:\mirror\мое\world_engine  (whole project)
-Obsidian: Open C:\mirror\мое\world_engine\vault  (vault only)
+VS Code:  Open C:\mirror\мое\world_engine          (whole project)
+Obsidian: Open C:\mirror\мое\world_engine\vault     (creative vault — lore & stories)
+Obsidian: Open C:\mirror\мое\world_engine\workspace-vault  (project vault — dev management)
 GitHub:   https://github.com/Alyasska/World_Engine  (source of truth)
 Preview:  https://alyasska.github.io/World_Engine/  (static site)
 ```
+
+---
+
+## Two-Vault Architecture (Added Phase 1)
+
+This project uses **two separate Obsidian vaults** in the same Git repository:
+
+| Vault | Path | Purpose |
+|---|---|---|
+| **Creative vault** | `vault/` | Stories, Characters, Places, Events, Systems, Institutions, Lore — the fictional world |
+| **Project vault** | `workspace-vault/` | Phase plans, agent notes, architecture decisions, prompt logs, progress — building the software |
+
+### Why Two Vaults?
+- Obsidian's graph view becomes cluttered if lore and dev notes are mixed
+- The agent handoff note should never appear in the creative world knowledge graph
+- Different mental contexts: building the software vs writing the world
+- Independent commit histories: a writing session won't pollute dev commits
+
+### How to Open Both in Obsidian
+1. Open Obsidian → vault switcher (bottom-left gear icon)
+2. Add `C:\mirror\мое\world_engine\vault` as "Creative — World Lore"
+3. Add `C:\mirror\мое\world_engine\workspace-vault` as "Project — World Engine Dev"
+4. Switch between them with the vault switcher
+
+### Editing Rules for workspace-vault/
+- Use `[[wikilinks]]` for cross-references *within* `workspace-vault/`
+- Use standard Markdown links for files *outside* the vault: `[CLAUDE.md](../../CLAUDE.md)`
+- Do not use `![[embed]]` syntax in files that need to be parsed by scripts
+- Do not put fictional world content (characters, lore, places) in `workspace-vault/`

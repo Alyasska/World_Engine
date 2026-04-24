@@ -35,26 +35,35 @@ Track phase completion here. A phase is complete only when the Visual Confirmati
 
 ---
 
-## Phase 1 — Interactive Map (Planned)
-**Status:** 🔲 Not started  
-**Goal:** An interactive, zoomable fantasy map in the browser. Either Azgaar iframe or MapLibre rendering custom GeoJSON.  
-**Visual Confirmation:** Open `https://alyasska.github.io/World_Engine/` and pan/zoom a fantasy map.  
+## Phase 1 — Interactive Visual Prototype
+**Status:** ✅ Complete  
+**Branch:** `phase-1-interactive-visual-prototype`  
+**Goal:** Turn the static preview into a working interactive prototype with pan/zoom, clickable markers, detail panel, layer toggles, and chronology bar. No external dependencies.  
+**Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — drag to pan, scroll to zoom, click markers to see linked data, toggle layers.
 
-**Checklist (draft — refine at phase start):**
-- [ ] Decision: Azgaar iframe vs MapLibre from scratch (document in ARCHITECTURE_DECISIONS.md)
-- [ ] If MapLibre: set up Vite project in `web/`, install maplibre-gl
-- [ ] Create/import base world GeoJSON (coastlines, major regions)
-- [ ] Render map with MapLibre in browser
-- [ ] Add click handler: clicking a region shows a stub info panel
-- [ ] Update GitHub Actions workflow if build step is needed
-- [ ] Deploy and confirm visual
+**Checklist:**
+- [x] Create `workspace-vault/` project-building Obsidian vault (separate from creative `vault/`)
+- [x] Create `web/data/` static JSON layer: places.json, characters.json, events.json, stories.json
+- [x] Write `web/engine.js` — vanilla JS interactive engine (~450 lines)
+- [x] Rewrite `web/index.html` — detailed hand-crafted SVG world map with layers
+- [x] Extend `web/style.css` — full Phase 1 interaction styles
+- [x] Pan + zoom (drag + scroll wheel + touch + zoom buttons)
+- [x] Clickable place markers (8 places) with detail panel
+- [x] Related characters, events, stories shown from JSON
+- [x] Layer toggles: Geography, Political, Narrative, Chronology (all visibly affect map)
+- [x] Chronology bar with era bands and event dots (clickable)
+- [x] docs/ARCHITECTURE_DECISIONS.md updated (AD-007, AD-008, AD-009)
+- [x] docs/OBSIDIAN_VSCODE_WORKFLOW.md updated (two-vault section)
+- [x] CLAUDE.md, AGENTS.md updated
+- [x] tracking/ files updated
+- [x] Committed and pushed to GitHub
 
 ---
 
-## Phase 2 — Vault↔Map Link (Planned)
+## Phase 2 — Vault↔Map Link + Real Map Engine (Planned)
 **Status:** 🔲 Not started  
-**Goal:** Clicking a map location opens the linked Markdown lore entry. Vault entries with `mapRefs` appear as markers.  
-**Visual Confirmation:** Click a settlement on the map → side panel shows its Markdown content.
+**Goal:** (1) Script that parses `vault/*.md` YAML frontmatter → `web/data/*.json` automatically. (2) Decide on MapLibre vs continued SVG approach. (3) Clicking a map marker links to the actual vault Markdown entry.  
+**Visual Confirmation:** Edit a Place in `vault/Places/`, run the script, reload the map — the updated description appears in the detail panel without touching the JSON manually.
 
 ---
 

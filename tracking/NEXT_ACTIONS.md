@@ -1,41 +1,56 @@
 # Next Actions
 
-The single most important thing to do next, plus a short queue. Keep this file current — update it whenever a task is completed or the priority changes.
+The single most important thing to do next, plus a short queue. Keep this file current.
 
 ---
 
 ## Immediate Next Step
 
-**Verify Phase 0 deployment**
-1. Check that the GitHub Actions workflow ran successfully after the initial push
-2. Visit `https://alyasska.github.io/World_Engine/` and confirm the preview loads
-3. In GitHub repo → Settings → Pages → confirm source is set to GitHub Actions
-4. If the page doesn't load, check the Actions tab for errors
+**Verify Phase 1 deployment on GitHub Pages**
+1. Merge `phase-1-interactive-visual-prototype` → `main` (or push directly after review)
+2. Confirm GitHub Actions workflow runs successfully (check Actions tab)
+3. Visit `https://alyasska.github.io/World_Engine/` and test:
+   - Drag the map to pan ✓
+   - Scroll to zoom ✓
+   - Click "Vareth" marker → side panel shows detail ✓
+   - Click an event in the detail panel → shows event detail ✓
+   - Toggle "Political" layer → territory fills disappear ✓
+   - Click an era in the chronology bar → other events dim ✓
+4. If the page doesn't load, check Settings → Pages → Source = GitHub Actions
 
 ---
 
-## Phase 1 Planning Queue
+## Phase 2 Planning Queue
 
-Once Phase 0 is verified, the recommended next prompt is:
+Once Phase 1 is confirmed deployed, the recommended next prompt:
 
-> "Start Phase 1: embed an interactive fantasy map. Research and decide between Azgaar iframe embed vs MapLibre from scratch. Document the decision in docs/ARCHITECTURE_DECISIONS.md, then implement the chosen approach in web/. The visual confirmation is a zoomable fantasy map visible at the GitHub Pages URL."
+> "Start Phase 2: vault-to-web bridge. Write a Node.js or Python script in `scripts/` that reads Markdown files from `vault/Places/`, `vault/Characters/`, `vault/Events/`, and `vault/Stories/`, parses their YAML frontmatter, and writes to `web/data/*.json` in the same format as the Phase 1 hand-authored JSON. Then create one real vault entry per type (a Place, a Character, an Event, a Story) using the existing templates. Run the script and confirm the web preview shows the new data. Document the script in docs/ARCHITECTURE_DECISIONS.md."
 
-**Pre-work for Phase 1:**
-- [ ] Decide: Azgaar iframe (faster to Phase 1 visual) vs MapLibre (more flexible, more setup)
-- [ ] If MapLibre: Evaluate whether to set up Vite in `web/` or keep plain HTML with a CDN import
-- [ ] Source or generate base world GeoJSON (coastlines, major regions)
-- [ ] Review `docs/OPEN_SOURCE_REPOS.md` entries for Azgaar and MapLibre
+**Pre-work for Phase 2:**
+- [ ] Decide: Python (gray-python) vs Node.js for the vault→JSON script (both are viable; Node is consistent with eventual frontend build)
+- [ ] Create first real vault entries to test with (use existing templates in `vault/Templates/`)
+- [ ] Decide whether to introduce MapLibre at Phase 2 or continue with the SVG approach
 
 ---
 
-## Backlog (Phase 1+)
+## Obsidian Setup Queue (Can Do Now)
+- [ ] Open `vault/` in Obsidian and install obsidian-git plugin
+- [ ] Open `workspace-vault/` in Obsidian as a second vault
+- [ ] Install obsidian-open-vscode in both vaults
+- [ ] Configure obsidian-git auto-commit interval
 
-- [ ] Create first real Place entry in `vault/Places/` for a sample world location
-- [ ] Create first real Story entry in `vault/Stories/` as a writing test
-- [ ] Set up Obsidian community plugins: obsidian-git, obsidian-open-vscode
-- [ ] Evaluate `vis-timeline` vs `gravity-ui/timeline` for the chronology bar (Phase 3)
-- [ ] Decide on fictional calendar/date system (needed before timeline UI)
-- [ ] Consider PMTiles format for Phase 1 map tile serving (no server needed)
+---
+
+## Backlog (Phase 2+)
+
+- [ ] Write vault→JSON bridge script (`scripts/vault-to-json.js` or `.py`)
+- [ ] Create first real Place entry: `vault/Places/vareth.md`
+- [ ] Create first real Character entry: `vault/Characters/aran-voss.md`
+- [ ] Create first real Story entry: `vault/Stories/the-first-winter.md`
+- [ ] Decide: MapLibre integration in Phase 2 (import after Azgaar JSON export available)
+- [ ] Evaluate `vis-timeline` for Phase 3 chronology scrubbing
+- [ ] Define fictional calendar/date system (needed before Phase 3 timeline)
+- [ ] Add PMTiles consideration for Phase 2 map tile serving (no tile server needed)
 
 ---
 
@@ -43,7 +58,7 @@ Once Phase 0 is verified, the recommended next prompt is:
 
 | Decision | Blocking | Notes |
 |---|---|---|
-| Azgaar iframe vs MapLibre | Phase 1 start | See `docs/OPEN_SOURCE_REPOS.md` |
-| Vite vs CDN import for MapLibre | Phase 1 if MapLibre chosen | Vite = better DX; CDN = faster bootstrap |
-| Fictional calendar system | Phase 3 timeline | Needs to be defined before chronology UI |
-| Backend hosting provider | Phase 2+ | See `docs/HOSTING_STRATEGY.md` |
+| Script language for vault→JSON | Phase 2 | Node.js (consistent) or Python (simpler) |
+| MapLibre at Phase 2 or Phase 3 | Phase 2 start | AD-007 says Phase 2; confirm with user |
+| Fictional calendar system | Phase 3 timeline | Design before vis-timeline integration |
+| Backend hosting provider | Phase 3+ | See `docs/HOSTING_STRATEGY.md` |

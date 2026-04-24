@@ -20,6 +20,7 @@ See `tracking/MILESTONES.md` for the authoritative phase status.
 ## Quick Orientation
 | What you need | Where to find it |
 |---|---|
+| Agent behavior rules | `CLAUDE.md` ← read first |
 | Architecture decisions | `docs/ARCHITECTURE_DECISIONS.md` |
 | Final vision | `docs/FINAL_VISION.md` |
 | Lessons from old repo | `docs/OLD_REPO_LESSONS.md` |
@@ -28,7 +29,8 @@ See `tracking/MILESTONES.md` for the authoritative phase status.
 | What to do next | `tracking/NEXT_ACTIONS.md` |
 | Recent changes | `tracking/CHANGELOG.md` |
 | Canonical terms | `terminology/TERMS.md` |
-| Agent behavior rules | `CLAUDE.md` |
+| Obsidian two-vault setup | `docs/OBSIDIAN_VSCODE_WORKFLOW.md` |
+| Agent handoff (Obsidian) | `workspace-vault/02_Agent_Notes/agent-handoff.md` |
 
 ## Handoff Protocol
 When an agent finishes a task:
@@ -46,7 +48,7 @@ world_engine/
 ├── tracking/              # Milestones, changelog, next actions
 ├── terminology/           # Canonical worldbuilding term definitions
 ├── skills/                # Reusable agent behavior guides
-├── vault/                 # Obsidian-compatible Markdown knowledge base
+├── vault/                 # CREATIVE Obsidian vault — fictional world content
 │   ├── Stories/
 │   ├── Characters/
 │   ├── Places/
@@ -57,9 +59,28 @@ world_engine/
 │   ├── Maps/
 │   ├── Assets/
 │   └── Templates/
-├── web/                   # Static preview + future frontend (GitHub Pages root)
+├── workspace-vault/       # PROJECT Obsidian vault — dev management (NOT lore)
+│   ├── 00_Index/          # Master index (HOME.md)
+│   ├── 01_Phases/         # One note per phase
+│   ├── 02_Agent_Notes/    # Agent handoff notes
+│   ├── 03_Prompts/        # Prompt log
+│   ├── 04_Architecture/   # Architecture overview
+│   ├── 05_Open_Source_Research/
+│   ├── 06_UI_UX/
+│   ├── 07_Deployment/
+│   ├── 08_Decisions/
+│   └── 09_Progress_Log/
+├── web/                   # Static frontend (GitHub Pages root)
+│   ├── data/              # Static JSON data bridge
+│   │   ├── places.json
+│   │   ├── characters.json
+│   │   ├── events.json
+│   │   └── stories.json
+│   ├── engine.js          # Vanilla JS interactive engine
+│   ├── index.html         # Main page
+│   └── style.css
 ├── references/            # External links, research assets
-└── scripts/               # Utility scripts
+└── scripts/               # Utility scripts (vault→JSON parser, etc.)
 ```
 
 ## Safety Rules (Repeat from CLAUDE.md)

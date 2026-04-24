@@ -3,166 +3,415 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>World Engine — Phase 0 Preview</title>
+  <title>World Engine — Interactive Preview</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Top bar -->
-  <header class="topbar">
-    <div class="topbar-title">
-      <span class="logo-glyph">◈</span>
-      <span class="logo-text">World Engine</span>
-    </div>
-    <nav class="topbar-nav">
-      <span class="nav-item active">Map</span>
-      <span class="nav-item">Stories</span>
-      <span class="nav-item">Characters</span>
-      <span class="nav-item">Lore</span>
-    </nav>
-    <div class="topbar-badge">Phase 0 Preview</div>
-  </header>
-
-  <!-- Main layout -->
-  <main class="layout">
-
-    <!-- Map area -->
-    <section class="map-area">
-      <div class="map-placeholder">
-        <div class="map-overlay-text">
-          <p class="map-phase-label">Phase 0 — Map Placeholder</p>
-          <p class="map-sub">Interactive map arrives in Phase 1</p>
-          <p class="map-hint">Powered by MapLibre GL JS + Azgaar Fantasy Map Generator</p>
-        </div>
-
-        <!-- Decorative SVG geography sketch -->
-        <svg class="map-sketch" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ocean fill -->
-          <rect width="800" height="500" fill="none"/>
-          <!-- Continent silhouette (decorative) -->
-          <path class="continent" d="M 120 80 C 180 40, 300 30, 380 70 C 460 110, 500 90, 560 120
-            C 620 150, 660 200, 640 270 C 620 340, 580 380, 520 400
-            C 460 420, 380 440, 300 420 C 220 400, 160 360, 130 300
-            C 100 240, 80 160, 120 80 Z" />
-          <!-- Inner sea -->
-          <path class="inner-sea" d="M 250 180 C 300 160, 380 170, 420 210
-            C 460 250, 440 310, 390 330 C 340 350, 270 330, 240 290
-            C 210 250, 210 200, 250 180 Z" />
-          <!-- Mountain ranges (decorative lines) -->
-          <g class="mountains">
-            <path d="M 200 140 L 215 115 L 230 140" />
-            <path d="M 225 140 L 242 112 L 258 140" />
-            <path d="M 250 140 L 268 108 L 285 140" />
-            <path d="M 460 160 L 475 135 L 490 160" />
-            <path d="M 485 160 L 502 132 L 518 160" />
-          </g>
-          <!-- Rivers -->
-          <path class="river" d="M 230 145 C 250 180, 260 220, 248 285" />
-          <path class="river" d="M 480 165 C 470 200, 450 230, 392 328" />
-          <!-- City dots -->
-          <circle class="city-dot major" cx="320" cy="200" r="6" />
-          <circle class="city-dot" cx="420" cy="240" r="4" />
-          <circle class="city-dot" cx="260" cy="290" r="4" />
-          <circle class="city-dot" cx="500" cy="280" r="4" />
-          <circle class="city-dot" cx="350" cy="360" r="3" />
-          <!-- City labels -->
-          <text class="city-label" x="326" y="197">Vareth</text>
-          <text class="city-label" x="426" y="237">Solmark</text>
-          <text class="city-label" x="220" y="287">Drenford</text>
-          <text class="city-label" x="506" y="277">Ashveil</text>
-          <!-- Region label -->
-          <text class="region-label" x="310" y="130">The Northern Reach</text>
-          <text class="region-label" x="390" y="390">The Sunken Coast</text>
-          <!-- Compass rose -->
-          <g class="compass" transform="translate(710, 60)">
-            <circle r="20" fill="none" stroke="#8b7355" stroke-width="1" opacity="0.5"/>
-            <path d="M 0 -18 L 4 -6 L 0 -10 L -4 -6 Z" fill="#c8a96e" opacity="0.8"/>
-            <path d="M 0 18 L 4 6 L 0 10 L -4 6 Z" fill="#6b5a44" opacity="0.6"/>
-            <path d="M -18 0 L -6 4 L -10 0 L -6 -4 Z" fill="#6b5a44" opacity="0.6"/>
-            <path d="M 18 0 L 6 4 L 10 0 L 6 -4 Z" fill="#6b5a44" opacity="0.6"/>
-            <text x="-3" y="-22" font-size="10" fill="#c8a96e" opacity="0.8">N</text>
-          </g>
-        </svg>
-      </div>
-    </section>
-
-    <!-- Side panel -->
-    <aside class="side-panel">
-      <div class="panel-section">
-        <h2 class="panel-heading">Stories</h2>
-        <ul class="entity-list">
-          <li class="entity-item stub">
-            <span class="entity-icon">📖</span>
-            <span class="entity-name">— no stories yet —</span>
-          </li>
-        </ul>
-        <button class="panel-action" disabled>+ New Story</button>
-      </div>
-
-      <div class="panel-section">
-        <h2 class="panel-heading">Places</h2>
-        <ul class="entity-list">
-          <li class="entity-item stub">
-            <span class="entity-icon">🏛</span>
-            <span class="entity-name">Vareth <span class="entity-tag">city</span></span>
-          </li>
-          <li class="entity-item stub">
-            <span class="entity-icon">🏔</span>
-            <span class="entity-name">Northern Reach <span class="entity-tag">region</span></span>
-          </li>
-        </ul>
-        <button class="panel-action" disabled>+ New Place</button>
-      </div>
-
-      <div class="panel-section">
-        <h2 class="panel-heading">Characters</h2>
-        <ul class="entity-list">
-          <li class="entity-item stub">
-            <span class="entity-icon">👤</span>
-            <span class="entity-name">— no characters yet —</span>
-          </li>
-        </ul>
-        <button class="panel-action" disabled>+ New Character</button>
-      </div>
-
-      <div class="panel-section">
-        <h2 class="panel-heading">Events</h2>
-        <ul class="entity-list">
-          <li class="entity-item stub">
-            <span class="entity-icon">⚡</span>
-            <span class="entity-name">— no events yet —</span>
-          </li>
-        </ul>
-        <button class="panel-action" disabled>+ New Event</button>
-      </div>
-    </aside>
-
-  </main>
-
-  <!-- Chronology bar -->
-  <footer class="chrono-bar">
-    <div class="chrono-label">Chronology</div>
-    <div class="chrono-track">
-      <div class="chrono-era" style="left: 5%; width: 28%">
-        <span class="era-name">Age of Founding</span>
-      </div>
-      <div class="chrono-era active" style="left: 35%; width: 35%">
-        <span class="era-name">The Long Wars</span>
-      </div>
-      <div class="chrono-era" style="left: 72%; width: 23%">
-        <span class="era-name">Post-Collapse</span>
-      </div>
-      <div class="chrono-cursor" style="left: 48%"></div>
-    </div>
-    <div class="chrono-hint">← Phase 3: drag to travel through time →</div>
-  </footer>
-
-  <!-- Phase 0 notice -->
-  <div class="phase-notice">
-    <strong>World Engine — Phase 0 Preview</strong>
-    &nbsp;·&nbsp; Static scaffold &nbsp;·&nbsp; No backend &nbsp;·&nbsp;
-    Map, stories, and timeline arrive in Phases 1–3
+<!-- ═══════════════════════════════════════════════════════
+     TOP BAR
+═══════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <span class="logo-glyph">◈</span>
+    <span class="logo-text">World Engine</span>
   </div>
 
+  <nav class="topbar-nav" aria-label="Main navigation">
+    <span class="nav-item active">Map</span>
+    <span class="nav-item">Stories</span>
+    <span class="nav-item">Characters</span>
+    <span class="nav-item">Lore</span>
+  </nav>
+
+  <div class="layer-toggles" role="group" aria-label="Map layers">
+    <button class="layer-btn active" data-layer="geography"  aria-pressed="true" title="Toggle geographic labels and terrain">
+      <span class="layer-icon">◉</span> Geography
+    </button>
+    <button class="layer-btn active" data-layer="political"  aria-pressed="true" title="Toggle political territories and borders">
+      <span class="layer-icon">⚑</span> Political
+    </button>
+    <button class="layer-btn active" data-layer="narrative"  aria-pressed="true" title="Toggle narrative markers (events, ruins)">
+      <span class="layer-icon">✦</span> Narrative
+    </button>
+    <button class="layer-btn active" data-layer="chronology" aria-pressed="true" title="Toggle chronology bar">
+      <span class="layer-icon">⏱</span> Chronology
+    </button>
+  </div>
+
+  <span class="topbar-badge">Phase 1 Preview</span>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN LAYOUT
+═══════════════════════════════════════════════════════ -->
+<main class="layout">
+
+  <!-- MAP AREA -->
+  <section class="map-area" aria-label="Interactive world map">
+
+    <div class="map-viewport" id="mapViewport">
+      <div class="map-canvas" id="mapCanvas">
+
+        <!-- ── WORLD SVG ── -->
+        <svg id="worldSvg" width="1000" height="620"
+             viewBox="0 0 1000 620"
+             xmlns="http://www.w3.org/2000/svg"
+             aria-label="The Known Lands — interactive fantasy world map">
+
+          <!-- ── OCEAN BACKGROUND ── -->
+          <rect width="1000" height="620" fill="#172030"/>
+
+          <!-- Ocean grid (very subtle) -->
+          <g opacity="0.08">
+            <line x1="0" y1="124" x2="1000" y2="124" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="0" y1="248" x2="1000" y2="248" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="0" y1="372" x2="1000" y2="372" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="0" y1="496" x2="1000" y2="496" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="200" y1="0" x2="200" y2="620" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="400" y1="0" x2="400" y2="620" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="600" y1="0" x2="600" y2="620" stroke="#4a8aaa" stroke-width="0.5"/>
+            <line x1="800" y1="0" x2="800" y2="620" stroke="#4a8aaa" stroke-width="0.5"/>
+          </g>
+
+          <!-- ════════════════════════════════════════════
+               LAYER: GEOGRAPHY
+          ════════════════════════════════════════════ -->
+          <g class="svg-layer-geography" id="layerGeography">
+
+            <!-- CONTINENT FILL (The Known Lands) -->
+            <path class="continent-fill" d="
+              M 80,100
+              C 108,46 185,22 290,32
+              C 395,42 492,25 622,52
+              C 745,79 805,122 815,202
+              C 825,282 800,368 762,440
+              C 724,512 651,554 544,561
+              C 437,568 316,556 218,534
+              C 120,512 64,462 48,380
+              C 32,298 44,200 80,100 Z
+            "/>
+
+            <!-- Continent edge highlight (coastal cliff feel) -->
+            <path class="continent-edge" fill="none" d="
+              M 80,100
+              C 108,46 185,22 290,32
+              C 395,42 492,25 622,52
+              C 745,79 805,122 815,202
+              C 825,282 800,368 762,440
+              C 724,512 651,554 544,561
+              C 437,568 316,556 218,534
+              C 120,512 64,462 48,380
+              C 32,298 44,200 80,100 Z
+            "/>
+
+            <!-- VEILED SEA (inland) -->
+            <path class="veiled-sea" d="
+              M 392,248
+              C 436,215 502,210 552,238
+              C 602,266 621,312 602,352
+              C 583,392 534,408 479,400
+              C 424,392 387,360 377,320
+              C 367,280 367,264 392,248 Z
+            "/>
+
+            <!-- Veiled Sea label -->
+            <text class="sea-label" x="490" y="308" text-anchor="middle"
+                  font-size="11" font-style="italic" fill="#4a7090" opacity="0.7">
+              The Veiled Sea
+            </text>
+
+            <!-- ── MOUNTAIN RANGES ── -->
+
+            <!-- Ashspine Mountains (main range, central) -->
+            <g class="mountain-group">
+              <path class="mountain-range" d="
+                M 400,150 L 415,120 L 430,150
+                L 448,112 L 467,150
+                L 485,115 L 504,150
+                L 522,118 L 542,150
+                L 560,113 L 580,150
+                L 598,120 L 617,150
+                L 633,116 L 648,150
+              "/>
+              <!-- Snow caps on major peaks -->
+              <path class="mountain-snow" d="
+                M 446,120 L 453,112 L 460,120
+                M 483,123 L 490,115 L 496,123
+                M 520,126 L 527,118 L 534,126
+                M 558,121 L 565,113 L 572,121
+              "/>
+              <text class="terrain-label" x="520" y="108" text-anchor="middle"
+                    font-size="9.5" fill="#7a8a9a" opacity="0.7" font-style="italic">
+                Ashspine Mountains
+              </text>
+            </g>
+
+            <!-- Southern Crags -->
+            <g class="mountain-group">
+              <path class="mountain-range" d="
+                M 568,362 L 582,340 L 596,362
+                L 614,338 L 628,362
+                L 646,340 L 662,362
+                L 680,342 L 696,362
+                L 712,338 L 728,362
+              "/>
+              <text class="terrain-label" x="648" y="335" text-anchor="middle"
+                    font-size="9" fill="#7a8a9a" opacity="0.6" font-style="italic">
+                Southern Crags
+              </text>
+            </g>
+
+            <!-- ── RIVERS ── -->
+
+            <!-- Var River (flows from Ashspine to Veiled Sea) -->
+            <path class="river" d="M 358,158 C 362,190 374,218 385,248"/>
+            <text class="terrain-label" x="355" y="206" font-size="8.5" fill="#3d6a8a" opacity="0.7" font-style="italic">Var R.</text>
+
+            <!-- Silver Run (central, short) -->
+            <path class="river" d="M 495,142 C 497,178 497,212 496,245"/>
+            <text class="terrain-label" x="504" y="188" font-size="8.5" fill="#3d6a8a" opacity="0.7" font-style="italic">Silver Run</text>
+
+            <!-- Maren River (east, to south coast) -->
+            <path class="river" d="M 635,190 C 648,238 662,292 675,350 C 688,408 697,455 702,500"/>
+            <text class="terrain-label" x="665" y="295" font-size="8.5" fill="#3d6a8a" opacity="0.7" font-style="italic">Maren R.</text>
+
+            <!-- West River (northwest to south) -->
+            <path class="river" d="M 150,198 C 165,255 184,310 210,358 C 236,406 245,455 248,500"/>
+            <text class="terrain-label" x="185" y="310" font-size="8.5" fill="#3d6a8a" opacity="0.7" font-style="italic">West R.</text>
+
+            <!-- ── FORESTS ── -->
+
+            <!-- Silver Wood (west, near Drenford) -->
+            <g class="forest-group" opacity="0.75">
+              <circle class="forest-circle" cx="295" cy="370" r="22"/>
+              <circle class="forest-circle" cx="318" cy="358" r="18"/>
+              <circle class="forest-circle" cx="281" cy="356" r="16"/>
+              <circle class="forest-circle" cx="310" cy="386" r="15"/>
+              <circle class="forest-circle" cx="276" cy="378" r="14"/>
+              <circle class="forest-circle" cx="330" cy="375" r="13"/>
+            </g>
+            <text class="terrain-label" x="303" y="404" text-anchor="middle"
+                  font-size="9" fill="#4a6a4a" opacity="0.7" font-style="italic">
+              Silver Wood
+            </text>
+
+            <!-- Thornwood (north-central) -->
+            <g class="forest-group" opacity="0.7">
+              <circle class="forest-circle" cx="413" cy="178" r="16"/>
+              <circle class="forest-circle" cx="431" cy="167" r="14"/>
+              <circle class="forest-circle" cx="445" cy="181" r="13"/>
+              <circle class="forest-circle" cx="420" cy="194" r="12"/>
+              <circle class="forest-circle" cx="436" cy="196" r="11"/>
+            </g>
+            <text class="terrain-label" x="430" y="210" text-anchor="middle"
+                  font-size="9" fill="#4a6a4a" opacity="0.7" font-style="italic">
+              Thornwood
+            </text>
+
+            <!-- Eastern Wilds -->
+            <g class="forest-group" opacity="0.65">
+              <circle class="forest-circle" cx="703" cy="285" r="18"/>
+              <circle class="forest-circle" cx="721" cy="273" r="15"/>
+              <circle class="forest-circle" cx="716" cy="298" r="14"/>
+              <circle class="forest-circle" cx="695" cy="279" r="13"/>
+              <circle class="forest-circle" cx="730" cy="286" r="12"/>
+            </g>
+            <text class="terrain-label" x="714" y="318" text-anchor="middle"
+                  font-size="9" fill="#4a6a4a" opacity="0.6" font-style="italic">
+              Eastern Wilds
+            </text>
+
+          </g><!-- end layer-geography -->
+
+
+          <!-- ════════════════════════════════════════════
+               LAYER: POLITICAL
+          ════════════════════════════════════════════ -->
+          <g class="svg-layer-political" id="layerPolitical">
+
+            <!-- Northern Reach territory (House Voss — cool blue) -->
+            <path class="territory territory-northern" d="
+              M 80,100
+              C 108,46 185,22 290,32
+              C 360,40 400,80 400,150
+              C 390,165 360,185 320,195
+              C 280,205 220,225 180,260
+              C 140,295 100,330 78,368
+              C 60,330 44,265 48,200
+              C 42,160 56,125 80,100 Z
+            "/>
+
+            <!-- The Compact territory (merchant east — amber) -->
+            <path class="territory territory-compact" d="
+              M 400,150
+              C 450,90 540,60 622,52
+              C 745,79 805,122 815,202
+              C 820,265 795,330 762,390
+              C 735,420 700,440 660,440
+              C 635,415 618,380 604,352
+              C 583,392 534,408 479,400
+              C 440,370 420,310 430,260
+              C 448,210 470,170 400,150 Z
+            "/>
+
+            <!-- Free Coast territory (independent south — grey-green) -->
+            <path class="territory territory-free-coast" d="
+              M 78,368
+              C 100,330 140,295 180,260
+              C 220,225 280,205 320,195
+              C 360,185 400,200 430,260
+              C 420,310 440,370 479,400
+              C 460,430 440,460 420,490
+              C 380,510 320,530 218,534
+              C 120,512 64,462 48,380
+              C 60,375 72,372 78,368 Z
+            "/>
+
+            <!-- Region name labels -->
+            <text class="region-label region-label-north"
+                  x="168" y="190" text-anchor="middle" font-size="14"
+                  letter-spacing="0.1em" opacity="0.5">
+              NORTHERN REACH
+            </text>
+            <text class="region-label region-label-compact"
+                  x="650" y="185" text-anchor="middle" font-size="13"
+                  letter-spacing="0.09em" opacity="0.5">
+              THE COMPACT
+            </text>
+            <text class="region-label region-label-coast"
+                  x="350" y="480" text-anchor="middle" font-size="12"
+                  letter-spacing="0.08em" opacity="0.45">
+              FREE COAST
+            </text>
+
+            <!-- Border lines between territories (dashed) -->
+            <path class="political-border" d="
+              M 400,150 C 390,165 360,185 320,195
+              C 280,205 220,225 180,260 C 140,295 100,330 78,368
+            "/>
+            <path class="political-border" d="
+              M 400,150 C 448,210 470,170 430,260
+              C 420,310 440,370 479,400
+            "/>
+
+          </g><!-- end layer-political -->
+
+
+          <!-- ════════════════════════════════════════════
+               LAYER: NARRATIVE
+          ════════════════════════════════════════════ -->
+          <g class="svg-layer-narrative" id="layerNarrative">
+
+            <!-- Story path: Mira's merchant road -->
+            <path class="story-path" d="
+              M 685,455 C 640,420 590,360 575,252
+              C 570,280 540,320 480,400
+              C 420,430 310,410 230,345
+            " stroke-dasharray="6,4"/>
+
+            <!-- Story path label -->
+            <text class="story-path-label" x="530" y="360" font-size="9"
+                  fill="#c8a96e" opacity="0.5" font-style="italic">
+              Merchant Roads
+            </text>
+
+            <!-- Ashveil destruction marker (large narrative circle) -->
+            <circle cx="460" cy="432" r="24" fill="none"
+                    stroke="#8a4030" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>
+            <circle cx="460" cy="432" r="32" fill="none"
+                    stroke="#8a4030" stroke-width="0.5" stroke-dasharray="2,6" opacity="0.25"/>
+
+          </g><!-- end layer-narrative -->
+
+
+          <!-- ── PLACE MARKERS (JS-populated) ── -->
+          <g id="markersGroup"/>
+
+          <!-- ── COMPASS ROSE ── -->
+          <g class="compass-rose" transform="translate(930,58)">
+            <circle r="24" fill="none" stroke="#4a5060" stroke-width="1" opacity="0.6"/>
+            <polygon points="0,-20 3,-8 0,-12 -3,-8" fill="#c8a96e" opacity="0.9"/>
+            <polygon points="0,20 3,8 0,12 -3,8"  fill="#5a5048" opacity="0.7"/>
+            <polygon points="-20,0 -8,3 -12,0 -8,-3" fill="#5a5048" opacity="0.7"/>
+            <polygon points="20,0 8,3 12,0 8,-3"  fill="#5a5048" opacity="0.7"/>
+            <text x="-4" y="-26" font-size="11" fill="#c8a96e" opacity="0.85"
+                  font-family="Georgia,serif">N</text>
+          </g>
+
+          <!-- ── MAP TITLE / SCALE ── -->
+          <text class="map-title" x="50" y="598" font-size="10"
+                fill="#5a5048" opacity="0.6" font-style="italic">
+            The Known Lands — Phase 1 Interactive Preview
+          </text>
+
+        </svg><!-- end worldSvg -->
+      </div><!-- end mapCanvas -->
+    </div><!-- end mapViewport -->
+
+    <!-- Zoom controls -->
+    <div class="map-controls" aria-label="Map zoom controls">
+      <button id="btnZoomIn"  class="map-ctrl-btn" title="Zoom in">＋</button>
+      <button id="btnZoomOut" class="map-ctrl-btn" title="Zoom out">－</button>
+      <button id="btnReset"   class="map-ctrl-btn" title="Reset view">⊙</button>
+    </div>
+
+  </section><!-- end map-area -->
+
+
+  <!-- SIDE PANEL -->
+  <aside class="side-panel" id="sidePanel" aria-label="Detail panel">
+
+    <!-- Welcome state -->
+    <div id="panelWelcome" class="panel-welcome">
+      <div class="welcome-glyph">◈</div>
+      <h2 class="welcome-title">The Known Lands</h2>
+      <p class="welcome-sub">Click any settlement or landmark on the map to see its history, linked characters, and stories.</p>
+
+      <div class="welcome-hints">
+        <div class="hint-row"><span class="hint-key">Drag</span><span class="hint-desc">Pan the map</span></div>
+        <div class="hint-row"><span class="hint-key">Scroll</span><span class="hint-desc">Zoom in/out</span></div>
+        <div class="hint-row"><span class="hint-key">Layer buttons</span><span class="hint-desc">Show/hide map overlays</span></div>
+        <div class="hint-row"><span class="hint-key">Chrono bar</span><span class="hint-desc">Click era or event</span></div>
+      </div>
+
+      <div class="welcome-world-stats">
+        <div class="world-stat"><span class="stat-num" id="dataStatus">Loading...</span></div>
+      </div>
+    </div>
+
+    <!-- Detail state (hidden until a place is clicked) -->
+    <div id="panelDetail" class="panel-detail" hidden></div>
+
+  </aside>
+
+</main><!-- end layout -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CHRONOLOGY BAR
+═══════════════════════════════════════════════════════ -->
+<footer class="chrono-bar" id="chronoBar" aria-label="World chronology">
+  <div class="chrono-left">
+    <span class="chrono-heading">Chronology</span>
+    <span class="chrono-era-display" id="eraDisplay"></span>
+  </div>
+  <div class="chrono-track" id="chronoTrack" role="listbox" aria-label="Historical eras and events">
+    <!-- populated by engine.js -->
+  </div>
+  <div class="chrono-right">
+    <span class="chrono-hint">← click era or event →</span>
+    <span class="chrono-phase-note">Phase 3: drag to travel in time</span>
+  </div>
+</footer>
+
+<!-- Status bar -->
+<div class="phase-notice" role="status" aria-live="polite">
+  <strong>World Engine — Phase 1 Interactive Preview</strong>
+  &nbsp;·&nbsp; Pan + zoom &nbsp;·&nbsp; Click markers &nbsp;·&nbsp; Layer toggles &nbsp;·&nbsp;
+  Chronology bar &nbsp;·&nbsp; No backend · Static JSON
+</div>
+
+<script src="engine.js"></script>
 </body>
 </html>
