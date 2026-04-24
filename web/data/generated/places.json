@@ -1,0 +1,31 @@
+[
+  {
+    "id": "place-vareth",
+    "type": "place",
+    "title": "Vareth",
+    "aliases": [
+      "The Iron City",
+      "Seat of the North"
+    ],
+    "canonState": "canon",
+    "placeType": "city",
+    "region": "northern-reach",
+    "faction": "northern-reach",
+    "layer": "political",
+    "description": "The largest fortified city in the Northern Reach, built where the Var River meets the foothills of the Ashspine. Ruled by House Voss for six generations. Its iron gates have never been breached. The city smells of coal smoke and river mist.",
+    "linkedCharacters": [
+      "char-aran-voss"
+    ],
+    "linkedEvents": [
+      "event-founding-vareth",
+      "event-siege-of-vareth"
+    ],
+    "linkedStories": [
+      "story-the-first-winter"
+    ],
+    "mapRef": {
+      "x": 290,
+      "y": 175
+    }
+  }
+]

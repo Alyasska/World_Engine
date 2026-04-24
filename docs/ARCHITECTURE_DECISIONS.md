@@ -75,6 +75,20 @@ This document records every significant technical decision made in this project,
 
 ---
 
+## AD-010 — Built-in YAML Parser for vault→JSON Script (No External Dependency)
+**Date:** 2026-04-24
+**Decision:** `scripts/vault-to-json.js` uses a hand-written YAML frontmatter parser instead of `gray-matter` or `js-yaml`.
+**Rationale:** The vault YAML uses a small, well-defined subset of YAML: scalar strings, numbers, null, booleans, block arrays (`- item`), and one-level nested objects (`mapRef: {x, y}`). No multi-line block scalars, no anchors, no inline tables. A targeted parser handles these patterns with ~80 lines of readable code and zero installation steps. Adding `gray-matter` would require `npm init` + `npm install`, introducing a `node_modules/` directory and a `package.json` before any other tooling decision has been made. That is premature — the parser decision should follow the broader Phase 2 toolchain decision (AD-011).
+**Trade-off:** The built-in parser will fail silently or produce wrong output if future vault entries use YAML features outside its scope. Mitigated by: (a) the parser logs `[skip]` for unparseable files rather than crashing, (b) the contract doc (OBSIDIAN_DATA_CONTRACT.md) defines the allowed patterns, (c) the script writes to `web/data/generated/` not `web/data/` directly — existing live JSON is never touched.
+**Known limitations:**
+- No multi-line string values (`|` or `>` block scalars)
+- No inline flow tables (`{key: value}` on a single line)
+- No YAML anchors/aliases
+- Inline comments only stripped from unquoted values; quoted string values are safe
+**Revisit at:** Phase 2C. When `gray-matter` or `js-yaml` is introduced as part of a broader Node toolchain, replace the built-in parser and document as AD-011.
+
+---
+
 ## AD-009 — Static JSON as Phase 1 Data Bridge
 **Date:** 2026-04-24  
 **Decision:** Hand-authored static JSON files in `web/data/` (places, characters, events, stories) serve as the Phase 1 data layer. No backend, no parser, no database.  

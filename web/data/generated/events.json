@@ -1,0 +1,36 @@
+[
+  {
+    "id": "event-siege-of-vareth",
+    "type": "event",
+    "title": "The Siege of Vareth",
+    "aliases": [
+      "The Long Siege",
+      "Voss's Stand"
+    ],
+    "canonState": "canon",
+    "era": "long-wars",
+    "date": "Year 12, The Long Wars",
+    "chronoPosition": 0.4,
+    "eventType": "battle",
+    "scale": "regional",
+    "primaryPlace": "place-vareth",
+    "linkedPlaces": [
+      "place-vareth"
+    ],
+    "participants": [
+      "char-aran-voss"
+    ],
+    "description": "The Compact's allied forces besieged Vareth for forty days. Aran Voss, twenty-three years old, had taken command of the city after his father's death on the third day. The siege was broken not by military force but by a flood that cut the supply lines. Both sides called it luck.",
+    "consequences": [
+      "Aran Voss established as ruler of Vareth",
+      "Northern Reach survived as a political entity",
+      "The Compact retreated but was not defeated"
+    ],
+    "linkedStories": [
+      "story-the-first-winter"
+    ],
+    "linkedEvents": [
+      "event-fall-of-grey-keep"
+    ]
+  }
+]

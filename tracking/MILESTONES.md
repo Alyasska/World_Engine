@@ -96,10 +96,23 @@ Track phase completion here. A phase is complete only when the Visual Confirmati
 
 ---
 
-## Phase 2B — Vault→JSON Parser Script (Planned)
-**Status:** 🔲 Not started
-**Goal:** Script that reads vault `.md` YAML frontmatter and writes `web/data/*.json` automatically. First real end-to-end test of the data contract.
-**Visual Confirmation:** Edit `vault/Places/vareth.md`, run the script, reload the map — updated description appears in the detail panel without touching JSON manually.
+## Phase 2B — Vault→JSON Parser Script
+**Status:** ✅ Complete
+**Branch:** `phase-2b-vault-parser`
+**Goal:** Script that reads vault `.md` YAML frontmatter and writes JSON. Writes to `web/data/generated/` (staging) — live `web/data/*.json` untouched until Phase 2C.
+
+**Checklist:**
+- [x] `scripts/vault-to-json.js` — no-dependency YAML frontmatter parser
+- [x] `docs/ARCHITECTURE_DECISIONS.md` — AD-010: built-in parser rationale and limitations
+- [x] `web/data/generated/places.json` — 1 entry from vault/Places/vareth.md
+- [x] `web/data/generated/characters.json` — 1 entry from vault/Characters/aran-voss.md
+- [x] `web/data/generated/events.json` — 1 entry from vault/Events/siege-of-vareth.md
+- [x] `web/data/generated/stories.json` — 1 entry from vault/Stories/the-first-winter.md
+- [x] `web/data/generated/README.md` — documents staging area and promotion path
+- [x] All 4 vault entries parsed with correct web fields, vault-only fields dropped
+- [x] Original `web/data/*.json` unchanged — Phase 1 preview not broken
+
+**Run:** `node scripts/vault-to-json.js`
 
 ---
 
