@@ -1,0 +1,418 @@
+/* World Engine — Phase 0 Preview Styles */
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-deep:      #0d0e12;
+  --bg-panel:     #13151c;
+  --bg-map:       #1a1e2e;
+  --border:       #2a2e3d;
+  --border-light: #3a3f55;
+  --gold:         #c8a96e;
+  --gold-dim:     #8b7355;
+  --text-primary: #d4cfc4;
+  --text-muted:   #7a7870;
+  --text-dim:     #4a4840;
+  --accent-era:   #2a3550;
+  --accent-active:#3d5080;
+  --river-blue:   #3a6080;
+  --continent:    #2a3040;
+  --continent-edge: #3d4a60;
+
+  --topbar-h:     48px;
+  --chrono-h:     64px;
+  --notice-h:     30px;
+  --panel-w:      260px;
+  --font-ui:      'Georgia', 'Times New Roman', serif;
+  --font-mono:    'Consolas', monospace;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+/* ─── Top Bar ──────────────────────────────────────────────── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 24px;
+  z-index: 100;
+}
+
+.topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-glyph {
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.logo-text {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topbar-nav {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.nav-item {
+  padding: 4px 12px;
+  border-radius: 3px;
+  color: var(--text-muted);
+  cursor: default;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
+}
+
+.nav-item:hover { color: var(--text-primary); }
+.nav-item.active { color: var(--gold); }
+
+.topbar-badge {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Main Layout ──────────────────────────────────────────── */
+.layout {
+  position: fixed;
+  top: var(--topbar-h);
+  bottom: calc(var(--chrono-h) + var(--notice-h));
+  left: 0; right: 0;
+  display: flex;
+}
+
+/* ─── Map Area ─────────────────────────────────────────────── */
+.map-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-map);
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle grid overlay for atmosphere */
+.map-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.2;
+}
+
+/* Vignette */
+.map-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(13,14,18,0.7) 100%);
+  pointer-events: none;
+}
+
+.map-sketch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+}
+
+/* SVG element styles */
+.continent {
+  fill: var(--continent);
+  stroke: var(--continent-edge);
+  stroke-width: 1.5;
+}
+
+.inner-sea {
+  fill: var(--bg-map);
+  stroke: var(--river-blue);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.mountains path {
+  fill: none;
+  stroke: var(--gold-dim);
+  stroke-width: 1.2;
+  opacity: 0.7;
+}
+
+.river {
+  fill: none;
+  stroke: var(--river-blue);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.city-dot {
+  fill: var(--gold);
+  opacity: 0.9;
+}
+
+.city-dot.major {
+  fill: var(--gold);
+  stroke: var(--gold-dim);
+  stroke-width: 2;
+}
+
+.city-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  fill: var(--text-primary);
+  opacity: 0.85;
+}
+
+.region-label {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  fill: var(--text-muted);
+  opacity: 0.6;
+  font-style: italic;
+  letter-spacing: 0.08em;
+}
+
+.map-overlay-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  background: rgba(13,14,18,0.75);
+  border: 1px solid var(--border);
+  padding: 16px 24px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.map-phase-label {
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.map-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.map-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* ─── Side Panel ───────────────────────────────────────────── */
+.side-panel {
+  width: var(--panel-w);
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-section {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-heading {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-dim);
+  margin-bottom: 8px;
+}
+
+.entity-list {
+  list-style: none;
+  margin-bottom: 8px;
+}
+
+.entity-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.entity-item.stub { color: var(--text-dim); font-style: italic; }
+
+.entity-icon { font-size: 12px; opacity: 0.7; }
+
+.entity-name { flex: 1; }
+
+.entity-tag {
+  font-size: 10px;
+  color: var(--text-dim);
+  background: var(--border);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-style: normal;
+  font-family: var(--font-mono);
+}
+
+.panel-action {
+  font-size: 11px;
+  font-family: var(--font-ui);
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px dashed var(--border);
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: not-allowed;
+  letter-spacing: 0.04em;
+  width: 100%;
+}
+
+/* ─── Chronology Bar ───────────────────────────────────────── */
+.chrono-bar {
+  position: fixed;
+  bottom: var(--notice-h);
+  left: 0; right: 0;
+  height: var(--chrono-h);
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  z-index: 50;
+}
+
+.chrono-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.chrono-track {
+  flex: 1;
+  height: 28px;
+  position: relative;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.chrono-era {
+  position: absolute;
+  top: 0; bottom: 0;
+  background: var(--accent-era);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  transition: background 0.2s;
+}
+
+.chrono-era.active {
+  background: var(--accent-active);
+}
+
+.era-name {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chrono-era.active .era-name {
+  color: var(--text-primary);
+}
+
+.chrono-cursor {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--gold);
+  opacity: 0.85;
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.chrono-hint {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  width: 200px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+/* ─── Phase Notice ─────────────────────────────────────────── */
+.phase-notice {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--notice-h);
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  z-index: 50;
+}
+
+.phase-notice strong {
+  color: var(--text-muted);
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+/* ─── Responsive hint ──────────────────────────────────────── */
+@media (max-width: 640px) {
+  .side-panel { display: none; }
+  .chrono-hint { display: none; }
+}

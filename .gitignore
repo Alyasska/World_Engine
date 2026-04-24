@@ -1,0 +1,28 @@
+# Node
+node_modules/
+dist/
+.cache/
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/settings.json
+*.swp
+*.swo
+
+# Obsidian local settings (keep community plugins list, ignore local prefs)
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+vault/.obsidian/cache
+
+# Build artifacts
+web/dist/
+
+# Logs
+*.log
+npm-debug.log*
