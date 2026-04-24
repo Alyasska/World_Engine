@@ -53,10 +53,26 @@ Track phase completion here. A phase is complete only when the Visual Confirmati
 - [x] Layer toggles: Geography, Political, Narrative, Chronology (all visibly affect map)
 - [x] Chronology bar with era bands and event dots (clickable)
 - [x] docs/ARCHITECTURE_DECISIONS.md updated (AD-007, AD-008, AD-009)
-- [x] docs/OBSIDIAN_VSCODE_WORKFLOW.md updated (two-vault section)
+- [x] docs/OBSIDIAN_VSCODE_WORKFLOW.md updated (two-level architecture)
 - [x] CLAUDE.md, AGENTS.md updated
 - [x] tracking/ files updated
+- [x] PROJECT_INDEX.md created at repo root for Obsidian project-vault navigation
 - [x] Committed and pushed to GitHub
+
+**What Is Real vs Mocked:**
+
+| Feature | Status | Notes |
+|---|---|---|
+| Pan / zoom | ✅ Real | Vanilla JS, CSS transform, cursor-centered zoom |
+| Place markers | ✅ Real | Rendered from places.json (8 places) |
+| Detail panel content | ✅ Real | Loaded from JSON |
+| Related entities | ✅ Real | Cross-referenced across 4 JSON files |
+| Layer toggles | ✅ Real | Visibly show/hide SVG groups and chrono bar |
+| Chronology bar | ✅ Real | Events from events.json, era selection |
+| World geography | ⚙️ Hand-crafted SVG | Not from Azgaar — Phase 2 decision |
+| Political borders | ⚙️ Approximate fills | Rough territory, not from data |
+| vault → JSON pipeline | 🔲 Mocked | JSON is hand-authored; script is Phase 2 |
+| MapLibre / Azgaar | 🔲 Not yet | Documented as future; Phase 2 decision |
 
 ---
 

@@ -25,12 +25,14 @@ See `tracking/MILESTONES.md` for the authoritative phase status.
 | Final vision | `docs/FINAL_VISION.md` |
 | Lessons from old repo | `docs/OLD_REPO_LESSONS.md` |
 | Open-source candidates | `docs/OPEN_SOURCE_REPOS.md` |
+| Prompt log | `docs/PROMPT_LOG.md` |
+| UI design reference | `docs/UI_DESIGN_NOTES.md` |
 | Current milestone status | `tracking/MILESTONES.md` |
 | What to do next | `tracking/NEXT_ACTIONS.md` |
 | Recent changes | `tracking/CHANGELOG.md` |
 | Canonical terms | `terminology/TERMS.md` |
 | Obsidian two-vault setup | `docs/OBSIDIAN_VSCODE_WORKFLOW.md` |
-| Agent handoff (Obsidian) | `workspace-vault/02_Agent_Notes/agent-handoff.md` |
+| Project Obsidian navigation | `PROJECT_INDEX.md` |
 
 ## Handoff Protocol
 When an agent finishes a task:
@@ -59,17 +61,7 @@ world_engine/
 │   ├── Maps/
 │   ├── Assets/
 │   └── Templates/
-├── workspace-vault/       # PROJECT Obsidian vault — dev management (NOT lore)
-│   ├── 00_Index/          # Master index (HOME.md)
-│   ├── 01_Phases/         # One note per phase
-│   ├── 02_Agent_Notes/    # Agent handoff notes
-│   ├── 03_Prompts/        # Prompt log
-│   ├── 04_Architecture/   # Architecture overview
-│   ├── 05_Open_Source_Research/
-│   ├── 06_UI_UX/
-│   ├── 07_Deployment/
-│   ├── 08_Decisions/
-│   └── 09_Progress_Log/
+├── PROJECT_INDEX.md       # Obsidian navigation index for repo root (project vault)
 ├── web/                   # Static frontend (GitHub Pages root)
 │   ├── data/              # Static JSON data bridge
 │   │   ├── places.json

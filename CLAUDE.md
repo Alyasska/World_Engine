@@ -4,8 +4,8 @@
 - **Project:** World Engine — private long-term worldbuilding system
 - **Repo:** https://github.com/Alyasska/World_Engine
 - **Local root:** `C:\mirror\мое\world_engine`
-- **Creative vault (Obsidian):** `C:\mirror\мое\world_engine\vault\` — fictional world content
-- **Project vault (Obsidian):** `C:\mirror\мое\world_engine\workspace-vault\` — software dev management
+- **Project vault (Obsidian):** `C:\mirror\мое\world_engine` (repo root) — open this for project management, planning, agent notes
+- **Creative vault (Obsidian):** `C:\mirror\мое\world_engine\vault\` — open this for fictional world writing
 - **Phase:** 1 complete → tracking in `tracking/MILESTONES.md`
 
 ## Architecture Principles
@@ -20,16 +20,16 @@
 - `tracking/` — milestones, next actions, changelog (update these as you work)
 - `terminology/` — canonical definitions for worldbuilding terms used in this project
 - `skills/` — reusable agent behavior guides
-- `vault/` — **creative** Obsidian vault: Stories, Characters, Places, Events, Lore (fictional world)
-- `workspace-vault/` — **project** Obsidian vault: phases, agent notes, decisions, prompts (dev management)
+- `vault/` — **creative** Obsidian vault: Stories, Characters, Places, Events, Lore (fictional world only)
 - `web/` — static frontend; GitHub Pages root; contains `data/` (static JSON), `engine.js`, `index.html`
 - `references/` — external links, snippets, and non-code research assets
 - `scripts/` — utility scripts (vault→JSON parser, file scaffolding, etc.)
+- `PROJECT_INDEX.md` — Obsidian navigation index for the project vault (repo root)
 
 ## Two-Vault Rule
 **Never mix creative lore with development notes.**
-- Fictional content (characters, stories, places, lore) → `vault/`
-- Dev content (phases, decisions, agent notes, prompts) → `workspace-vault/`
+- Fictional content (characters, stories, places, lore) → `vault/` (open as Obsidian creative vault)
+- Dev content (phases, decisions, agent notes, prompts) → repo root docs/, tracking/, skills/ (open as Obsidian project vault)
 - See `docs/OBSIDIAN_VSCODE_WORKFLOW.md` for setup and editing rules
 
 ## Agent Behavior Rules

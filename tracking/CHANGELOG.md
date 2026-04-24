@@ -4,6 +4,22 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-24] Phase 1 correction — Remove workspace-vault, use repo root as project Obsidian vault
+
+**Changed:**
+- Removed `workspace-vault/` entirely (was an incorrect separate planning system)
+- Created `PROJECT_INDEX.md` at repo root — navigation index for project-management Obsidian vault
+- Created `docs/PROMPT_LOG.md` — prompt log (unique content rescued from workspace-vault)
+- Created `docs/UI_DESIGN_NOTES.md` — color palette + aesthetic direction reference
+- Updated `docs/OBSIDIAN_VSCODE_WORKFLOW.md` — rewritten for correct two-level architecture
+- Updated `docs/ARCHITECTURE_DECISIONS.md` — AD-008 corrected (repo root = project vault)
+- Updated `CLAUDE.md`, `AGENTS.md` — removed workspace-vault references
+- Updated `tracking/MILESTONES.md` — added real/mocked table to Phase 1 section
+
+**Architecture correction:** The repo root `C:\mirror\мое\world_engine` IS the project-management Obsidian vault. No separate folder needed — CLAUDE.md, AGENTS.md, docs/, tracking/, skills/, terminology/ already contain all project management content. `PROJECT_INDEX.md` provides Obsidian-friendly navigation of these files.
+
+---
+
 ## [2026-04-24] Phase 1 — Interactive visual prototype and project vault
 
 **Branch:** `phase-1-interactive-visual-prototype`

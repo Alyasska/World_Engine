@@ -66,12 +66,12 @@ This document records every significant technical decision made in this project,
 
 ---
 
-## AD-008 — Two-Vault Obsidian Architecture
+## AD-008 — Two-Level Obsidian Architecture
 **Date:** 2026-04-24  
-**Decision:** Maintain two separate Obsidian vaults in the same Git repository: `vault/` for creative worldbuilding content, `workspace-vault/` for software project management.  
-**Rationale:** Mixing fictional lore with development notes in a single Obsidian graph causes clutter: the agent handoff note should not appear next to "Chapter 3 of The First Winter." Different mental contexts require different tools. Independent commits: a lore writing session should not pollute the development commit history.  
-**Trade-off:** Two Obsidian windows to open instead of one. Documented in `docs/OBSIDIAN_VSCODE_WORKFLOW.md` with setup instructions for both.  
-**Constraint:** `workspace-vault/` uses Obsidian `[[wikilinks]]` only for internal cross-references within that vault. Links to project files outside the vault use standard Markdown links.
+**Decision:** Two separate Obsidian vaults pointed at different paths in the same Git repository: the **repo root** (`C:\mirror\мое\world_engine`) as the project-management vault, and `vault/` as the creative worldbuilding vault.  
+**Rationale:** Mixing fictional lore with development notes in a single Obsidian graph causes clutter — the CLAUDE.md and MILESTONES.md should not appear in the world knowledge graph next to Characters and Stories. The repo root already contains all project management files (docs/, tracking/, skills/, terminology/). No separate folder is needed. A single `PROJECT_INDEX.md` at root provides Obsidian navigation.  
+**Trade-off:** When the project vault is open (repo root), non-Markdown files (web/*.js, web/*.html) appear in Obsidian's file tree but are invisible in graph view and do not interfere. Acceptable.  
+**Constraint:** Use standard Markdown links `[text](path)` everywhere in repo-root files so they work in VS Code, GitHub, and both Obsidian contexts. `[[wikilinks]]` are only used inside `vault/` (creative vault), never in docs/, tracking/, or skills/.
 
 ---
 
