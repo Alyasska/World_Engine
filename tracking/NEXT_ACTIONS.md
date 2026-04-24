@@ -6,17 +6,25 @@ The single most important thing to do next, plus a short queue. Keep this file c
 
 ## Immediate Next Step
 
-**Start Phase 2B — vault→JSON parser script**
+**Start Phase 2C — promote generated data and extend the vault**
 
-The data contract is aligned (Phase 2A complete). Sample vault entries exist in `vault/Places/`, `vault/Characters/`, `vault/Events/`, `vault/Stories/`. The next step is the script that converts them to JSON.
+Phase 2B is complete. The parser works. The next step is: add more vault entries,
+run the script, confirm the web preview loads from generated data correctly.
 
 Recommended next prompt:
 
-> "Start Phase 2B: write a script in `scripts/vault-to-json.js` (Node.js, no external dependencies beyond the built-in `fs` module and a YAML parser) that reads every `.md` file in `vault/Places/`, `vault/Characters/`, `vault/Events/`, and `vault/Stories/`, parses their YAML frontmatter using the field contract in `docs/OBSIDIAN_DATA_CONTRACT.md`, and writes to `web/data/places.json`, `web/data/characters.json`, `web/data/events.json`, `web/data/stories.json`. Skip entries where `canonState: retired`. Merge output with any existing entries that have no vault source. Document the script choice in `docs/ARCHITECTURE_DECISIONS.md` as AD-010."
+> "Start Phase 2C on branch `phase-2c-live-data`. Goal: (1) Add vault entries for
+> the remaining 7 places, 3 characters, 5 events, and 2 stories that exist in
+> web/data/*.json but have no vault source yet. Use the aligned templates from
+> Phase 2A. (2) Run `node scripts/vault-to-json.js` — confirm all entries appear
+> in web/data/generated/. (3) Switch web/engine.js to load from
+> web/data/generated/*.json instead of web/data/*.json. (4) Verify the GitHub
+> Pages preview still shows all 8 place markers, all layers, and the chronology
+> bar. (5) Document the toolchain decision (Node.js, no framework yet) as AD-011."
 
-**Pre-work / decisions pending:**
-- [ ] Confirm: Node.js for the parser (consistent with project; `gray-matter` is the standard YAML+MD parser — check license before importing)
-- [ ] Decide: Should the script **merge** existing hand-authored JSON with vault-generated entries, or **replace** entirely? (Recommend: replace entries by `id`, keep hand-authored ones with no vault source)
+**Decisions pending for Phase 2C:**
+- [ ] Merge strategy: when the vault entry for a place exists AND a hand-authored JSON entry with the same id exists, which wins? (Recommend: vault wins — it is the authoritative source)
+- [ ] Switch timing: promote generated/ → live in the same PR as completing vault entries, or in a separate commit?
 
 ---
 

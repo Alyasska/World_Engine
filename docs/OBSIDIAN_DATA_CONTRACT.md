@@ -19,11 +19,16 @@ The vault is authoritative for lore content. The JSON is authoritative for what 
 ## Pipeline (current and target)
 
 ```
-Phase 1 (now):   vault/  ──(manual)──►  web/data/*.json  ──►  engine.js
-Phase 2B (next): vault/  ──(script)──►  web/data/*.json  ──►  engine.js
+Phase 1:         vault/  ──(manual)──►  web/data/*.json            ──►  engine.js
+Phase 2B (now):  vault/  ──(script)──►  web/data/generated/*.json  (staging)
+Phase 2C (next): vault/  ──(script)──►  web/data/*.json            ──►  engine.js (live)
 ```
 
-Until the parser exists, JSON files must be kept in sync by hand. The contract ensures alignment is possible when the script is built.
+**Phase 2B status:** `scripts/vault-to-json.js` exists and generates output to
+`web/data/generated/`. The live web engine still loads from `web/data/*.json`.
+Promotion to live happens in Phase 2C once the vault has sufficient entries.
+
+Run the parser: `node scripts/vault-to-json.js`
 
 ---
 

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "story-the-first-winter",
+    "type": "story",
+    "title": "The First Winter",
+    "aliases": [
+      "Winter of the Siege"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 12–13, The Long Wars",
+    "chronoPosition": 0.41,
+    "primaryPlace": "place-vareth",
+    "linkedPlaces": [
+      "place-vareth",
+      "place-grey-keep"
+    ],
+    "protagonists": [
+      "char-aran-voss"
+    ],
+    "participants": [],
+    "logline": "A young lord inherits a siege on the third day of his rule, with his father's body still warm.",
+    "description": "The story of Vareth's forty-day siege as experienced by Aran Voss — not the strategic decisions but the weight of them. A governor who reads philosophy trying to keep 40,000 people alive through a winter when the food stores were set for 28,000.",
+    "linkedEvents": [
+      "event-siege-of-vareth"
+    ],
+    "linkedCharacters": [
+      "char-aran-voss"
+    ],
+    "tags": [
+      "siege",
+      "winter",
+      "governance",
+      "Vareth",
+      "House Voss"
+    ]
+  }
+]

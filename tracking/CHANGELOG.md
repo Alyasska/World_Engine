@@ -4,6 +4,30 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-24] Phase 2B — Vault→JSON parser (safe staged output)
+
+**Branch:** `phase-2b-vault-parser`
+
+**Added:**
+- `scripts/vault-to-json.js` — Node.js script (no external dependencies) that parses vault Markdown YAML frontmatter and writes to `web/data/generated/`. Built-in YAML parser handles all patterns used in this vault. Skips `canonState: retired`. Drops vault-only fields. Strips cellId from mapRef.
+- `web/data/generated/places.json` — 1 generated entry (place-vareth)
+- `web/data/generated/characters.json` — 1 generated entry (char-aran-voss)
+- `web/data/generated/events.json` — 1 generated entry (event-siege-of-vareth)
+- `web/data/generated/stories.json` — 1 generated entry (story-the-first-winter)
+- `web/data/generated/README.md` — documents staging area and promotion steps for Phase 2C
+
+**Changed:**
+- `docs/ARCHITECTURE_DECISIONS.md` — added AD-010 (built-in YAML parser rationale + limitations)
+- `docs/OBSIDIAN_DATA_CONTRACT.md` — updated pipeline section to show current Phase 2B state
+- `tracking/MILESTONES.md` — Phase 2B marked complete
+- `tracking/NEXT_ACTIONS.md` — updated for Phase 2C
+
+**Safety:** `web/data/*.json` (Phase 1 hand-authored files) is untouched. Phase 1 preview is not broken.
+
+**Run:** `node scripts/vault-to-json.js`
+
+---
+
 ## [2026-04-24] Phase 2A — Obsidian data contract alignment
 
 **Branch:** `phase-2a-obsidian-data-contract`

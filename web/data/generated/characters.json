@@ -1,0 +1,36 @@
+[
+  {
+    "id": "char-aran-voss",
+    "type": "character",
+    "title": "Lord Aran Voss",
+    "aliases": [
+      "The Iron Lord",
+      "Voss the Younger"
+    ],
+    "canonState": "canon",
+    "role": "protagonist",
+    "faction": "northern-reach",
+    "species": "human",
+    "birthPlace": "place-vareth",
+    "currentPlace": "place-vareth",
+    "traits": [
+      "calculating",
+      "loyal to his city",
+      "cold in public",
+      "haunted in private"
+    ],
+    "arc": "A lord who built his reputation on strength, now unsure if strength can solve what is coming.",
+    "description": "Lord of Vareth and nominal ruler of the Northern Reach. Took power at twenty-three when his father died in the siege. Has governed for eleven years. His correspondence reveals a man who reads more philosophy than military strategy.",
+    "linkedPlaces": [
+      "place-vareth",
+      "place-grey-keep"
+    ],
+    "linkedEvents": [
+      "event-siege-of-vareth",
+      "event-treaty-of-solmark"
+    ],
+    "linkedStories": [
+      "story-the-first-winter"
+    ]
+  }
+]
