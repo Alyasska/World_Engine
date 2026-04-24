@@ -109,6 +109,44 @@ Inside `vault/`, `[[wikilinks]]` are fine because those files are only opened in
 
 ---
 
+## Phase 2 Authoring Workflow: Vault → Map
+
+This is the day-to-day workflow for keeping the interactive map preview current
+with vault lore entries (active since Phase 2C).
+
+```
+1. Edit or create a vault entry
+   → vault/Places/*.md, vault/Characters/*.md, vault/Events/*.md, vault/Stories/*.md
+   → Use the aligned templates in vault/Templates/
+   → Edit in Obsidian (creative vault) or VS Code
+
+2. Run the parser
+   → From the repo root in a terminal:
+      node scripts/vault-to-json.js
+   → Output goes to web/data/generated/
+
+3. Check the output (optional)
+   → Inspect web/data/generated/places.json etc. to verify the entry looks right
+   → Start VS Code Live Server to preview locally
+
+4. Commit everything together
+   → git add vault/  web/data/generated/
+   → git commit -m "vault: update [entry name]"
+
+5. Push → GitHub Pages redeploys automatically
+   → GitHub Actions deploys web/ to https://alyasska.github.io/World_Engine/
+   → The map shows the updated data within ~30 seconds of push
+```
+
+**Field contract:** See [docs/OBSIDIAN_DATA_CONTRACT.md](OBSIDIAN_DATA_CONTRACT.md)
+for which frontmatter fields are exported to JSON vs vault-only.
+
+**Parser limitations:** The built-in YAML parser handles the patterns used in this
+vault. Do not use multi-line block scalars (`|`, `>`), inline flow tables, or YAML
+anchors in vault entries. See AD-010 in [docs/ARCHITECTURE_DECISIONS.md](ARCHITECTURE_DECISIONS.md).
+
+---
+
 ## Quick Reference
 
 ```
@@ -117,4 +155,6 @@ Obsidian #1:     C:\mirror\мое\world_engine          ← project vault (plann
 Obsidian #2:     C:\mirror\мое\world_engine\vault    ← creative vault (lore)
 GitHub:          https://github.com/Alyasska/World_Engine
 Preview:         https://alyasska.github.io/World_Engine/
+Parser:          node scripts/vault-to-json.js
+Generated data:  web/data/generated/
 ```

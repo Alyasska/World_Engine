@@ -1,5 +1,49 @@
 [
   {
+    "id": "story-merchant-roads",
+    "type": "story",
+    "title": "Merchant Roads",
+    "aliases": [
+      "The Long Route"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 28–31, The Long Wars",
+    "chronoPosition": 0.55,
+    "primaryPlace": "place-solmark",
+    "linkedPlaces": [
+      "place-solmark",
+      "place-drenford",
+      "place-port-maren",
+      "place-vareth"
+    ],
+    "protagonists": [
+      "char-mira-solhand"
+    ],
+    "participants": [
+      "char-aran-voss",
+      "char-elder-council"
+    ],
+    "logline": "The most important negotiation of the war was conducted over trading ledgers, not at a peace table.",
+    "description": "Mira Solhand travels from Port Maren to Solmark to Drenford and ultimately to Vareth, carrying messages no official courier can carry. She moves through a war as a merchant — invisible, essential, and thoroughly aware of what she is doing.",
+    "linkedEvents": [
+      "event-treaty-of-solmark",
+      "event-founding-solmark"
+    ],
+    "linkedCharacters": [
+      "char-mira-solhand",
+      "char-aran-voss",
+      "char-elder-council"
+    ],
+    "tags": [
+      "merchant",
+      "war",
+      "diplomacy",
+      "Mira",
+      "Compact"
+    ]
+  },
+  {
     "id": "story-the-first-winter",
     "type": "story",
     "title": "The First Winter",
@@ -33,6 +77,41 @@
       "governance",
       "Vareth",
       "House Voss"
+    ]
+  },
+  {
+    "id": "story-the-silence-after",
+    "type": "story",
+    "title": "The Silence After",
+    "aliases": [
+      "Ashveil Witness"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 18–19, The Long Wars",
+    "chronoPosition": 0.45,
+    "primaryPlace": "place-ashveil",
+    "linkedPlaces": [
+      "place-ashveil",
+      "place-veiled-shore"
+    ],
+    "protagonists": [
+      "char-the-wanderer"
+    ],
+    "participants": [],
+    "logline": "The first person to see Ashveil after the burning never told anyone what they found.",
+    "description": "A traveler arrives at Ashveil three days after the burning, before the official record-keepers, before the soldiers. What they find — and choose not to report — reshapes everything that follows. A story told entirely from outside the political narratives.",
+    "linkedEvents": [
+      "event-burning-of-ashveil"
+    ],
+    "linkedCharacters": [
+      "char-the-wanderer"
+    ],
+    "tags": [
+      "mystery",
+      "Ashveil",
+      "wanderer",
+      "aftermath"
     ]
   }
 ]

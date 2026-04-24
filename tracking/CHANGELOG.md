@@ -4,6 +4,29 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-24] Phase 2C — Live generated data + Phase 2 static demo
+
+**Branch:** `phase-2c-live-generated-data`
+
+**Added:**
+- `vault/Places/` — 7 new entries: grey-keep, solmark, drenford, ashveil, port-maren, thornwood-watch, veiled-shore
+- `vault/Characters/` — 3 new entries: mira-solhand, the-wanderer, elder-council
+- `vault/Events/` — 5 new entries: founding-vareth, founding-solmark, burning-of-ashveil, treaty-of-solmark, fall-of-grey-keep
+- `vault/Stories/` — 2 new entries: merchant-roads, the-silence-after
+- `web/data/generated/` — updated to full dataset: 8 places, 4 characters, 6 events, 3 stories
+
+**Changed:**
+- `web/engine.js` — fetches from `web/data/generated/*.json`; data status shows "vault-generated"; comment updated to Phase 2
+- `web/index.html` — topbar badge: "Phase 2 Preview"; notice bar: Phase 2 data-flow attribution
+- `docs/ARCHITECTURE_DECISIONS.md` — AD-011 (engine switches to generated vault data)
+- `docs/OBSIDIAN_VSCODE_WORKFLOW.md` — Phase 2 authoring workflow section added
+- `tracking/MILESTONES.md` — Phase 2C marked complete; Phase 3 section added
+- `tracking/NEXT_ACTIONS.md` — updated for Phase 3
+
+**Phase 2 complete:** Obsidian vault Markdown → `vault-to-json.js` → `web/data/generated/` → GitHub Pages interactive map. No backend. No framework. All Phase 1 visual features intact.
+
+---
+
 ## [2026-04-24] Phase 2B — Vault→JSON parser (safe staged output)
 
 **Branch:** `phase-2b-vault-parser`

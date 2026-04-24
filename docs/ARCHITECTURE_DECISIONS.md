@@ -75,6 +75,16 @@ This document records every significant technical decision made in this project,
 
 ---
 
+## AD-011 — Web Engine Loads from Generated Vault Data
+**Date:** 2026-04-24
+**Decision:** `web/engine.js` now fetches from `web/data/generated/*.json` (vault-generated) instead of `web/data/*.json` (hand-authored). The hand-authored files are retained as `web/data/*.json` for reference but are no longer served by the live preview.
+**Rationale:** Phase 2C completes the end-to-end pipeline: vault Markdown → `scripts/vault-to-json.js` → `web/data/generated/` → GitHub Pages. All 8 places, 4 characters, 6 events, and 3 stories now have vault `.md` sources that produce equivalent JSON output. Switching to generated data proves the pipeline works at full dataset scale and makes vault editing the authoritative authoring workflow going forward.
+**Trade-off:** Generated JSON is only as current as the last parser run. If a vault entry is edited without running the script, the preview is stale. Mitigated by: (a) single-command update (`node scripts/vault-to-json.js`), (b) generated JSON is committed to Git alongside vault changes so the deploy is always consistent. A future Phase 3 option: GitHub Action that runs the parser automatically on vault file changes.
+**Hand-authored JSON retention:** `web/data/places.json`, `characters.json`, `events.json`, `stories.json` remain on disk as legacy reference and emergency fallback. They are not deleted. To revert to hand-authored data, change the four `fetch` paths in `engine.js` from `./data/generated/X.json` back to `./data/X.json`.
+**Revisit at:** Phase 3, if automated pipeline (CI runs parser) or MapLibre integration changes the data serving approach.
+
+---
+
 ## AD-010 — Built-in YAML Parser for vault→JSON Script (No External Dependency)
 **Date:** 2026-04-24
 **Decision:** `scripts/vault-to-json.js` uses a hand-written YAML frontmatter parser instead of `gray-matter` or `js-yaml`.

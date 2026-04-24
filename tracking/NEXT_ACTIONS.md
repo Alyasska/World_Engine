@@ -6,45 +6,42 @@ The single most important thing to do next, plus a short queue. Keep this file c
 
 ## Immediate Next Step
 
-**Start Phase 2C — promote generated data and extend the vault**
+**Phase 2 is complete. Start Phase 3 — Chronology Scrubbing.**
 
-Phase 2B is complete. The parser works. The next step is: add more vault entries,
-run the script, confirm the web preview loads from generated data correctly.
+The full vault→map pipeline works. All entries are vault-authored, the engine loads
+generated JSON, and GitHub Pages shows the Phase 2 data-flow attribution.
 
 Recommended next prompt:
 
-> "Start Phase 2C on branch `phase-2c-live-data`. Goal: (1) Add vault entries for
-> the remaining 7 places, 3 characters, 5 events, and 2 stories that exist in
-> web/data/*.json but have no vault source yet. Use the aligned templates from
-> Phase 2A. (2) Run `node scripts/vault-to-json.js` — confirm all entries appear
-> in web/data/generated/. (3) Switch web/engine.js to load from
-> web/data/generated/*.json instead of web/data/*.json. (4) Verify the GitHub
-> Pages preview still shows all 8 place markers, all layers, and the chronology
-> bar. (5) Document the toolchain decision (Node.js, no framework yet) as AD-011."
-
-**Decisions pending for Phase 2C:**
-- [ ] Merge strategy: when the vault entry for a place exists AND a hand-authored JSON entry with the same id exists, which wins? (Recommend: vault wins — it is the authoritative source)
-- [ ] Switch timing: promote generated/ → live in the same PR as completing vault entries, or in a separate commit?
+> "Start Phase 3 on branch `phase-3-chronology-scrub`. Goal: make the chronology
+> bar draggable so the user can scrub through time. When the cursor is in the Age
+> of Founding, show only Age of Founding events and dim others. When in the Long
+> Wars, show Long Wars events. Phase 3A focus: (1) draggable cursor on the
+> chronology bar, (2) event dots dim/brighten based on selected era, (3) visible
+> era label updates as you drag. No MapLibre yet — stay SVG. Evaluate vis-timeline
+> (MIT licensed) as an option but document the decision in AD-012 before adding it."
 
 ---
 
-## Obsidian Setup Queue (Can Do Anytime)
-- [ ] Open `vault/` in Obsidian as the creative worldbuilding vault
-- [ ] Open repo root in Obsidian as the project-management vault
-- [ ] Install `obsidian-git` plugin in both vaults
-- [ ] Install `obsidian-open-vscode` to jump from vault note → VS Code
-- [ ] Configure obsidian-git auto-commit interval
+## Phase 3 Options
+
+- [ ] **3A — Draggable chronology scrub bar** (drag cursor, era-sensitive event dimming) — recommended first
+- [ ] **3B — Era-sensitive territory fills** (SVG political layers shift when era changes)
+- [ ] **3B — Vault→VS Code marker link** (clicking a marker opens vault `.md` in VS Code via URI)
+- [ ] **3B — CI auto-parser** (GitHub Action runs parser on vault push, commits generated JSON)
 
 ---
 
-## Backlog (Phase 2B+)
+## Backlog (Phase 3+)
 
-- [ ] Write vault→JSON bridge script (`scripts/vault-to-json.js`) — **Phase 2B**
-- [ ] Decide: MapLibre at Phase 2C or continue SVG — document in AD-011
-- [ ] Add vault→marker link: clicking a map marker opens the vault `.md` file
-- [ ] Evaluate `vis-timeline` for Phase 3 chronology scrubbing
-- [ ] Define fictional calendar/date system (needed before Phase 3 timeline)
-- [ ] Add PMTiles consideration for Phase 2C map tile serving
+- [ ] Draggable chronology scrub — Phase 3A
+- [ ] Era-sensitive SVG territory fills — Phase 3B
+- [ ] Vault→VS Code link from map markers — Phase 3B
+- [ ] GitHub Action: auto-run `vault-to-json.js` on push — Phase 3B
+- [ ] Evaluate vis-timeline for scrubbing — Phase 3A decision (see AD-012 when created)
+- [ ] Fictional calendar/date system definition — needed before precise Phase 3 positioning
+- [ ] MapLibre + Azgaar integration — Phase 4 decision (see AD-007)
+- [ ] Add Dataview queries to creative vault (now has real entries)
 
 ---
 
@@ -52,7 +49,7 @@ Recommended next prompt:
 
 | Decision | Blocking | Notes |
 |---|---|---|
-| Script language for vault→JSON | Phase 2 | Node.js (consistent) or Python (simpler) |
-| MapLibre at Phase 2 or Phase 3 | Phase 2 start | AD-007 says Phase 2; confirm with user |
-| Fictional calendar system | Phase 3 timeline | Design before vis-timeline integration |
-| Backend hosting provider | Phase 3+ | See `docs/HOSTING_STRATEGY.md` |
+| vis-timeline vs custom scrub | Phase 3A start | MIT licensed; check bundle size first |
+| Fictional calendar system | Phase 3 timeline | Design before scrubbing |
+| MapLibre at Phase 3 or 4 | Phase 4 start | AD-007 says Phase 2; updated to Phase 4 |
+| CI parser automation | Phase 3B | GitHub Action or pre-commit hook |
