@@ -3,37 +3,43 @@ id: place-
 type: place
 title: ""
 aliases: []           # alternate names, names in different eras/languages
-canonState: draft
+canonState: draft     # canon | draft | alt | legend | retired
 
 # Geography
 region: ""            # parent region slug
-placeType: ""         # city | village | ruin | landmark | wilderness | building | sea | mountain | other
+placeType: ""         # city | town | village | fortress | ruins | landmark | wilderness
+layer: political      # geography | political | narrative — controls SVG layer in web engine
 size: ""              # vast | large | medium | small | tiny
 
-# Map reference
+# Map reference — x/y are SVG pixel coords for Phase 1; cellId reserved for Phase 2 Azgaar
 mapRef:
-  cellId: ""          # Azgaar cell ID or equivalent
-  region: ""          # map region name
-  coords: {}          # { x: 0, y: 0 } if using coordinate system
+  x: 0
+  y: 0
+  cellId: ""
 
-# Politics & Culture
-currentFaction: ""    # Institution slug controlling this place
-foundingDate: ""
-population: ""        # approximate, can be narrative ("tens of thousands")
-culture: ""           # cultural identity or mix
+# Politics
+faction: ""           # slug of controlling faction/institution (null if contested/none)
+
+# Web summary — becomes the description field in web/data/places.json
+description: ""       # one-paragraph summary for the web detail panel
 
 # History
+foundingDate: ""
 historicalFactions: []  # list of { era: "", faction: "" }
-significantEvents: []   # Event slugs that happened here
 
-# Connections
+# Connections (slugs — these fields mirror the JSON contract directly)
 linkedCharacters: []  # Characters associated with this place
+linkedEvents: []      # Event slugs that occurred here
 linkedStories: []     # Stories set here
-linkedLore: []        # Lore entries about this place
 linkedPlaces: []      # nearby or related places
 
+# Vault-only fields (not parsed to JSON in Phase 1)
+population: ""        # approximate, can be narrative ("tens of thousands")
+culture: ""           # cultural identity or mix
+linkedLore: []        # Lore entries about this place
+
 # Meta
-sourceStatus: authored
+sourceStatus: authored  # authored | generated | imported | template
 tags: []
 notes: ""
 ---

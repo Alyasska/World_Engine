@@ -17,8 +17,8 @@ Open `C:\mirror\мое\world_engine` as a vault in Obsidian to use this index wi
 
 | Item | Value |
 |---|---|
-| Phase | **1 complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
-| Active branch | `phase-1-interactive-visual-prototype` |
+| Phase | **2A complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
+| Active branch | `phase-2a-obsidian-data-contract` |
 | Next action | [tracking/NEXT_ACTIONS.md](tracking/NEXT_ACTIONS.md) |
 | Preview URL | https://alyasska.github.io/World_Engine/ |
 
@@ -28,6 +28,7 @@ Open `C:\mirror\мое\world_engine` as a vault in Obsidian to use this index wi
 
 - [docs/FINAL_VISION.md](docs/FINAL_VISION.md) — three-pillar vision: map + knowledge + feedback loop
 - [docs/ARCHITECTURE_DECISIONS.md](docs/ARCHITECTURE_DECISIONS.md) — all technical decisions (AD-001 to AD-009)
+- [docs/OBSIDIAN_DATA_CONTRACT.md](docs/OBSIDIAN_DATA_CONTRACT.md) — shared field contract between vault templates and web JSON
 - [docs/OLD_REPO_LESSONS.md](docs/OLD_REPO_LESSONS.md) — lessons from Alyasska/world_building
 - [docs/HOSTING_STRATEGY.md](docs/HOSTING_STRATEGY.md) — GitHub Pages now; hosting options for Phase 2+
 - [docs/UI_DESIGN_NOTES.md](docs/UI_DESIGN_NOTES.md) — color palette, layout structure, marker vocabulary
