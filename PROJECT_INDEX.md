@@ -17,8 +17,8 @@ Open `C:\mirror\мое\world_engine` as a vault in Obsidian to use this index wi
 
 | Item | Value |
 |---|---|
-| Phase | **2A complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
-| Active branch | `phase-2a-obsidian-data-contract` |
+| Phase | **2 complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
+| Active branch | `phase-2c-live-generated-data` |
 | Next action | [tracking/NEXT_ACTIONS.md](tracking/NEXT_ACTIONS.md) |
 | Preview URL | https://alyasska.github.io/World_Engine/ |
 
@@ -44,7 +44,7 @@ Open `C:\mirror\мое\world_engine` as a vault in Obsidian to use this index wi
 
 ## Workflow
 
-- [docs/OBSIDIAN_VSCODE_WORKFLOW.md](docs/OBSIDIAN_VSCODE_WORKFLOW.md) — two-vault setup (repo root + vault/)
+- [docs/OBSIDIAN_VSCODE_WORKFLOW.md](docs/OBSIDIAN_VSCODE_WORKFLOW.md) — two-vault setup + Phase 2 authoring workflow (edit vault → run parser → push)
 - [CLAUDE.md](CLAUDE.md) — agent operating rules, architecture principles
 - [AGENTS.md](AGENTS.md) — quick project orientation for any agent
 

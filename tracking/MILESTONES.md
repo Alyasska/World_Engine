@@ -116,10 +116,37 @@ Track phase completion here. A phase is complete only when the Visual Confirmati
 
 ---
 
-## Phase 2C — Map Engine Decision (Planned)
+## Phase 2C — Live Generated Data + Static Demo
+**Status:** ✅ Complete
+**Branch:** `phase-2c-live-generated-data`
+**Goal:** Complete the full Phase 2 loop — vault Markdown → parser → generated JSON → live GitHub Pages preview. All entries have vault sources; engine loads generated data; preview shows data-flow attribution.
+
+**Checklist:**
+- [x] vault/Places/ — all 8 places have vault `.md` sources
+- [x] vault/Characters/ — all 4 characters have vault `.md` sources
+- [x] vault/Events/ — all 6 events have vault `.md` sources
+- [x] vault/Stories/ — all 3 stories have vault `.md` sources
+- [x] `node scripts/vault-to-json.js` produces 8+4+6+3 entries in web/data/generated/
+- [x] `web/engine.js` fetches from `web/data/generated/` (generated data is live)
+- [x] `web/index.html` topbar badge updated to "Phase 2 Preview"
+- [x] `web/index.html` notice bar shows Phase 2 data-flow attribution
+- [x] `web/data/generated/` entries match the hand-authored JSON (validated before switch)
+- [x] `web/data/*.json` (hand-authored) retained as legacy reference — not deleted
+- [x] All Phase 1 visual features verified: markers, layers, panel, chronology bar
+- [x] `docs/ARCHITECTURE_DECISIONS.md` — AD-011 (engine switches to generated data)
+- [x] `docs/OBSIDIAN_VSCODE_WORKFLOW.md` — Phase 2 authoring workflow documented
+- [x] tracking files updated
+
+**Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — notice bar reads
+"Obsidian vault Markdown → vault-to-json.js → generated JSON → interactive map".
+Data status shows "vault-generated". All 8 markers, layers, and chronology bar work.
+
+---
+
+## Phase 3 — Chronology Scrubbing (Planned)
 **Status:** 🔲 Not started
-**Goal:** Decide whether to introduce MapLibre + Azgaar tiles or continue with the SVG approach. Add vault→marker link (clicking a marker opens the vault entry).
-**Visual Confirmation:** Click a map marker → vault entry opens in VS Code or browser preview.
+**Goal:** A draggable timeline at the bottom of the map. Dragging changes the visible political era, dims out-of-era events, and eventually shifts territory overlays.
+**Visual Confirmation:** Drag the timeline cursor → event dots in other eras dim; selected era band highlights; territory fills shift if political data has era variants.
 
 ---
 

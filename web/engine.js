@@ -1,8 +1,9 @@
 'use strict';
 
 // ═══════════════════════════════════════════════════════════
-// WORLD ENGINE — Phase 1 Interactive Engine
+// WORLD ENGINE — Phase 2 Interactive Engine
 // Vanilla JS only. No external dependencies.
+// Data loaded from web/data/generated/ (vault-to-json.js output).
 // Works on GitHub Pages (/World_Engine/) and local server.
 // Local file:// won't work due to fetch() — use VS Code Live Server.
 // ═══════════════════════════════════════════════════════════
@@ -57,13 +58,13 @@ async function init() {
 async function loadData() {
   try {
     const [places, characters, events, stories] = await Promise.all([
-      fetch('./data/places.json').then(r => { if (!r.ok) throw r; return r.json(); }),
-      fetch('./data/characters.json').then(r => { if (!r.ok) throw r; return r.json(); }),
-      fetch('./data/events.json').then(r => { if (!r.ok) throw r; return r.json(); }),
-      fetch('./data/stories.json').then(r => { if (!r.ok) throw r; return r.json(); })
+      fetch('./data/generated/places.json').then(r => { if (!r.ok) throw r; return r.json(); }),
+      fetch('./data/generated/characters.json').then(r => { if (!r.ok) throw r; return r.json(); }),
+      fetch('./data/generated/events.json').then(r => { if (!r.ok) throw r; return r.json(); }),
+      fetch('./data/generated/stories.json').then(r => { if (!r.ok) throw r; return r.json(); })
     ]);
     state.data = { places, characters, events, stories };
-    document.getElementById('dataStatus').textContent = `${places.length} places · ${characters.length} characters · ${events.length} events · ${stories.length} stories`;
+    document.getElementById('dataStatus').textContent = `${places.length} places · ${characters.length} characters · ${events.length} events · ${stories.length} stories · vault-generated`;
   } catch (err) {
     console.warn('[engine] Data fetch failed. Run via a local server (VS Code Live Server recommended).', err);
     document.getElementById('dataStatus').textContent = 'Data load failed — open via local server';
