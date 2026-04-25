@@ -4,6 +4,27 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 3C — Narrative time filtering
+
+**Branch:** `phase-3c-narrative-time-filtering`
+
+**Changed:**
+- `web/engine.js`:
+  - `applyNarrativeFilter(eraId)` — new function; derives active place IDs from `events.linkedPlaces` filtered by era; toggles `marker-era-active`/`marker-era-inactive` on each `[data-place-id]` marker `<g>`; if the era has no events (post-collapse), removes all era classes (neutral state)
+  - `applyEra()` — calls `applyNarrativeFilter()` after existing era logic
+  - `showPlaceDetail()` — linked events that match `state.activeEra` get `.era-current` class and an inline `<span class="era-badge-active">now</span>`
+- `web/style.css`:
+  - `.place-marker` transition extended to `opacity 0.4s ease, filter 0.4s ease`
+  - `.place-marker.marker-era-active` — soft gold drop-shadow glow
+  - `.place-marker.marker-era-inactive:not(.marker-selected)` — opacity 0.28; selected markers never dim
+  - `.detail-link-item.era-current` — left gold border accent
+  - `.era-badge-active` — small uppercase "now" label in gold
+- `web/index.html` — phase note updated to "3A ✓ · 3B ✓ · 3C ✓"
+
+**Data:** No parser change. Uses existing `events.linkedPlaces` to derive active places per era at runtime. All data is in `web/data/generated/events.json`.
+
+---
+
 ## [2026-04-25] Phase 3B — Era-sensitive map overlays
 
 **Branch:** `phase-3b-era-overlays`

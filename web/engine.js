@@ -417,10 +417,11 @@ function showPlaceDetail(placeId) {
       <h3 class="detail-section-heading">Events</h3>
       <ul class="detail-link-list">
         ${linkedEvts.map(ev => `
-          <li class="detail-link-item" data-event-id="${ev.id}">
+          <li class="detail-link-item${ev.era === state.activeEra ? ' era-current' : ''}" data-event-id="${ev.id}">
             <span class="link-icon">⚡</span>
             <span class="link-name">${ev.title}</span>
             <span class="link-sub">${ev.date}</span>
+            ${ev.era === state.activeEra ? '<span class="era-badge-active">now</span>' : ''}
           </li>`).join('')}
       </ul>
     </div>` : ''}
@@ -598,7 +599,7 @@ function eraAtPosition(fraction) {
   return ERAS.find(e => fraction >= e.start && fraction < e.end) || ERAS[ERAS.length - 1];
 }
 
-// Update era display, band highlights, dot dimming, and map overlays without moving the cursor.
+// Update era display, band highlights, dot dimming, map overlays, and marker emphasis.
 function applyEra(eraId) {
   state.activeEra = eraId;
   document.querySelectorAll('.chrono-era').forEach(el => {
@@ -609,6 +610,27 @@ function applyEra(eraId) {
   });
   updateEraDisplay(eraId);
   applyEraOverlays(eraId);
+  applyNarrativeFilter(eraId);
+}
+
+// Emphasise place markers that have events in eraId; dim the rest.
+// If the era has no events (e.g. post-collapse) all markers return to neutral.
+function applyNarrativeFilter(eraId) {
+  const activePlaceIds = new Set(
+    state.data.events
+      .filter(ev => ev.era === eraId)
+      .flatMap(ev => ev.linkedPlaces || [])
+  );
+
+  document.querySelectorAll('[data-place-id]').forEach(marker => {
+    if (activePlaceIds.size === 0) {
+      marker.classList.remove('marker-era-active', 'marker-era-inactive');
+      return;
+    }
+    const isActive = activePlaceIds.has(marker.dataset.placeId);
+    marker.classList.toggle('marker-era-active',   isActive);
+    marker.classList.toggle('marker-era-inactive', !isActive);
+  });
 }
 
 // Switch the political layer's era class so CSS territory rules take effect.

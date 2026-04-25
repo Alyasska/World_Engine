@@ -323,7 +323,7 @@ html, body {
 
 /* ── Place Markers ── */
 .place-marker {
-  transition: opacity 0.15s;
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
 .place-marker circle, .place-marker polygon, .place-marker path {
@@ -355,6 +355,17 @@ html, body {
   stroke: var(--gold) !important;
   stroke-width: 2.5 !important;
   filter: drop-shadow(0 0 6px rgba(200, 169, 110, 0.6));
+}
+
+/* Phase 3C: narrative time filtering */
+.place-marker.marker-era-active {
+  filter: drop-shadow(0 0 5px rgba(200, 169, 110, 0.45));
+}
+
+/* :not(.marker-selected) ensures an open detail panel is never dimmed */
+.place-marker.marker-era-inactive:not(.marker-selected) {
+  opacity: 0.28;
+  filter: none;
 }
 
 /* Map controls */
@@ -610,6 +621,23 @@ html, body {
 
 .detail-link-item[data-event-id] { cursor: pointer; }
 .detail-link-item[data-event-id]:hover { background: rgba(200,169,110,0.05); border-color: rgba(200,169,110,0.15); }
+
+/* Phase 3C: active-era highlight in the detail panel event list */
+.detail-link-item.era-current {
+  border-left: 2px solid rgba(200, 169, 110, 0.45);
+  padding-left: 5px;
+}
+
+.era-badge-active {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--gold);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  flex-shrink: 0;
+  align-self: center;
+}
 
 .link-icon {
   font-size: 11px;
