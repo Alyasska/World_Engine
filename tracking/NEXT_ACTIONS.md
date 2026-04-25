@@ -6,29 +6,30 @@ The single most important thing to do next, plus a short queue. Keep this file c
 
 ## Immediate Next Step
 
-**Phase 2 is complete. Start Phase 3 — Chronology Scrubbing.**
+**Phase 3A is complete. Start Phase 3B — Era-Sensitive Overlays.**
 
-The full vault→map pipeline works. All entries are vault-authored, the engine loads
-generated JSON, and GitHub Pages shows the Phase 2 data-flow attribution.
+Phase 3A delivered a draggable chronology cursor with live era detection, dot dimming
+(20% opacity outside active era), and glow feedback during drag. No library added.
 
 Recommended next prompt:
 
-> "Start Phase 3 on branch `phase-3-chronology-scrub`. Goal: make the chronology
-> bar draggable so the user can scrub through time. When the cursor is in the Age
-> of Founding, show only Age of Founding events and dim others. When in the Long
-> Wars, show Long Wars events. Phase 3A focus: (1) draggable cursor on the
-> chronology bar, (2) event dots dim/brighten based on selected era, (3) visible
-> era label updates as you drag. No MapLibre yet — stay SVG. Evaluate vis-timeline
-> (MIT licensed) as an option but document the decision in AD-012 before adding it."
+> "Start Phase 3B on branch `phase-3b-era-overlays`. Goal: when the user drags the
+> chronology cursor into a different era, the SVG political territory fills update
+> to reflect the politics of that era. Define era-specific territory data for the
+> Age of Founding (only Northern Reach exists, no Compact), Long Wars (current
+> default), and Post-Collapse (Free Coast dominant). Store the era-variant data in
+> web/data/generated/eras.json or inline in engine.js. On era change, update the
+> SVG fill opacity/color for the political layer groups using CSS classes. No
+> MapLibre yet. Keep all changes in vanilla JS + SVG."
 
 ---
 
 ## Phase 3 Options
 
-- [ ] **3A — Draggable chronology scrub bar** (drag cursor, era-sensitive event dimming) — recommended first
-- [ ] **3B — Era-sensitive territory fills** (SVG political layers shift when era changes)
-- [ ] **3B — Vault→VS Code marker link** (clicking a marker opens vault `.md` in VS Code via URI)
-- [ ] **3B — CI auto-parser** (GitHub Action runs parser on vault push, commits generated JSON)
+- [x] **3A — Draggable chronology cursor** ✅ complete
+- [ ] **3B — Era-sensitive SVG territory fills** (update political fills as cursor moves through eras)
+- [ ] **3B — Vault→VS Code marker link** (clicking a marker opens vault `.md` in VS Code via URI scheme)
+- [ ] **3B — CI auto-parser** (GitHub Action: run `vault-to-json.js` on vault push, commit generated JSON)
 
 ---
 

@@ -75,6 +75,24 @@ This document records every significant technical decision made in this project,
 
 ---
 
+## AD-012 — Vanilla JS Drag for Phase 3A Chronology (vis-timeline Evaluated and Rejected)
+**Date:** 2026-04-24
+**Decision:** Phase 3A draggable chronology cursor is implemented with vanilla JS + CSS. vis-timeline was evaluated and rejected.
+
+**vis-timeline evaluation:**
+- Repo: `visjs/vis-timeline` (MIT license ✓)
+- Bundle: ~300 KB minified (~100 KB gzip) — significant for one scrub bar
+- API surface: designed for multi-track timelines with item groups, item rendering, and complex event models; requires a build step or CDN import
+- The Phase 3A requirement is a single draggable cursor over 3 era bands — `mousedown`/`mousemove`/`mouseup` + touch equivalents + clamped fraction math + CSS transitions. This is ~40 lines of JS and ~25 lines of CSS.
+
+**Rationale:** vis-timeline solves a harder problem than Phase 3A requires. Adding it now would introduce a significant dependency for a feature that vanilla JS handles cleanly at a fraction of the complexity. The custom cursor is extensible to Phase 3B territory fills without library lock-in.
+
+**Trade-off:** A multi-track item timeline (e.g., overlapping story arcs rendered as bars) would be significantly harder to build in vanilla JS. If Phase 3B or Phase 4 requires that kind of timeline, revisit vis-timeline then.
+
+**Revisit at:** Phase 3B, if multi-item timeline rendering over eras is required.
+
+---
+
 ## AD-011 — Web Engine Loads from Generated Vault Data
 **Date:** 2026-04-24
 **Decision:** `web/engine.js` now fetches from `web/data/generated/*.json` (vault-generated) instead of `web/data/*.json` (hand-authored). The hand-authored files are retained as `web/data/*.json` for reference but are no longer served by the live preview.

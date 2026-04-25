@@ -735,8 +735,8 @@ html, body {
 }
 
 .chrono-event-dot.dot-inactive {
-  background: var(--text-dim);
-  opacity: 0.4;
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
 }
 
 .chrono-event-dot .chrono-event-tip {
@@ -768,13 +768,41 @@ html, body {
 .chrono-cursor {
   position: absolute;
   top: -4px; bottom: -4px;
+  width: 16px;
+  background: transparent;
+  transform: translateX(-50%);
+  pointer-events: auto;
+  cursor: ew-resize;
+  z-index: 5;
+  transition: left 0.25s ease;
+}
+
+.chrono-cursor::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0; bottom: 0;
   width: 2px;
   background: var(--gold);
   opacity: 0.75;
   box-shadow: 0 0 8px rgba(200,169,110,0.5);
   border-radius: 1px;
-  pointer-events: none;
-  transition: left 0.3s ease;
+  transition: opacity 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chrono-cursor:hover::after {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(200,169,110,0.7);
+}
+
+.chrono-cursor.dragging {
+  transition: none;
+}
+
+.chrono-cursor.dragging::after {
+  opacity: 1;
+  box-shadow: 0 0 16px rgba(200,169,110,0.95);
 }
 
 .chrono-right {

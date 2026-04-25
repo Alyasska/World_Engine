@@ -143,10 +143,36 @@ Data status shows "vault-generated". All 8 markers, layers, and chronology bar w
 
 ---
 
-## Phase 3 — Chronology Scrubbing (Planned)
+## Phase 3A — Draggable Chronology Cursor
+**Status:** ✅ Complete
+**Branch:** `phase-3-chronology-scrub`
+**Goal:** Make the chronology bar cursor draggable. Dragging or clicking the track moves the cursor, updates the active era live, brightens the current era band, and dims out-of-era event dots.
+
+**Checklist:**
+- [x] Cursor drag: mouse (mousedown/mousemove/mouseup on window)
+- [x] Cursor drag: touch (touchstart/touchmove/touchend with passive:false)
+- [x] Click anywhere on track → cursor moves to that exact position
+- [x] Era band click still works (cursor snaps to era center)
+- [x] Event dot click still works (opens event detail)
+- [x] Era label updates live while dragging
+- [x] Era bands highlight/dim based on cursor position (not just on click)
+- [x] Event dots outside active era dim to 20% opacity with CSS transition
+- [x] Cursor hit area expanded to 16px wide (transparent) via CSS — easy to grab
+- [x] Gold line visual via `::after` (centered, 2px)
+- [x] `.dragging` class removes `left` transition during drag (instant follow)
+- [x] `.dragging::after` brightens the cursor glow while dragging
+- [x] `docs/ARCHITECTURE_DECISIONS.md` — AD-012 (vis-timeline evaluated, vanilla JS chosen)
+- [x] No external library added
+- [x] All Phase 1 and Phase 2 visual features still working
+
+**Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — grab the gold cursor on the chronology bar and drag left/right. Era label updates live. Event dots dim to near-invisible outside the active era. Click any era band to snap cursor there.
+
+---
+
+## Phase 3B — Era-Sensitive Overlays (Planned)
 **Status:** 🔲 Not started
-**Goal:** A draggable timeline at the bottom of the map. Dragging changes the visible political era, dims out-of-era events, and eventually shifts territory overlays.
-**Visual Confirmation:** Drag the timeline cursor → event dots in other eras dim; selected era band highlights; territory fills shift if political data has era variants.
+**Goal:** SVG territory fills and markers shift based on the current era. Dragging the cursor into the Age of Founding shows Age of Founding political borders.
+**Visual Confirmation:** Drag cursor into Age of Founding → political territory fills update to show pre-Long-Wars borders.
 
 ---
 
