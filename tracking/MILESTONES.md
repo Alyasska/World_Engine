@@ -313,14 +313,161 @@ Obsidian vault edit → `git push` → `parse-vault.yml` runs → bot commits `w
 
 ---
 
-## Phase 4 — Story↔Map Feedback Loop (Planned)
-**Status:** 🔲 Not started  
-**Goal:** Writing a Story entry with location data automatically creates a map marker.  
-**Visual Confirmation:** Add `mapRefs` to a Story → marker appears on map without manual intervention.
+---
+
+## Roadmap — Reevaluated 2026-04-25
+
+The sections below replace the original vague "Phase 4 / Phase 5" placeholders.
+They reflect what was actually built, what gaps exist, and what the next safe steps are.
+
+**Current data inventory (as of 4B):**
+- 8 places (7 canon, 1 draft)
+- 4 characters (3 canon, 1 draft)
+- 6 events: 2 Age of Founding, 4 Long Wars, **0 Post-Collapse**
+- 3 stories: all draft, all Long Wars era
+
+**Known gaps driving the near-term roadmap:**
+1. Post-Collapse era is completely empty — the signature feature (era scrubbing) has a dead zone for 1/3 of the timeline.
+2. Characters and stories in detail panels are listed but not clickable — no detail views exist for these entity types.
+3. All story entries are draft and concentrated in one era.
 
 ---
 
-## Phase 5 — Polish and Mobile (Planned)
-**Status:** 🔲 Not started  
-**Goal:** Fast load, offline-capable, usable on phone.  
-**Visual Confirmation:** Lighthouse score ≥ 85, works on iPhone/Android browser.
+## Phase 4C — Post-Collapse Content Seed
+**Status:** 🔲 Not started
+**Type:** Content work (vault authoring, zero code changes)
+**Goal:** Add at least 2–3 Post-Collapse events and link them to existing places. Make the era scrubber meaningful across all three eras.
+
+**Why it matters:**  
+The chronology cursor is the signature interactive feature. Dragging it to Post-Collapse currently shows all markers neutral and the timeline empty in that zone. The engine handles this correctly (neutral state, no crash), but experientially it feels broken. Adding events is pure vault authoring — no parser change, no engine change, no CI change.
+
+**What it touches:**
+- `vault/Events/` — 2–3 new `.md` files (post-collapse era)
+- `vault/Places/` — update `linkedEvents` in relevant place files
+- CI auto-runs parser, GitHub Pages updates automatically
+
+**What must not change:** `web/engine.js`, `web/style.css`, `scripts/`, `.github/workflows/`
+
+**Acceptance criteria:**
+- Drag cursor to Post-Collapse → at least one event dot appears in the post-collapse zone
+- Drag cursor to Post-Collapse → at least one place marker glows (era-active)
+- Existing Age of Founding and Long Wars behavior unchanged
+- `node scripts/validate-vault.js` passes with 0 errors
+
+**Risk:** Low. Pure vault authoring. CI validates before publishing.
+
+---
+
+## Phase 4D — Character and Story Detail Panels
+**Status:** 🔲 Not started
+**Type:** Engineering work (engine.js only)
+**Goal:** Clicking a character or story in a place detail panel opens a detail view for that entity. Currently these items are listed but clicking them does nothing.
+
+**Why it matters:**  
+`showPlaceDetail` renders characters and stories as list items with no click listeners attached. This is the most visible UX gap in the current app. The entity data is already in the generated JSON — no schema change is needed.
+
+**What it touches:**
+- `web/engine.js` — add `showCharacterDetail(charId)` and `showStoryDetail(storyId)`; add click listeners in `showPlaceDetail`; extend back-navigation
+- `web/style.css` — minor additions for any new panel layout needs
+
+**Character detail should show:** title, role, faction, description, traits, arc, linked places (clickable), linked events, linked stories  
+**Story detail should show:** title, logline, description, era, primary place (clickable to select marker), linked events, linked characters
+
+**What must not change:** No new dependencies. No schema change. No parser change. No CI change.
+
+**Acceptance criteria:**
+- Clicking a character in a place panel → character detail opens
+- Clicking a story in a place panel → story detail opens
+- Back button in character/story detail returns to the place panel
+- Clicking a linked place in a character detail → that place detail opens and marker selects on map
+- All Phase 3 and 4A/4B features intact
+
+**Risk:** Low. Engine.js only. No data contract impact.
+
+---
+
+## Phase 4E — Empty Era State Feedback
+**Status:** 🔲 Not started
+**Type:** Engineering work (small — engine.js + style.css)
+**Goal:** When the active era has no events, show a subtle informational state so users understand the era is intentionally sparse, not broken.
+
+**Why it matters:**  
+Post-Collapse currently transitions markers to neutral silently. A first-time user may think the map stopped working. A single line of contextual text ("No recorded events in this era") in the detail panel welcome state or chronology display resolves the confusion.
+
+**What it touches:** `web/engine.js` (detect zero-event eras in `applyNarrativeFilter` or `applyEra`), `web/style.css` (optional style for the empty state message)
+
+**What must not change:** No data contract change. No new JSON fields. No parser change.
+
+**Acceptance criteria:**
+- Drag cursor to an era with 0 events → visible, non-alarming feedback indicates the sparse state
+- Drag back to a populated era → feedback disappears
+- No layout shift
+
+**Risk:** Low.
+
+---
+
+## Phase 4F — Story Path Layer (Data-Driven)
+**Status:** 🔲 Not started
+**Type:** Engineering work (medium — engine.js + index.html)
+**Goal:** Render story paths as a dynamic map overlay driven by story data, replacing the hardcoded SVG path in `index.html`.
+
+**Why it matters:**  
+There is currently a hardcoded SVG path for "Merchant Roads" drawn in `index.html`'s narrative layer. It is disconnected from the story data. As story entries grow, paths should be generated from `story.linkedPlaces` in order, not manually drawn in HTML.
+
+**What it touches:** `web/engine.js` (story path renderer using linkedPlaces mapRef coordinates), `web/index.html` (remove hardcoded path), `web/style.css` (story path styles)
+
+**What must not change:** No new vault fields needed. `linkedPlaces` already provides the place IDs; `mapRef.x/y` provides coordinates.
+
+**Risk:** Medium. Requires coordinate interpolation and SVG path generation. Defer until 4C and 4D are complete.
+
+---
+
+## Phase 5A — Chronology Depth and Era Metadata
+**Status:** 🔲 Not started (future)
+**Type:** Engineering + content design
+**Goal:** Richer chronology display: era dates/in-world years, event count per era, era tooltips. Define the canonical in-world calendar system.
+
+**Depends on:** Phase 4C (content must exist before calendar design makes sense)
+**Risk:** Medium. Calendar design is a worldbuilding decision that should precede implementation.
+
+---
+
+## Phase 5B — Data-Driven Era Map Overlays
+**Status:** 🔲 Not started (future)
+**Type:** Engineering + content design
+**Goal:** Replace hardcoded CSS political overlay rules with vault-driven era map states. Define a data contract for era-specific territory visibility (which factions control which territory in which era).
+
+**Current state:** Era overlays are CSS rules hardcoded in `style.css` for 3 known eras. Adding a new era or changing territory boundaries requires CSS editing. A vault-based contract would allow authors to specify era map states in Markdown.
+
+**Depends on:** Phase 5A (era metadata must be defined before territory data can reference it)
+**Risk:** Medium. Requires a new vault entity type or extended event schema.
+
+---
+
+## Phase 6 — Map Infrastructure Upgrade (MapLibre + Azgaar)
+**Status:** 🔲 Not started (major future phase)
+**Type:** Engineering (high effort, high impact)
+**Goal:** Replace the hand-crafted SVG world map with a proper tile-based map using MapLibre GL JS + Azgaar Fantasy Map Generator export.
+
+**Current state:** The SVG map is hand-drawn at Phase 1 quality. Places are at approximate pixel positions. Political territories are manually drawn paths. This is acceptable until the world grows to a scale where hand-crafting becomes unsustainable.
+
+**Depends on:** Azgaar map export with GeoJSON. MapLibre integration research (already in `docs/OPEN_SOURCE_REPOS.md`).
+**Risk:** High. Significant engineering effort; requires bundler (Vite or similar), breaking change to map rendering.
+**Decision gate:** Do not start until the vault has 20+ places and the hand-crafted SVG becomes a creative constraint.
+
+---
+
+## Out of Scope — Static-First Era
+
+The following are explicitly not part of this project in its current phase. Do not introduce them without a documented phase decision:
+
+| Technology | Why deferred |
+|---|---|
+| Backend / REST API | No server-side logic needed; GitHub Pages is sufficient |
+| Database (SQLite, PostgreSQL, etc.) | Vault Markdown is the data store; no query engine needed yet |
+| Next.js / React / SvelteKit | No framework; vanilla JS + static files proven sufficient |
+| Prisma / ORM | No database means no ORM |
+| User accounts / auth | Single-author private project |
+| Real-time collaboration | Not a use case |
+| npm dependencies in parser/validator | AD-010 prohibits external deps in scripts/ |

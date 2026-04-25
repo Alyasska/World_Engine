@@ -4,6 +4,34 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Roadmap reevaluation after Phase 4A–4B
+
+**Branch:** `phase-roadmap-reevaluation`
+
+**Reviewed:** engine.js, index.html, all tracking/docs files, generated JSON, vault structure.
+
+**Findings:**
+- Post-Collapse era has 0 events — era scrubber dead zone for 1/3 of the timeline
+- Characters and stories listed in place panels are non-interactive (no `showCharacterDetail` or `showStoryDetail` exists in engine.js)
+- All 3 story entries are draft and all are Long Wars era only
+- PROJECT_INDEX.md was stale (referenced Phase 2 as current)
+- MILESTONES.md "Phase 4/5" placeholders were vague and not aligned with actual project state
+
+**Changed:**
+- `tracking/MILESTONES.md` — replaced vague Phase 4/5 placeholders with full phase definitions: 4C (content), 4D (engineering), 4E (engineering), 4F (deferred), 5A, 5B, Phase 6; added "Out of Scope" section
+- `tracking/NEXT_ACTIONS.md` — full rewrite: structured with immediate action, next 3 actions, deferred, do-not-start-yet, manual checklist, branch naming plan
+- `tracking/CHANGELOG.md` — this entry
+- `PROJECT_INDEX.md` — updated phase reference from "Phase 2 complete" to current Phase 4B
+
+**Roadmap outcome:**
+- Immediate next: Phase 4C — Post-Collapse content seed (CONTENT work, zero code)
+- Next engineering: Phase 4D — character and story detail panels
+- Small polish: Phase 4E — empty era state feedback
+- Deferred: Phase 4F, 5A, 5B
+- Do not start: Phase 6 (MapLibre), backend, database, framework
+
+---
+
 ## [2026-04-25] Phase 4B — Vault data validation
 
 **Branch:** `phase-4b-vault-validation`

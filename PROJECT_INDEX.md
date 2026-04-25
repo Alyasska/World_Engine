@@ -1,7 +1,7 @@
 ---
 type: index
 title: World Engine — Project Index
-updated: 2026-04-24
+updated: 2026-04-25
 ---
 
 # World Engine — Project Index
@@ -17,17 +17,17 @@ Open `C:\mirror\мое\world_engine` as a vault in Obsidian to use this index wi
 
 | Item | Value |
 |---|---|
-| Phase | **2 complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
-| Active branch | `phase-2c-live-generated-data` |
+| Phase | **4B complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
 | Next action | [tracking/NEXT_ACTIONS.md](tracking/NEXT_ACTIONS.md) |
 | Preview URL | https://alyasska.github.io/World_Engine/ |
+| CI pipeline | Obsidian edit → git push → GitHub Actions → GitHub Pages (fully automated) |
 
 ---
 
 ## Vision & Architecture
 
 - [docs/FINAL_VISION.md](docs/FINAL_VISION.md) — three-pillar vision: map + knowledge + feedback loop
-- [docs/ARCHITECTURE_DECISIONS.md](docs/ARCHITECTURE_DECISIONS.md) — all technical decisions (AD-001 to AD-009)
+- [docs/ARCHITECTURE_DECISIONS.md](docs/ARCHITECTURE_DECISIONS.md) — all technical decisions (AD-001 to AD-015)
 - [docs/OBSIDIAN_DATA_CONTRACT.md](docs/OBSIDIAN_DATA_CONTRACT.md) — shared field contract between vault templates and web JSON
 - [docs/OLD_REPO_LESSONS.md](docs/OLD_REPO_LESSONS.md) — lessons from Alyasska/world_building
 - [docs/HOSTING_STRATEGY.md](docs/HOSTING_STRATEGY.md) — GitHub Pages now; hosting options for Phase 2+
