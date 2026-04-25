@@ -169,17 +169,29 @@ Data status shows "vault-generated". All 8 markers, layers, and chronology bar w
 
 ---
 
-## Phase 3B — Era-Sensitive Overlays (Planned)
-**Status:** 🔲 Not started
+## Phase 3B — Era-Sensitive Overlays
+**Status:** ✅ Complete
+**Branch:** `phase-3b-era-overlays`
 **Goal:** SVG territory fills and markers shift based on the current era. Dragging the cursor into the Age of Founding shows Age of Founding political borders.
-**Visual Confirmation:** Drag cursor into Age of Founding → political territory fills update to show pre-Long-Wars borders.
+
+**Checklist:**
+- [x] `applyEraOverlays(eraId)` — toggles `era-{id}` CSS class on `#layerPolitical`
+- [x] Called automatically from `applyEra()` on every cursor move
+- [x] Age of Founding: Compact + Free Coast territories hidden; Northern Reach fill brightened
+- [x] Long Wars: default three-power split (no overrides — base styles are Long Wars)
+- [x] Post-Collapse: Northern + Compact fills dimmed; Free Coast fill brightened
+- [x] CSS `transition: fill/opacity 0.5s ease` on territories, labels, and borders — smooth crossfade
+- [x] No new SVG paths, no new HTML elements, no new libraries
+- [x] Layer toggle (Political on/off) still works independently of era class
+- [x] All Phase 3A features intact (drag, dot dimming, era label)
+
+**Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — drag cursor to Age of Founding → Compact and Free Coast territory fills fade out; Northern Reach brightens. Drag to Post-Collapse → Northern and Compact dim; Free Coast glows. Drag back to Long Wars → default three-way split restores.
 
 ---
 
-## Phase 3 — Chronology Bar (Planned)
-**Status:** 🔲 Not started  
-**Goal:** A scrubable timeline at the bottom of the map. Dragging changes the visible political era, event markers, and linked vault state.  
-**Visual Confirmation:** Drag the timeline → political borders shift on the map.
+## Phase 3 — Chronology + Era Overlays
+**Status:** ✅ Complete (3A + 3B)
+**Summary:** Draggable chronology cursor with live era detection (3A) and era-sensitive SVG political territory fills (3B).
 
 ---
 

@@ -278,6 +278,33 @@ html, body {
   opacity: 0.5;
 }
 
+/* ── Phase 3B: era-sensitive territory overlays ─────────────────────────── */
+.territory,
+.region-label,
+.political-border {
+  transition: fill 0.5s ease, opacity 0.5s ease;
+}
+
+/* Age of Founding — Northern Reach is the only established power */
+#layerPolitical.era-age-founding .territory-compact    { opacity: 0; }
+#layerPolitical.era-age-founding .region-label-compact { opacity: 0; }
+#layerPolitical.era-age-founding .territory-free-coast { opacity: 0; }
+#layerPolitical.era-age-founding .region-label-coast   { opacity: 0; }
+#layerPolitical.era-age-founding .political-border     { opacity: 0; }
+#layerPolitical.era-age-founding .territory-northern   { fill: rgba(106, 154, 200, 0.22); }
+#layerPolitical.era-age-founding .region-label-north   { opacity: 0.7; }
+
+/* Long Wars — default three-power split; base styles apply, no overrides needed */
+
+/* Post-Collapse — Free Coast rises, Compact and Northern Reach weakened */
+#layerPolitical.era-post-collapse .territory-northern   { fill: rgba(106, 154, 200, 0.05); }
+#layerPolitical.era-post-collapse .region-label-north   { opacity: 0.3; }
+#layerPolitical.era-post-collapse .territory-compact    { fill: rgba(200, 160, 68,  0.04); }
+#layerPolitical.era-post-collapse .region-label-compact { opacity: 0.3; }
+#layerPolitical.era-post-collapse .territory-free-coast { fill: rgba(106, 170, 136, 0.25); }
+#layerPolitical.era-post-collapse .region-label-coast   { opacity: 0.8; }
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 /* Narrative layer */
 .story-path {
   fill: none;
