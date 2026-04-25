@@ -205,14 +205,35 @@ Data status shows "vault-generated". All 8 markers, layers, and chronology bar w
 - [x] All Phase 3A and 3B features intact
 - [x] Layer toggles, pan/zoom, detail panel, GitHub Pages compatibility all preserved
 
-**Known limitation:** The detail panel era badges are rendered at click time and do not update live when the cursor moves after the panel opens. Documented in NEXT_ACTIONS.
+**Known limitation:** ~~The detail panel era badges are rendered at click time and do not update live.~~ Fixed in Phase 3D.
 
 **Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — drag cursor to Age of Founding → Vareth and Solmark glow; other markers dim. Drag to Long Wars → Vareth, Ashveil, Grey Keep, Solmark glow. Drag to Post-Collapse → all markers neutral. Open a place detail while in an era → events matching that era show a gold "now" badge.
 
 ---
 
+## Phase 3D — Live Panel Era Refresh
+**Status:** ✅ Complete
+**Branch:** `phase-3d-live-panel-refresh`
+**Goal:** The place detail panel re-renders its era badges live as the chronology cursor moves.
+
+**Checklist:**
+- [x] `state.detailMode` — new field tracking `'place'` / `'event'` / `null`
+- [x] `showPlaceDetail` sets `detailMode = 'place'`
+- [x] `showEventDetail` sets `detailMode = 'event'`
+- [x] `clearDetail` sets `detailMode = null`
+- [x] `refreshOpenPanel()` — re-renders place detail if `detailMode === 'place'`; no-ops for event details and closed panels
+- [x] `applyEra()` calls `refreshOpenPanel()` as its last step
+- [x] Selected marker remains visually selected after re-render (`.marker-selected` re-applied on each `showPlaceDetail` call)
+- [x] No CSS changes needed — existing `.era-current` and `.era-badge-active` rules reused
+- [x] No parser change. No data contract change.
+- [x] All Phase 3A–3C features intact
+
+**Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — open Vareth detail, drag cursor through all three eras; "now" badge appears/disappears on Founding of Vareth and Siege of Vareth in real time.
+
+---
+
 ## Phase 3 — Chronology + Era Overlays + Narrative Filtering
-**Status:** ✅ Complete (3A + 3B + 3C)
+**Status:** ✅ Complete (3A + 3B + 3C + 3D)
 **Summary:** Draggable chronology cursor (3A), era-sensitive SVG territory fills (3B), and era-aware marker emphasis with panel era context (3C).
 
 ---

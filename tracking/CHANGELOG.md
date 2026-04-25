@@ -4,6 +4,26 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 3D — Live panel era refresh
+
+**Branch:** `phase-3d-live-panel-refresh`
+
+**Changed:**
+- `web/engine.js`:
+  - `state.detailMode` — new field (`null` | `'place'` | `'event'`); tracks which panel is currently displayed
+  - `showPlaceDetail()` — sets `state.detailMode = 'place'`
+  - `showEventDetail()` — sets `state.detailMode = 'event'`
+  - `clearDetail()` — sets `state.detailMode = null`
+  - `refreshOpenPanel()` — new helper; calls `showPlaceDetail(state.selectedId)` when `detailMode === 'place'`; no-ops otherwise
+  - `applyEra()` — calls `refreshOpenPanel()` after all other era updates
+- `web/index.html` — phase note updated to "Phase 3A–3D ✓"
+
+**Behaviour:** Dragging or clicking the chronology cursor while a place detail is open re-renders the panel immediately. Active-era "now" badges and `.era-current` left-border highlights update live. Event sub-details (opened by clicking an event in the panel) are left undisturbed — they contain no era-aware content yet.
+
+**No-change:** No CSS added. No parser change. No data contract change. No new DOM listeners added on each re-render (innerHTML replacement GC's old nodes).
+
+---
+
 ## [2026-04-25] Phase 3C — Narrative time filtering
 
 **Branch:** `phase-3c-narrative-time-filtering`

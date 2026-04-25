@@ -22,6 +22,7 @@ const state = {
   panStartY: 0,
   activeLayers: new Set(['geography', 'political', 'narrative']),
   selectedId: null,
+  detailMode: null,   // 'place' | 'event' | null — tracks which panel is visible
   activeEra: 'long-wars',
   data: { places: [], characters: [], events: [], stories: [] }
 };
@@ -365,7 +366,8 @@ function showPlaceDetail(placeId) {
   const place = state.data.places.find(p => p.id === placeId);
   if (!place) return;
 
-  state.selectedId = placeId;
+  state.selectedId  = placeId;
+  state.detailMode  = 'place';
   updateMarkerSelection(placeId);
 
   const linkedChars    = place.linkedCharacters
@@ -457,6 +459,7 @@ function showPlaceDetail(placeId) {
 function showEventDetail(eventId) {
   const ev = state.data.events.find(e => e.id === eventId);
   if (!ev) return;
+  state.detailMode = 'event';
 
   const linkedPlaces = ev.linkedPlaces
     ? state.data.places.filter(p => ev.linkedPlaces.includes(p.id))
@@ -527,7 +530,8 @@ function showEventDetail(eventId) {
 }
 
 function clearDetail() {
-  state.selectedId = null;
+  state.selectedId  = null;
+  state.detailMode  = null;
   updateMarkerSelection(null);
   panelDetail.hidden  = true;
   panelWelcome.hidden = false;
@@ -599,7 +603,8 @@ function eraAtPosition(fraction) {
   return ERAS.find(e => fraction >= e.start && fraction < e.end) || ERAS[ERAS.length - 1];
 }
 
-// Update era display, band highlights, dot dimming, map overlays, and marker emphasis.
+// Update era display, band highlights, dot dimming, map overlays, marker emphasis,
+// and refresh the open detail panel if it is showing a place.
 function applyEra(eraId) {
   state.activeEra = eraId;
   document.querySelectorAll('.chrono-era').forEach(el => {
@@ -611,6 +616,15 @@ function applyEra(eraId) {
   updateEraDisplay(eraId);
   applyEraOverlays(eraId);
   applyNarrativeFilter(eraId);
+  refreshOpenPanel();
+}
+
+// Re-render the place detail panel so era badges reflect the current era.
+// No-ops if the panel is closed or showing an event detail.
+function refreshOpenPanel() {
+  if (state.detailMode === 'place' && state.selectedId) {
+    showPlaceDetail(state.selectedId);
+  }
 }
 
 // Emphasise place markers that have events in eraId; dim the rest.
