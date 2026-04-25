@@ -232,9 +232,30 @@ Data status shows "vault-generated". All 8 markers, layers, and chronology bar w
 
 ---
 
-## Phase 3 — Chronology + Era Overlays + Narrative Filtering
-**Status:** ✅ Complete (3A + 3B + 3C + 3D)
-**Summary:** Draggable chronology cursor (3A), era-sensitive SVG territory fills (3B), and era-aware marker emphasis with panel era context (3C).
+## Phase 3E — Local Authoring Links
+**Status:** ✅ Complete
+**Branch:** `phase-3e-local-authoring-links`
+**Goal:** When browsing the preview locally with `?author=1`, clicking the authoring link in a place or event detail panel opens the corresponding vault `.md` in VS Code.
+
+**Checklist:**
+- [x] `isAuthorMode()` — checks `?author=1` in URL; false in all public browsing
+- [x] `authoringLinkHTML(entity)` — derives vault path from `entity.type` + `entity.id`; returns `''` in public mode
+- [x] Place detail: "Open in VS Code" link in detail header
+- [x] Event detail: "Open in VS Code" link in detail header
+- [x] Cyrillic `мое` path segment percent-encoded via `encodeURI` for safe URI construction
+- [x] CSS `.author-link` — subdued monospace badge, gold border on hover
+- [x] No link visible in normal public (GitHub Pages) browsing
+- [x] No parser change. No generated JSON change. No data contract change.
+- [x] AD-013 documenting `?author=1` gate pattern
+- [x] All Phase 3A–3D features intact
+
+**Visual Confirmation (local only):** Open `http://localhost:PORT/?author=1` → click any place or event → "Open in VS Code" link appears in the detail header. Click it → VS Code opens the matching vault file.
+
+---
+
+## Phase 3 — Chronology + Era Overlays + Narrative Filtering + Authoring
+**Status:** ✅ Complete (3A + 3B + 3C + 3D + 3E)
+**Summary:** Draggable chronology cursor (3A), era-sensitive SVG territory fills (3B), era-aware marker emphasis with live panel refresh (3C + 3D), and local VS Code authoring links gated behind `?author=1` (3E).
 
 ---
 

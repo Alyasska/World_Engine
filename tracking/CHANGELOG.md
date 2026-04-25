@@ -4,6 +4,28 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 3E — Local authoring links
+
+**Branch:** `phase-3e-local-authoring-links`
+
+**Changed:**
+- `web/engine.js`:
+  - `VAULT_ROOT` constant — `'C:/mirror/мое/world_engine'` (used only when author mode is active)
+  - `ENTITY_VAULT_DIR` / `ENTITY_ID_PREFIX` — maps entity `type` to vault folder and ID prefix
+  - `isAuthorMode()` — returns `true` when `?author=1` is in the URL
+  - `authoringLinkHTML(entity)` — derives `vault/{Type}/{slug}.md` from entity type and id; constructs `vscode://file/...` URI (Cyrillic path percent-encoded via `encodeURI`); returns `''` in public mode
+  - `showPlaceDetail` — `${authoringLinkHTML(place)}` injected in detail header
+  - `showEventDetail` — `${authoringLinkHTML(ev)}` injected in detail header
+- `web/style.css` — `.author-link` and `.author-link:hover` styles (subdued monospace badge with gold border on hover)
+- `web/index.html` — phase note updated to "Phase 3A–3E ✓"
+- `docs/ARCHITECTURE_DECISIONS.md` — AD-013: `?author=1` local authoring mode gate
+
+**Behaviour:** In normal public browsing (GitHub Pages or local), no VS Code links appear. Load the preview with `?author=1` to enable authoring links in place and event detail panels. Links resolve to the exact vault `.md` file in VS Code. Missing-vault or no-VS-Code failures are harmless (browser silent fail or system prompt).
+
+**No-change:** No parser change. No generated JSON change. No data contract change.
+
+---
+
 ## [2026-04-25] Phase 3D — Live panel era refresh
 
 **Branch:** `phase-3d-live-panel-refresh`

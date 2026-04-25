@@ -75,6 +75,27 @@ This document records every significant technical decision made in this project,
 
 ---
 
+## AD-013 — ?author=1 Query Parameter for Local Authoring Mode
+**Date:** 2026-04-25
+**Decision:** Local-only features (e.g. `vscode://file/` links to the Obsidian vault) are gated behind a `?author=1` query parameter in the URL. Public GitHub Pages users never see them.
+
+**Rationale:** The preview is deployed publicly on GitHub Pages. Hardcoded local filesystem paths (`C:/mirror/мое/world_engine/...`) must not appear in the public UI — they are meaningless to anyone else and look like a bug. A query-parameter gate is the simplest mechanism that:
+1. Requires zero server-side logic (works with static hosting)
+2. Leaves the public URL completely clean
+3. Is discoverable to the author via documentation
+4. Does not pollute the URL for normal use
+
+**Convention established:**
+- `isAuthorMode()` checks `new URLSearchParams(window.location.search).get('author') === '1'`
+- `VAULT_ROOT` constant defines the local repo root — used only when `isAuthorMode()` returns true
+- Any future local-dev-only feature follows the same gate
+
+**Trade-off:** The `?author=1` URL is not secret — anyone who finds it would see VS Code links that silently fail on their machine. This is acceptable; the links are harmless on non-matching machines (browser opens a `vscode://` URI which either no-ops or shows a system "open VS Code?" prompt).
+
+**Revisit at:** Phase 4, if a broader author dashboard (multiple local settings) is needed. Consider `?author=1&vault=...` extension or a local `author.config.json` that is `.gitignore`d.
+
+---
+
 ## AD-012 — Vanilla JS Drag for Phase 3A Chronology (vis-timeline Evaluated and Rejected)
 **Date:** 2026-04-24
 **Decision:** Phase 3A draggable chronology cursor is implemented with vanilla JS + CSS. vis-timeline was evaluated and rejected.

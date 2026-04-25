@@ -693,6 +693,26 @@ html, body {
 
 .muted { color: var(--text-dim) !important; }
 
+/* Phase 3E: local authoring link — only rendered when ?author=1 is in the URL */
+.author-link {
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--gold-dim);
+  opacity: 0.6;
+  text-decoration: none;
+  border: 1px solid rgba(200, 169, 110, 0.2);
+  border-radius: 2px;
+  padding: 2px 8px;
+  transition: opacity var(--transition), border-color var(--transition);
+}
+
+.author-link:hover {
+  opacity: 1;
+  border-color: rgba(200, 169, 110, 0.5);
+}
+
 /* ─── CHRONOLOGY BAR ────────────────────────────────────── */
 .chrono-bar {
   position: fixed;

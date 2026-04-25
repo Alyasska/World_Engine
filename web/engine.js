@@ -249,6 +249,29 @@ const FACTION_COLORS = {
   'null':           '#7a7870'
 };
 
+// ── Phase 3E: local authoring links (?author=1 mode only) ─────────────────
+const VAULT_ROOT = 'C:/mirror/мое/world_engine';
+
+const ENTITY_VAULT_DIR    = { place: 'Places', character: 'Characters', event: 'Events', story: 'Stories' };
+const ENTITY_ID_PREFIX    = { place: 'place-', character: 'char-',      event: 'event-', story: 'story-'  };
+
+function isAuthorMode() {
+  return new URLSearchParams(window.location.search).get('author') === '1';
+}
+
+// Returns an <a> tag pointing to the vault .md file in VS Code, or '' in public mode.
+function authoringLinkHTML(entity) {
+  if (!isAuthorMode()) return '';
+  const folder = ENTITY_VAULT_DIR[entity.type];
+  const prefix = ENTITY_ID_PREFIX[entity.type];
+  if (!folder || !prefix) return '';
+  const slug    = entity.id.startsWith(prefix) ? entity.id.slice(prefix.length) : entity.id;
+  const relPath = `vault/${folder}/${slug}.md`;
+  const uri     = `vscode://file/${encodeURI(VAULT_ROOT + '/' + relPath)}`;
+  return `<a class="author-link" href="${uri}" title="${relPath}">Open in VS Code</a>`;
+}
+// ──────────────────────────────────────────────────────────────────────────
+
 function markerColor(place) {
   if (!state.activeLayers.has('political') || !place.faction) return '#c8a96e';
   return FACTION_COLORS[place.faction] || '#c8a96e';
@@ -398,6 +421,7 @@ function showPlaceDetail(placeId) {
       </div>
       ${factionLabel}
       ${eraText}
+      ${authoringLinkHTML(place)}
     </div>
     <p class="detail-description">${place.description}</p>
 
@@ -479,6 +503,7 @@ function showEventDetail(eventId) {
         ${canonBadge}
       </div>
       <p class="detail-era">${ev.date} · ${ev.era === 'age-founding' ? 'Age of Founding' : ev.era === 'long-wars' ? 'The Long Wars' : 'Post-Collapse'}</p>
+      ${authoringLinkHTML(ev)}
     </div>
     <p class="detail-description">${ev.description}</p>
 
