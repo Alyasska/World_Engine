@@ -96,6 +96,36 @@ This document records every significant technical decision made in this project,
 
 ---
 
+## AD-015 — Vault Validation Before Generated JSON Publishing
+**Date:** 2026-04-25
+**Decision:** A validation script (`scripts/validate-vault.js`) runs as a required CI step before the parser (`vault-to-json.js`). If any vault entity fails validation, the workflow exits 1 and no generated JSON is committed.
+
+**Checks enforced:**
+1. Required fields: `id`, `type`, `title`, `canonState` on every entity
+2. No duplicate `id` values across all vault folders
+3. `type` must be one of: `place`, `character`, `event`, `story`
+4. `id` prefix must match folder type (`place-*`, `char-*`, `event-*`, `story-*`)
+5. Declared `type` must match the folder the file lives in
+6. Cross-reference integrity: every value in `linkedPlaces`, `linkedCharacters`, `linkedEvents`, `linkedStories` must resolve to a known vault `id`
+7. Event `era` must be one of: `age-founding`, `long-wars`, `post-collapse`
+8. `canonState` must be one of: `canon`, `draft`, `alt`, `legend`, `retired`
+
+**Rationale:** Phase 4A automated the parser, but an automated parser that publishes broken cross-references or invalid era tags silently is worse than no automation. The validator is the gate: broken vault → CI fails → no bad JSON reaches GitHub Pages.
+
+**Design choices:**
+- Same frontmatter parser as `vault-to-json.js` (AD-010) — no new dependency, no divergence
+- Three-pass structure: collect, validate structure, validate cross-references. Cross-reference pass requires all IDs collected first.
+- CRLF normalization (`\r\n` → `\n`) applied at read time so the validator works on Windows locally and Linux CI identically. The parser skips this because it is only ever run in CI (Linux, LF endings from git checkout).
+- Template files (leading `_`) excluded from validation — they are scaffolding, not entities.
+- Empty reference arrays (`linkedPlaces: []`) are valid and not checked.
+- `retired` entities are included in the ID registry so references to them pass cross-reference checks.
+
+**Trade-off:** Validation runs on every vault push, adding ~1s to CI. Acceptable. If the vault grows to hundreds of entries, the three-pass scan is still O(n) and remains fast.
+
+**Revisit at:** If new entity types are added (`institution`, `lore`), update `SOURCES` and `ID_PREFIX` in both `validate-vault.js` and `vault-to-json.js`.
+
+---
+
 ## AD-013 — ?author=1 Query Parameter for Local Authoring Mode
 **Date:** 2026-04-25
 **Decision:** Local-only features (e.g. `vscode://file/` links to the Obsidian vault) are gated behind a `?author=1` query parameter in the URL. Public GitHub Pages users never see them.

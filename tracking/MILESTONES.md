@@ -287,6 +287,32 @@ Obsidian vault edit → `git push` → `parse-vault.yml` runs → bot commits `w
 
 ---
 
+## Phase 4B — Vault Data Validation
+**Status:** ✅ Complete
+**Branch:** `phase-4b-vault-validation`
+**Goal:** Gate the CI auto-parser behind a validation step so broken vault data cannot silently reach GitHub Pages.
+
+**Checklist:**
+- [x] `scripts/validate-vault.js` — no-dependency validator (mirrors vault-to-json.js parser, AD-010)
+- [x] Required field checks: `id`, `type`, `title`, `canonState`
+- [x] Duplicate ID detection across all vault folders
+- [x] `type` allowed-value check (`place`, `character`, `event`, `story`)
+- [x] ID prefix ↔ folder type consistency (`place-*`, `char-*`, `event-*`, `story-*`)
+- [x] Declared `type` ↔ folder name consistency
+- [x] Cross-reference integrity: `linkedPlaces`, `linkedCharacters`, `linkedEvents`, `linkedStories`
+- [x] Event `era` allowed-value check (`age-founding`, `long-wars`, `post-collapse`)
+- [x] `canonState` allowed-value check (`canon`, `draft`, `alt`, `legend`, `retired`)
+- [x] CRLF-safe: normalizes line endings at read time (works on Windows locally and Linux CI)
+- [x] Template files (leading `_`) excluded from validation
+- [x] `.github/workflows/parse-vault.yml` — "Validate vault data" step added before "Generate JSON from vault"
+- [x] AD-015 documented
+- [x] All 21 current vault entities pass validation
+- [x] All Phase 4A CI features intact
+
+**Visual Confirmation (CI):** Push a vault file with a broken `linkedPlaces` reference → `Parse Vault Data` workflow fails at the validation step; no bad JSON is committed.
+
+---
+
 ## Phase 4 — Story↔Map Feedback Loop (Planned)
 **Status:** 🔲 Not started  
 **Goal:** Writing a Story entry with location data automatically creates a map marker.  

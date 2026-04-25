@@ -4,6 +4,31 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 4B — Vault data validation
+
+**Branch:** `phase-4b-vault-validation`
+
+**Added:**
+- `scripts/validate-vault.js` — no-dependency validation script:
+  - Checks required fields (`id`, `type`, `title`, `canonState`) on every entity
+  - Detects duplicate IDs across all vault folders
+  - Validates `type` against allowed values
+  - Validates `id` prefix matches folder type (`place-*`, `char-*`, `event-*`, `story-*`)
+  - Validates declared `type` matches the folder the file lives in
+  - Cross-reference integrity: all `linkedPlaces`, `linkedCharacters`, `linkedEvents`, `linkedStories` values must resolve to known IDs
+  - Event `era` must be one of: `age-founding`, `long-wars`, `post-collapse`
+  - `canonState` must be one of: `canon`, `draft`, `alt`, `legend`, `retired`
+  - Exit 0 on pass; exit 1 on any error
+  - CRLF-safe (normalizes line endings at read time — works on both Windows and Linux CI)
+
+**Changed:**
+- `.github/workflows/parse-vault.yml` — added "Validate vault data" step before "Generate JSON from vault"; broken vault now blocks parser from running
+- `docs/ARCHITECTURE_DECISIONS.md` — AD-015: vault validation design rationale
+
+**Effect:** A vault push with broken cross-references, invalid era tags, duplicate IDs, or missing required fields now fails CI before any JSON is committed to `main`.
+
+---
+
 ## [2026-04-25] Phase 4A — CI auto-parser
 
 **Branch:** `phase-4a-ci-auto-parser`

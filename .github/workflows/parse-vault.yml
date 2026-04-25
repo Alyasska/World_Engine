@@ -12,6 +12,7 @@ on:
     paths:
       - "vault/**"
       - "scripts/vault-to-json.js"
+      - "scripts/validate-vault.js"
 
 permissions:
   contents: write
@@ -28,6 +29,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Validate vault data
+        run: node scripts/validate-vault.js
 
       - name: Generate JSON from vault
         run: node scripts/vault-to-json.js
