@@ -598,7 +598,7 @@ function eraAtPosition(fraction) {
   return ERAS.find(e => fraction >= e.start && fraction < e.end) || ERAS[ERAS.length - 1];
 }
 
-// Update era display, band highlights, and dot dimming without moving the cursor.
+// Update era display, band highlights, dot dimming, and map overlays without moving the cursor.
 function applyEra(eraId) {
   state.activeEra = eraId;
   document.querySelectorAll('.chrono-era').forEach(el => {
@@ -608,6 +608,15 @@ function applyEra(eraId) {
     dot.classList.toggle('dot-inactive', dot.classList[1].replace('chrono-era-', '') !== eraId);
   });
   updateEraDisplay(eraId);
+  applyEraOverlays(eraId);
+}
+
+// Switch the political layer's era class so CSS territory rules take effect.
+function applyEraOverlays(eraId) {
+  const layer = document.getElementById('layerPolitical');
+  if (!layer) return;
+  ERAS.forEach(e => layer.classList.remove('era-' + e.id));
+  layer.classList.add('era-' + eraId);
 }
 
 // Move cursor to a fraction (0–1) and apply the corresponding era.

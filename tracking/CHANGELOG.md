@@ -4,6 +4,23 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 3B — Era-sensitive map overlays
+
+**Branch:** `phase-3b-era-overlays`
+
+**Changed:**
+- `web/engine.js`:
+  - `applyEraOverlays(eraId)` — new function; toggles `era-{id}` class on `#layerPolitical`
+  - `applyEra()` — calls `applyEraOverlays()` so overlays update on every cursor move
+- `web/style.css`:
+  - `.territory`, `.region-label`, `.political-border` — `transition: fill 0.5s ease, opacity 0.5s ease` added
+  - `#layerPolitical.era-age-founding` rules — Compact + Free Coast hidden (`opacity: 0`); Northern Reach fill brightened (`rgba(106,154,200,0.22)`)
+  - `#layerPolitical.era-post-collapse` rules — Northern + Compact fills dimmed; Free Coast fill brightened (`rgba(106,170,136,0.25)`), label opacity boosted
+  - Long Wars era: no overrides (base styles are the Long Wars default)
+- `web/index.html` — topbar badge updated to "Phase 3 Preview"; phase note updated; status bar updated
+
+---
+
 ## [2026-04-24] Phase 3A — Draggable chronology cursor
 
 **Branch:** `phase-3-chronology-scrub`
