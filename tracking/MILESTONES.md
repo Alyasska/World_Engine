@@ -189,9 +189,31 @@ Data status shows "vault-generated". All 8 markers, layers, and chronology bar w
 
 ---
 
-## Phase 3 — Chronology + Era Overlays
-**Status:** ✅ Complete (3A + 3B)
-**Summary:** Draggable chronology cursor with live era detection (3A) and era-sensitive SVG political territory fills (3B).
+## Phase 3C — Narrative Time Filtering
+**Status:** ✅ Complete
+**Branch:** `phase-3c-narrative-time-filtering`
+**Goal:** Map markers visually reflect the active era — places linked to era events are emphasized; others dim.
+
+**Checklist:**
+- [x] `applyNarrativeFilter(eraId)` derives active place IDs from `state.data.events` at runtime — no hardcoding
+- [x] Uses existing `events.linkedPlaces` field — no parser change, no data contract change
+- [x] `marker-era-active` — soft gold drop-shadow glow on markers with era-relevant events
+- [x] `marker-era-inactive:not(.marker-selected)` — opacity 0.28; selected (open detail panel) markers never dim
+- [x] Post-Collapse (no events): all markers revert to neutral (no dimming, no glow)
+- [x] CSS `transition: opacity 0.4s ease, filter 0.4s ease` — smooth per-marker crossfade
+- [x] `showPlaceDetail` — linked events matching active era get `.era-current` border accent + "now" badge
+- [x] All Phase 3A and 3B features intact
+- [x] Layer toggles, pan/zoom, detail panel, GitHub Pages compatibility all preserved
+
+**Known limitation:** The detail panel era badges are rendered at click time and do not update live when the cursor moves after the panel opens. Documented in NEXT_ACTIONS.
+
+**Visual Confirmation:** `https://alyasska.github.io/World_Engine/` — drag cursor to Age of Founding → Vareth and Solmark glow; other markers dim. Drag to Long Wars → Vareth, Ashveil, Grey Keep, Solmark glow. Drag to Post-Collapse → all markers neutral. Open a place detail while in an era → events matching that era show a gold "now" badge.
+
+---
+
+## Phase 3 — Chronology + Era Overlays + Narrative Filtering
+**Status:** ✅ Complete (3A + 3B + 3C)
+**Summary:** Draggable chronology cursor (3A), era-sensitive SVG territory fills (3B), and era-aware marker emphasis with panel era context (3C).
 
 ---
 
