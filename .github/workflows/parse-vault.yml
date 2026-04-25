@@ -1,0 +1,47 @@
+name: Parse Vault Data
+
+# Runs when vault Markdown or the parser script changes on main.
+# If the generated JSON is updated, commits only web/data/generated/ back
+# to the same branch so deploy-pages.yml picks it up on the next push.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "vault/**"
+      - "scripts/vault-to-json.js"
+
+permissions:
+  contents: write
+
+jobs:
+  parse-vault:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate JSON from vault
+        run: node scripts/vault-to-json.js
+
+      - name: Commit generated JSON if changed
+        run: |
+          if git diff --quiet -- web/data/generated; then
+            echo "No generated JSON changes — skipping commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add web/data/generated
+          git commit -m "chore: regenerate vault JSON"
+          git push

@@ -259,6 +259,34 @@ Data status shows "vault-generated". All 8 markers, layers, and chronology bar w
 
 ---
 
+## Phase 4A — CI Auto-Parser
+**Status:** ✅ Complete
+**Branch:** `phase-4a-ci-auto-parser`
+**Goal:** Close the manual loop — vault edits push to GitHub Pages automatically with no terminal steps.
+
+**Checklist:**
+- [x] `.github/workflows/parse-vault.yml` created
+- [x] Triggers on `vault/**` or `scripts/vault-to-json.js` path changes on `main`
+- [x] `workflow_dispatch` for manual runs
+- [x] Runs `node scripts/vault-to-json.js` (no `npm install` — zero external dependencies)
+- [x] `git diff --quiet` gate — skips commit and push if JSON unchanged (idempotent)
+- [x] Commits only `web/data/generated/` — vault files never touched by bot
+- [x] Commit message: `chore: regenerate vault JSON`
+- [x] Bot identity: `github-actions[bot]`
+- [x] Permissions: `contents: write` only
+- [x] AD-014 documented
+- [x] Parser and data contract untouched
+- [x] All Phase 3A–3E features untouched
+
+**Deployment chain after this phase:**
+Obsidian vault edit → `git push` → `parse-vault.yml` runs → bot commits `web/data/generated/*.json` → `deploy-pages.yml` triggers → GitHub Pages updated
+
+**GitHub settings to verify:** Repository must allow Actions to push to `main` (Settings → Actions → General → Workflow permissions → Read and write permissions).
+
+**Visual Confirmation:** After merging to main, edit any vault `.md` field (e.g. change a description), push. Go to Actions tab on GitHub — `Parse Vault Data` should run, produce a `chore: regenerate vault JSON` commit, which then triggers `Deploy to GitHub Pages`.
+
+---
+
 ## Phase 4 — Story↔Map Feedback Loop (Planned)
 **Status:** 🔲 Not started  
 **Goal:** Writing a Story entry with location data automatically creates a map marker.  
