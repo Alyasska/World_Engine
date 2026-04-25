@@ -18,7 +18,7 @@ mapRef:
   cellId: ""
 
 faction: northern-reach
-description: "The largest fortified city in the Northern Reach, built where the Var River meets the foothills of the Ashspine. Ruled by House Voss for six generations. Its iron gates have never been breached. The city smells of coal smoke and river mist."
+description: "The largest fortified city in the Northern Reach, built where the Var River meets the foothills of the Ashspine. Ruled by House Voss for six generations. Its iron gates have never been breached in recorded history. The city smells of coal smoke and river mist."
 
 foundingDate: "Year 44, Age of Founding"
 historicalFactions: []
