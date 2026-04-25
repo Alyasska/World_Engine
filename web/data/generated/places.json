@@ -42,9 +42,12 @@
     "linkedCharacters": [
       "char-the-wanderer"
     ],
-    "linkedEvents": [],
+    "linkedEvents": [
+      "event-free-coast-declaration"
+    ],
     "linkedStories": [
-      "story-merchant-roads"
+      "story-merchant-roads",
+      "story-the-last-road"
     ],
     "mapRef": {
       "x": 230,
@@ -92,7 +95,9 @@
     "linkedCharacters": [
       "char-mira-solhand"
     ],
-    "linkedEvents": [],
+    "linkedEvents": [
+      "event-free-coast-declaration"
+    ],
     "linkedStories": [
       "story-merchant-roads"
     ],
@@ -120,7 +125,9 @@
     ],
     "linkedEvents": [
       "event-founding-solmark",
-      "event-treaty-of-solmark"
+      "event-treaty-of-solmark",
+      "event-collapse-of-the-compact",
+      "event-free-coast-declaration"
     ],
     "linkedStories": [
       "story-merchant-roads"
@@ -145,7 +152,9 @@
     "layer": "geography",
     "description": "A lone watchtower on the edge of the Thornwood forest, staffed by Northern Reach scouts. The forest below it is ancient and largely unmapped. The Watch has been continuously occupied since Year 60.",
     "linkedCharacters": [],
-    "linkedEvents": [],
+    "linkedEvents": [
+      "event-thornwood-watch-abandoned"
+    ],
     "linkedStories": [],
     "mapRef": {
       "x": 425,
@@ -171,7 +180,9 @@
     ],
     "linkedEvents": [
       "event-founding-vareth",
-      "event-siege-of-vareth"
+      "event-siege-of-vareth",
+      "event-collapse-of-the-compact",
+      "event-thornwood-watch-abandoned"
     ],
     "linkedStories": [
       "story-the-first-winter"

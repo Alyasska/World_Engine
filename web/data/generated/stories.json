@@ -80,6 +80,44 @@
     ]
   },
   {
+    "id": "story-the-last-road",
+    "type": "story",
+    "title": "The Last Road",
+    "aliases": [
+      "After the Roads",
+      "The Merchant's Return"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 9–12, Post-Collapse",
+    "chronoPosition": 0.8,
+    "primaryPlace": "place-drenford",
+    "linkedPlaces": [
+      "place-drenford",
+      "place-solmark",
+      "place-port-maren"
+    ],
+    "protagonists": [],
+    "participants": [
+      "char-mira-solhand"
+    ],
+    "logline": "The roads that built the Compact are still there. So is the woman who knew them best.",
+    "description": "A story set in the early Post-Collapse, following the old merchant routes between Drenford, Solmark, and Port Maren. The roads are intact but the agreements they ran on are not. Someone is still trying to hold the trade together from Drenford's market square.",
+    "linkedEvents": [
+      "event-free-coast-declaration",
+      "event-collapse-of-the-compact"
+    ],
+    "linkedCharacters": [
+      "char-mira-solhand"
+    ],
+    "tags": [
+      "merchant",
+      "post-collapse",
+      "roads",
+      "free-coast"
+    ]
+  },
+  {
     "id": "story-the-silence-after",
     "type": "story",
     "title": "The Silence After",

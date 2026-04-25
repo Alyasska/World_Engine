@@ -32,6 +32,39 @@
     "linkedEvents": []
   },
   {
+    "id": "event-collapse-of-the-compact",
+    "type": "event",
+    "title": "Collapse of the Compact",
+    "aliases": [
+      "The Fracture",
+      "End of the Council"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 3, Post-Collapse",
+    "chronoPosition": 0.77,
+    "eventType": "collapse",
+    "scale": "regional",
+    "primaryPlace": "place-solmark",
+    "linkedPlaces": [
+      "place-solmark",
+      "place-vareth"
+    ],
+    "participants": [
+      "char-elder-council"
+    ],
+    "description": "The Compact's governing council in Solmark fractured under accumulated war debt and internal blame. Three of the five founding houses withdrew their seals within a month of each other, citing irreconcilable accounts. What remained was not a government but a quarrel over ledgers. Vareth stopped sending any formal acknowledgment south.",
+    "consequences": [
+      "Compact ceases to function as a unified political entity",
+      "Solmark survives as an independent city but loses its claim to regional authority",
+      "Northern Reach no longer has a formal counterpart to negotiate with"
+    ],
+    "linkedStories": [],
+    "linkedEvents": [
+      "event-treaty-of-solmark"
+    ]
+  },
+  {
     "id": "event-fall-of-grey-keep",
     "type": "event",
     "title": "The Fall of the Grey Keep",
@@ -119,6 +152,40 @@
     "linkedEvents": []
   },
   {
+    "id": "event-free-coast-declaration",
+    "type": "event",
+    "title": "The Free Coast Declaration",
+    "aliases": [
+      "The Harbor Refusal",
+      "Declaration of the Coast"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 9, Post-Collapse",
+    "chronoPosition": 0.85,
+    "eventType": "political",
+    "scale": "regional",
+    "primaryPlace": "place-port-maren",
+    "linkedPlaces": [
+      "place-port-maren",
+      "place-drenford",
+      "place-solmark"
+    ],
+    "participants": [],
+    "description": "Port Maren's harbor council formally stopped sending tax shipments to any inland faction, citing no functioning authority to receive them. Drenford followed within the season. The coastal towns had effectively been self-governing for years; this was the declaration that made it official. No one arrived to contest it.",
+    "consequences": [
+      "Coastal towns formally detach from any inland political claim",
+      "Port Maren consolidates as the dominant harbor on the Free Coast",
+      "Trade routes along the coast reorganize around Port Maren and Drenford"
+    ],
+    "linkedStories": [
+      "story-the-last-road"
+    ],
+    "linkedEvents": [
+      "event-collapse-of-the-compact"
+    ]
+  },
+  {
     "id": "event-siege-of-vareth",
     "type": "event",
     "title": "The Siege of Vareth",
@@ -150,6 +217,37 @@
     ],
     "linkedEvents": [
       "event-fall-of-grey-keep"
+    ]
+  },
+  {
+    "id": "event-thornwood-watch-abandoned",
+    "type": "event",
+    "title": "Thornwood Watch Abandoned",
+    "aliases": [
+      "The Dark Watch",
+      "When the Fires Went Out"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 17, Post-Collapse",
+    "chronoPosition": 0.93,
+    "eventType": "collapse",
+    "scale": "local",
+    "primaryPlace": "place-thornwood-watch",
+    "linkedPlaces": [
+      "place-thornwood-watch",
+      "place-vareth"
+    ],
+    "participants": [],
+    "description": "The last garrison at Thornwood Watch stopped receiving supply columns. They held position for two additional months on reserve stores, sent word south twice, and received no reply. On a morning in late autumn they extinguished the watch fires and marched back to Vareth. The post has been unmanned since.",
+    "consequences": [
+      "Northern approach through the Thornwood is no longer monitored",
+      "The watch tower stands intact but dark",
+      "Locals treat the road through the Thornwood as safe by day, uncertain by night"
+    ],
+    "linkedStories": [],
+    "linkedEvents": [
+      "event-collapse-of-the-compact"
     ]
   },
   {
