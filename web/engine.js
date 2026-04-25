@@ -533,7 +533,7 @@ function clearDetail() {
 }
 
 // ══════════════════════════════════════════════════════════
-// CHRONOLOGY BAR
+// CHRONOLOGY BAR  (Phase 3A: draggable cursor)
 // ══════════════════════════════════════════════════════════
 const ERAS = [
   { id: 'age-founding', label: 'Age of Founding', start: 0,    end: 0.33, color: '#3a5070' },
@@ -545,21 +545,19 @@ function renderChronology() {
   if (!chronoTrack) return;
   chronoTrack.innerHTML = '';
 
-  // Era bands
+  // Era bands (click handled by track-level listener in setupChronoEvents)
   ERAS.forEach(era => {
     const band = document.createElement('div');
     band.className = `chrono-era${era.active ? ' active' : ''}`;
-    band.style.left  = `${era.start * 100}%`;
-    band.style.width = `${(era.end - era.start) * 100}%`;
+    band.style.left       = `${era.start * 100}%`;
+    band.style.width      = `${(era.end - era.start) * 100}%`;
     band.style.background = era.color;
-    band.dataset.eraId = era.id;
+    band.dataset.eraId    = era.id;
 
     const label = document.createElement('span');
-    label.className = 'era-name';
+    label.className   = 'era-name';
     label.textContent = era.label;
     band.appendChild(label);
-
-    band.addEventListener('click', () => selectEra(era.id));
     chronoTrack.appendChild(band);
   });
 
@@ -572,48 +570,57 @@ function renderChronology() {
     dot.dataset.eventId = ev.id;
 
     const tip = document.createElement('div');
-    tip.className = 'chrono-event-tip';
+    tip.className   = 'chrono-event-tip';
     tip.textContent = ev.title;
     dot.appendChild(tip);
 
     dot.addEventListener('click', e => {
       e.stopPropagation();
       showEventDetail(ev.id);
-      // Scroll panel to top
       panelDetail.scrollTop = 0;
     });
 
     chronoTrack.appendChild(dot);
   });
 
-  // Current era cursor
+  // Draggable cursor (era-centered on init, transparent hit area via CSS)
   const cursor = document.createElement('div');
   cursor.id        = 'chronoCursor';
   cursor.className = 'chrono-cursor';
-  cursor.style.left = `${(0.33 + 0.72) / 2 * 100}%`;
   chronoTrack.appendChild(cursor);
 
-  updateEraDisplay('long-wars');
+  // Set initial position at Long Wars midpoint
+  moveCursorTo((ERAS[1].start + ERAS[1].end) / 2);
 }
 
-function selectEra(eraId) {
+// Return the era that contains the given timeline fraction (0–1).
+function eraAtPosition(fraction) {
+  return ERAS.find(e => fraction >= e.start && fraction < e.end) || ERAS[ERAS.length - 1];
+}
+
+// Update era display, band highlights, and dot dimming without moving the cursor.
+function applyEra(eraId) {
   state.activeEra = eraId;
   document.querySelectorAll('.chrono-era').forEach(el => {
     el.classList.toggle('active', el.dataset.eraId === eraId);
   });
-  updateEraDisplay(eraId);
-
-  // Move cursor to center of selected era
-  const era = ERAS.find(e => e.id === eraId);
-  if (era) {
-    const cursor = document.getElementById('chronoCursor');
-    if (cursor) cursor.style.left = `${(era.start + era.end) / 2 * 100}%`;
-  }
-
-  // Filter event dots: dim events not in this era
   document.querySelectorAll('.chrono-event-dot').forEach(dot => {
     dot.classList.toggle('dot-inactive', dot.classList[1].replace('chrono-era-', '') !== eraId);
   });
+  updateEraDisplay(eraId);
+}
+
+// Move cursor to a fraction (0–1) and apply the corresponding era.
+function moveCursorTo(fraction) {
+  const cursor = document.getElementById('chronoCursor');
+  if (cursor) cursor.style.left = `${fraction * 100}%`;
+  applyEra(eraAtPosition(fraction).id);
+}
+
+// Click-based era selection: snap cursor to the center of the named era.
+function selectEra(eraId) {
+  const era = ERAS.find(e => e.id === eraId);
+  if (era) moveCursorTo((era.start + era.end) / 2);
 }
 
 function updateEraDisplay(eraId) {
@@ -623,11 +630,60 @@ function updateEraDisplay(eraId) {
 }
 
 function setupChronoEvents() {
-  // Allow clicking on the track background to deselect
-  chronoTrack?.addEventListener('click', e => {
-    if (!e.target.closest('.chrono-event-dot') && !e.target.closest('.chrono-era')) {
-      document.querySelectorAll('.chrono-event-dot').forEach(d => d.classList.remove('dot-inactive'));
-      updateEraDisplay(state.activeEra);
+  const cursor = document.getElementById('chronoCursor');
+  if (!cursor || !chronoTrack) return;
+
+  let dragging = false;
+
+  // Convert a clientX pixel to a 0–1 timeline fraction clamped to the track.
+  function fractionAt(clientX) {
+    const rect = chronoTrack.getBoundingClientRect();
+    return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  }
+
+  // ── Cursor drag (mouse) ──────────────────────────────────
+  cursor.addEventListener('mousedown', e => {
+    dragging = true;
+    cursor.classList.add('dragging');
+    e.preventDefault();
+    e.stopPropagation();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    moveCursorTo(fractionAt(e.clientX));
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    cursor.classList.remove('dragging');
+  });
+
+  // ── Cursor drag (touch) ──────────────────────────────────
+  cursor.addEventListener('touchstart', e => {
+    dragging = true;
+    cursor.classList.add('dragging');
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    moveCursorTo(fractionAt(e.touches[0].clientX));
+  }, { passive: false });
+
+  window.addEventListener('touchend', () => {
+    if (!dragging) return;
+    dragging = false;
+    cursor.classList.remove('dragging');
+  });
+
+  // ── Click anywhere on track → move cursor there ──────────
+  // Era band clicks bubble up here; event dot clicks are excluded.
+  chronoTrack.addEventListener('click', e => {
+    if (e.target === cursor) return;
+    if (!e.target.closest('.chrono-event-dot')) {
+      moveCursorTo(fractionAt(e.clientX));
     }
   });
 }

@@ -4,6 +4,28 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-24] Phase 3A — Draggable chronology cursor
+
+**Branch:** `phase-3-chronology-scrub`
+
+**Changed:**
+- `web/engine.js` — chronology section refactored:
+  - `eraAtPosition(fraction)` — returns era at any 0–1 timeline position
+  - `applyEra(eraId)` — updates band highlights, dot dimming, era label (no cursor move)
+  - `moveCursorTo(fraction)` — moves cursor + calls `applyEra()` (single path for all interactions)
+  - `selectEra(eraId)` — snaps cursor to era center (used by era band clicks)
+  - `setupChronoEvents()` — replaced: cursor drag (mouse + touch), track click, event dot click preserved
+  - Era bands no longer have individual click listeners; track-level click handles all
+- `web/style.css`:
+  - `.chrono-cursor` — 16px transparent hit area, `transform: translateX(-50%)`, `cursor: ew-resize`, `pointer-events: auto`
+  - `.chrono-cursor::after` — 2px gold visual line via pseudo-element
+  - `.chrono-cursor.dragging` — removes left transition for instant drag follow; brightens glow
+  - `.chrono-event-dot.dot-inactive` — opacity 0.2 (was 0.4 + gray background)
+- `web/index.html` — chrono hint text updated to reflect drag interaction
+- `docs/ARCHITECTURE_DECISIONS.md` — AD-012: vis-timeline evaluated (~300KB), vanilla JS chosen
+
+---
+
 ## [2026-04-24] Phase 2C — Live generated data + Phase 2 static demo
 
 **Branch:** `phase-2c-live-generated-data`
