@@ -6,33 +6,33 @@ The single most important thing to do next, plus a short queue. Keep this file c
 
 ## Immediate Next Step
 
-**Phase 3D is complete. Phase 3 (3A–3D) is fully done.**
+**Phase 3E is complete. Phase 3 (3A–3E) is fully done.**
 
-Phase 3D added live panel refresh: dragging the cursor while a place detail is open
-re-renders the era badges instantly. Five lines of JS — one new state field, three
-one-liners in existing functions, one new helper.
+Phase 3E added `?author=1` local authoring links. In public mode nothing changes.
+With `?author=1`, place and event detail panels show an "Open in VS Code" link
+that opens the corresponding vault `.md` directly in VS Code.
 
 Recommended next steps (choose one):
 
-> **Option A — Vault→VS Code marker link:**
-> Clicking a place marker opens its `vault/Places/{id}.md` in VS Code via the
-> `vscode://file/C:/mirror/мое/world_engine/vault/Places/{id}.md` URI scheme.
-> No parser changes. Engine.js builds the URI from `place.id` and adds a small
-> "Open in VS Code" link inside `showPlaceDetail`.
+> **Option A — CI auto-parser (GitHub Action):**
+> Add `.github/workflows/parse-vault.yml` that runs `node scripts/vault-to-json.js`
+> on every push touching `vault/**`, then commits updated `web/data/generated/*.json`.
+> Vault edits auto-deploy to GitHub Pages with no manual parser run.
+> This completes the Obsidian → publish loop without any manual steps.
 
-> **Option B — CI auto-parser (GitHub Action):**
-> Add `.github/workflows/parse-vault.yml` — runs `node scripts/vault-to-json.js`
-> on every push that touches `vault/**`, then commits the updated
-> `web/data/generated/*.json`. Vault edits auto-deploy to GitHub Pages.
-
-> **Option C — Phase 4 start (Story↔Map feedback loop):**
+> **Option B — Phase 4 start (Story↔Map feedback loop):**
 > Writing a Story entry with `mapRefs` automatically creates a map marker.
-> Requires reading `stories.json` in `renderMarkers()` and rendering story-linked
-> markers with a distinct shape.
+> Read `stories.json` in `renderMarkers()`, render story-linked places with a
+> distinct "story" shape, open story detail panel on click.
 
-> **Option D — Post-Collapse vault content:**
-> Add vault events for the Post-Collapse era so that era produces glowing markers
-> instead of the current neutral state. Pure worldbuilding — no code changes.
+> **Option C — Post-Collapse vault content:**
+> Add vault events for the Post-Collapse era. Worldbuilding task, no code change.
+> Result: Post-Collapse era produces glowing markers and "now" badges instead of
+> the current neutral state.
+
+> **Option D — Fictional calendar system:**
+> Define a canonical in-world calendar (year numbering, era epochs, season names).
+> Needed before Phase 4 can position story events with precision on the timeline.
 
 ---
 
@@ -42,18 +42,33 @@ Recommended next steps (choose one):
 - [x] **3B — Era-sensitive SVG territory fills** ✅
 - [x] **3C — Narrative time filtering (marker emphasis)** ✅
 - [x] **3D — Live panel era refresh** ✅
+- [x] **3E — Local authoring links (`?author=1`)** ✅
+
+---
+
+## How to use author mode
+
+Add `?author=1` to the local preview URL:
+
+```
+http://localhost:5500/?author=1
+```
+
+Click any place or event → "Open in VS Code" link appears in the detail header.
+The link opens `vault/Places/{slug}.md`, `vault/Events/{slug}.md`, etc. in VS Code.
+
+**This link does not appear on the public GitHub Pages preview.**
 
 ---
 
 ## Backlog (Phase 4+)
 
-- [ ] Vault→VS Code marker link — Option A above
-- [ ] CI auto-parser (GitHub Action) — Option B above
+- [ ] CI auto-parser (GitHub Action) — Option A above
+- [ ] Story↔Map feedback loop — Phase 4 goal
+- [ ] Post-Collapse vault events — worldbuilding, no code change
 - [ ] Fictional calendar/date system — needed before precise timeline positioning
 - [ ] MapLibre + Azgaar integration — Phase 4 decision (see AD-007)
 - [ ] Add Dataview queries to creative vault
-- [ ] Story↔Map feedback loop — Phase 4 goal
-- [ ] Post-Collapse vault events — no code change required
 
 ---
 
@@ -61,7 +76,6 @@ Recommended next steps (choose one):
 
 | Decision | Blocking | Notes |
 |---|---|---|
+| CI parser automation | Phase 4 | GitHub Action or pre-commit hook |
 | Fictional calendar system | Phase 4 | Design before scrubbing |
 | MapLibre at Phase 4 or later | Phase 4 | AD-007 updated to Phase 4 |
-| CI parser automation | Option B | GitHub Action or pre-commit hook |
-| Vault→VS Code URI | Option A | `vscode://file/` scheme, no dependencies |
