@@ -75,6 +75,27 @@ This document records every significant technical decision made in this project,
 
 ---
 
+## AD-014 — GitHub Actions Auto-Parser for Vault-Generated JSON
+**Date:** 2026-04-25
+**Decision:** A GitHub Actions workflow (`.github/workflows/parse-vault.yml`) runs `node scripts/vault-to-json.js` automatically when vault Markdown or the parser script changes on `main`. If the generated JSON differs, the workflow commits only `web/data/generated/` back to `main` using the `github-actions[bot]` identity.
+
+**Rationale:** The manual step — "run `node scripts/vault-to-json.js` then commit generated JSON" — was the only remaining friction in the Obsidian → publish loop. Automating it means a vault author can edit Markdown in Obsidian, push, and see the map update on GitHub Pages without any terminal work. The existing `deploy-pages.yml` already triggers on every push to `main`, so the bot commit triggers an automatic Pages redeploy.
+
+**Design choices:**
+- Trigger path filters (`vault/**`, `scripts/vault-to-json.js`) prevent the workflow from running on unrelated pushes (e.g. docs, tracking files, web/ changes)
+- `git diff --quiet -- web/data/generated` skips the commit if nothing changed (idempotent)
+- Only `web/data/generated/` is committed — vault files and other changed files are never touched by the bot
+- `permissions: contents: write` is the minimum required; all other permissions default to `none`
+- No `npm install` step — `vault-to-json.js` has no external dependencies (AD-010)
+
+**Trade-off:** The bot commit to `main` triggers `deploy-pages.yml` for a second time (first for the vault push, second for the bot commit). This costs one extra Pages build per vault change. Acceptable at this scale.
+
+**Constraint:** For the `git push` to succeed, the repository's default branch protection must not require pull requests for pushes. If branch protection is later added, the workflow will need a Personal Access Token or a GitHub App token with bypass permission.
+
+**Revisit at:** If branch protection rules are enabled on `main`, or if the vault grows large enough that per-push CI costs become a concern.
+
+---
+
 ## AD-013 — ?author=1 Query Parameter for Local Authoring Mode
 **Date:** 2026-04-25
 **Decision:** Local-only features (e.g. `vscode://file/` links to the Obsidian vault) are gated behind a `?author=1` query parameter in the URL. Public GitHub Pages users never see them.

@@ -4,6 +4,26 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 4A — CI auto-parser
+
+**Branch:** `phase-4a-ci-auto-parser`
+
+**Added:**
+- `.github/workflows/parse-vault.yml` — GitHub Actions workflow:
+  - Triggers on push to `main` when `vault/**` or `scripts/vault-to-json.js` changes; also `workflow_dispatch`
+  - Runs `node scripts/vault-to-json.js`
+  - Checks `git diff --quiet -- web/data/generated`; skips commit if nothing changed
+  - If changed: commits only `web/data/generated/` with `github-actions[bot]` identity and message `chore: regenerate vault JSON`; pushes to `main`
+  - Permissions: `contents: write` only
+  - No `npm install` step (parser has no external dependencies)
+
+**Changed:**
+- `docs/ARCHITECTURE_DECISIONS.md` — AD-014: CI auto-parser design decisions
+
+**Effect:** Editing a vault `.md` in Obsidian → push to main → workflow runs → generated JSON updated → `deploy-pages.yml` redeploys GitHub Pages. Full loop, zero manual steps.
+
+---
+
 ## [2026-04-25] Phase 3E — Local authoring links
 
 **Branch:** `phase-3e-local-authoring-links`

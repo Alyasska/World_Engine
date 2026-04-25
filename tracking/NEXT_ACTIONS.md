@@ -6,69 +6,61 @@ The single most important thing to do next, plus a short queue. Keep this file c
 
 ## Immediate Next Step
 
-**Phase 3E is complete. Phase 3 (3A–3E) is fully done.**
+**Phase 4A is complete. Verify the CI workflow on GitHub.**
 
-Phase 3E added `?author=1` local authoring links. In public mode nothing changes.
-With `?author=1`, place and event detail panels show an "Open in VS Code" link
-that opens the corresponding vault `.md` directly in VS Code.
+Before treating 4A as done, confirm the Actions workflow actually runs:
 
-Recommended next steps (choose one):
-
-> **Option A — CI auto-parser (GitHub Action):**
-> Add `.github/workflows/parse-vault.yml` that runs `node scripts/vault-to-json.js`
-> on every push touching `vault/**`, then commits updated `web/data/generated/*.json`.
-> Vault edits auto-deploy to GitHub Pages with no manual parser run.
-> This completes the Obsidian → publish loop without any manual steps.
-
-> **Option B — Phase 4 start (Story↔Map feedback loop):**
-> Writing a Story entry with `mapRefs` automatically creates a map marker.
-> Read `stories.json` in `renderMarkers()`, render story-linked places with a
-> distinct "story" shape, open story detail panel on click.
-
-> **Option C — Post-Collapse vault content:**
-> Add vault events for the Post-Collapse era. Worldbuilding task, no code change.
-> Result: Post-Collapse era produces glowing markers and "now" badges instead of
-> the current neutral state.
-
-> **Option D — Fictional calendar system:**
-> Define a canonical in-world calendar (year numbering, era epochs, season names).
-> Needed before Phase 4 can position story events with precision on the timeline.
+1. Go to `https://github.com/Alyasska/World_Engine/settings/actions`
+2. Under **Workflow permissions**, confirm **Read and write permissions** is selected.
+   (Without this, the `git push` in the workflow will fail with a 403.)
+3. Edit any vault Markdown file (e.g. add a sentence to a `description` field).
+4. Commit and push to `main`.
+5. On GitHub → Actions tab: confirm `Parse Vault Data` runs.
+6. Confirm a `chore: regenerate vault JSON` commit appears.
+7. Confirm `Deploy to GitHub Pages` triggers from that commit.
+8. Confirm the live preview at `https://alyasska.github.io/World_Engine/` reflects the change.
 
 ---
 
-## Phase 3 Status
+## Recommended Next Steps (Phase 4+)
 
-- [x] **3A — Draggable chronology cursor** ✅
-- [x] **3B — Era-sensitive SVG territory fills** ✅
-- [x] **3C — Narrative time filtering (marker emphasis)** ✅
-- [x] **3D — Live panel era refresh** ✅
-- [x] **3E — Local authoring links (`?author=1`)** ✅
+> **Option A — Post-Collapse vault content:**
+> Add vault events for the Post-Collapse era. No code change required.
+> Existing CI will auto-publish them. Era markers will glow on Post-Collapse.
 
----
+> **Option B — Story marker layer (Phase 4B):**
+> Render story-linked places as a distinct map layer. Read `stories.json` in
+> `renderMarkers()`, add a "story" marker shape, open a story detail panel on click.
 
-## How to use author mode
+> **Option C — Fictional calendar system:**
+> Define a canonical in-world calendar (year numbering, era epochs).
+> Needed before story events can be positioned precisely on the timeline.
 
-Add `?author=1` to the local preview URL:
-
-```
-http://localhost:5500/?author=1
-```
-
-Click any place or event → "Open in VS Code" link appears in the detail header.
-The link opens `vault/Places/{slug}.md`, `vault/Events/{slug}.md`, etc. in VS Code.
-
-**This link does not appear on the public GitHub Pages preview.**
+> **Option D — MapLibre + Azgaar (Phase 4 major):**
+> Replace the hand-crafted SVG world map with a proper tile-based map using
+> MapLibre GL JS + Azgaar Fantasy Map Generator export. See AD-007.
 
 ---
 
-## Backlog (Phase 4+)
+## CI Workflow Reference
 
-- [ ] CI auto-parser (GitHub Action) — Option A above
-- [ ] Story↔Map feedback loop — Phase 4 goal
-- [ ] Post-Collapse vault events — worldbuilding, no code change
-- [ ] Fictional calendar/date system — needed before precise timeline positioning
-- [ ] MapLibre + Azgaar integration — Phase 4 decision (see AD-007)
+| File | `.github/workflows/parse-vault.yml` |
+|---|---|
+| Trigger | Push to `main` touching `vault/**` or `scripts/vault-to-json.js`; also `workflow_dispatch` |
+| What it does | Runs parser, commits `web/data/generated/` only if changed |
+| Bot identity | `github-actions[bot]` |
+| Required GitHub setting | Workflow permissions → Read and write |
+
+---
+
+## Backlog
+
+- [ ] Post-Collapse vault events (worldbuilding, no code)
+- [ ] Story marker layer — Phase 4B
+- [ ] Fictional calendar/date system
+- [ ] MapLibre + Azgaar integration — Phase 4 major
 - [ ] Add Dataview queries to creative vault
+- [ ] Character detail panels (no panel exists yet for characters)
 
 ---
 
@@ -76,6 +68,6 @@ The link opens `vault/Places/{slug}.md`, `vault/Events/{slug}.md`, etc. in VS Co
 
 | Decision | Blocking | Notes |
 |---|---|---|
-| CI parser automation | Phase 4 | GitHub Action or pre-commit hook |
-| Fictional calendar system | Phase 4 | Design before scrubbing |
-| MapLibre at Phase 4 or later | Phase 4 | AD-007 updated to Phase 4 |
+| Fictional calendar system | Phase 4B+ | Design before timeline scrubbing |
+| MapLibre integration | Phase 4 major | See AD-007; deferred from Phase 2 |
+| Character detail panel | Phase 4B | Currently characters only appear in place detail |
