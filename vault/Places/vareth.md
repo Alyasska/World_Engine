@@ -28,6 +28,8 @@ linkedCharacters:
 linkedEvents:
   - event-founding-vareth
   - event-siege-of-vareth
+  - event-collapse-of-the-compact
+  - event-thornwood-watch-abandoned
 linkedStories:
   - story-the-first-winter
 linkedPlaces:

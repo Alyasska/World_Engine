@@ -25,9 +25,11 @@ historicalFactions: []
 
 linkedCharacters:
   - char-the-wanderer
-linkedEvents: []
+linkedEvents:
+  - event-free-coast-declaration
 linkedStories:
   - story-merchant-roads
+  - story-the-last-road
 linkedPlaces: []
 
 population: "A few thousand — grows significantly during market season"

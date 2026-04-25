@@ -25,7 +25,8 @@ historicalFactions: []
 
 linkedCharacters:
   - char-mira-solhand
-linkedEvents: []
+linkedEvents:
+  - event-free-coast-declaration
 linkedStories:
   - story-merchant-roads
 linkedPlaces: []
