@@ -1,26 +1,27 @@
 # Next Actions
 
-*Reevaluated 2026-04-25 after Phase 4A–4B completion.*  
+*Updated 2026-04-25 after Phase 4C completion.*  
 Keep this file current. The single most important action is always listed first.
 
 ---
 
 ## 1. Immediate Next Action
 
-**[CONTENT] Phase 4C — Post-Collapse Content Seed**
+**[ENGINEERING] Phase 4D — Character and Story Detail Panels**
 
-The era scrubber — the project's signature interactive feature — visits Post-Collapse and shows nothing. All 6 vault events are Age of Founding or Long Wars. Zero Post-Collapse events exist.
+Phase 4C is complete. The Post-Collapse era now has 3 events and 1 story. The chronology scrubber is meaningful across all three eras.
 
-Add 2–3 Post-Collapse vault events. No code change required. The CI pipeline will auto-publish them.
+The next highest-value improvement is character and story detail panels. Currently, characters and stories appear in place detail panels as list items but clicking them does nothing — no `showCharacterDetail` or `showStoryDetail` function exists in `engine.js`.
 
-**Minimum to make the era feel alive:**
-- Create `vault/Events/` entries with `era: post-collapse`
-- Set `chronoPosition` in the 0.72–1.0 range
-- Link each event to at least one existing place via `linkedPlaces`
-- Update the corresponding place's `linkedEvents` list
+**What to implement:**
+- `showCharacterDetail(charId)` — description, role, faction, traits, arc, linked places/events/stories
+- `showStoryDetail(storyId)` — logline, description, era, primary place (clickable → selects marker), linked events/characters
+- Click listeners on `[data-char-id]` and `[data-story-id]` items in `showPlaceDetail`
+- Back button returns to the place panel that linked here
 
-**Branch:** `phase-4c-post-collapse-content`  
-**Visual confirmation:** Drag cursor to Post-Collapse on GitHub Pages → event dots appear in the post-collapse zone → at least one place marker glows (era-active).
+**Branch:** `phase-4d-character-story-panels`  
+**Files:** `web/engine.js` only (plus minor `web/style.css` if needed)  
+**No:** schema change, new dependencies, parser change, CI change.
 
 ---
 

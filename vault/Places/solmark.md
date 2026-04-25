@@ -28,6 +28,8 @@ linkedCharacters:
 linkedEvents:
   - event-founding-solmark
   - event-treaty-of-solmark
+  - event-collapse-of-the-compact
+  - event-free-coast-declaration
 linkedStories:
   - story-merchant-roads
 linkedPlaces: []

@@ -334,27 +334,22 @@ They reflect what was actually built, what gaps exist, and what the next safe st
 ---
 
 ## Phase 4C — Post-Collapse Content Seed
-**Status:** 🔲 Not started
+**Status:** ✅ Complete
+**Branch:** `phase-4c-post-collapse-content-seed`
 **Type:** Content work (vault authoring, zero code changes)
 **Goal:** Add at least 2–3 Post-Collapse events and link them to existing places. Make the era scrubber meaningful across all three eras.
 
-**Why it matters:**  
-The chronology cursor is the signature interactive feature. Dragging it to Post-Collapse currently shows all markers neutral and the timeline empty in that zone. The engine handles this correctly (neutral state, no crash), but experientially it feels broken. Adding events is pure vault authoring — no parser change, no engine change, no CI change.
+**Checklist:**
+- [x] `vault/Events/collapse-of-the-compact.md` — Year 3 PC, chronoPosition 0.77, linked to Solmark + Vareth
+- [x] `vault/Events/free-coast-declaration.md` — Year 9 PC, chronoPosition 0.85, linked to Port Maren + Drenford + Solmark
+- [x] `vault/Events/thornwood-watch-abandoned.md` — Year 17 PC, chronoPosition 0.93, linked to Thornwood Watch + Vareth
+- [x] `vault/Stories/the-last-road.md` — Post-Collapse story stub, chronoPosition 0.80, linked to both political events
+- [x] Updated `linkedEvents` in: vareth, solmark, port-maren, thornwood-watch, drenford
+- [x] Updated `linkedStories` in drenford (added `story-the-last-road`)
+- [x] `node scripts/validate-vault.js` passes — 25 entities, 0 errors
+- [x] All code files, parser, data contract, CI workflow untouched
 
-**What it touches:**
-- `vault/Events/` — 2–3 new `.md` files (post-collapse era)
-- `vault/Places/` — update `linkedEvents` in relevant place files
-- CI auto-runs parser, GitHub Pages updates automatically
-
-**What must not change:** `web/engine.js`, `web/style.css`, `scripts/`, `.github/workflows/`
-
-**Acceptance criteria:**
-- Drag cursor to Post-Collapse → at least one event dot appears in the post-collapse zone
-- Drag cursor to Post-Collapse → at least one place marker glows (era-active)
-- Existing Age of Founding and Long Wars behavior unchanged
-- `node scripts/validate-vault.js` passes with 0 errors
-
-**Risk:** Low. Pure vault authoring. CI validates before publishing.
+**Visual Confirmation:** After CI regenerates JSON — drag cursor to Post-Collapse → 3 event dots appear in the post-collapse zone (0.72–1.0) → Vareth, Solmark, Port Maren, Drenford, Thornwood Watch all glow era-active → clicking a place shows Post-Collapse events with "now" badges.
 
 ---
 

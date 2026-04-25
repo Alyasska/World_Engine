@@ -24,7 +24,8 @@ foundingDate: "Year 60, Age of Founding"
 historicalFactions: []
 
 linkedCharacters: []
-linkedEvents: []
+linkedEvents:
+  - event-thornwood-watch-abandoned
 linkedStories: []
 linkedPlaces: []
 

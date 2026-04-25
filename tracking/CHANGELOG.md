@@ -4,6 +4,33 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-25] Phase 4C — Post-Collapse content seed
+
+**Branch:** `phase-4c-post-collapse-content-seed`
+
+**Added (vault/Events/):**
+- `collapse-of-the-compact.md` — `event-collapse-of-the-compact` · post-collapse · Year 3 PC · chronoPosition 0.77 · primaryPlace: Solmark · linked to Vareth and Solmark · eventType: collapse
+- `free-coast-declaration.md` — `event-free-coast-declaration` · post-collapse · Year 9 PC · chronoPosition 0.85 · primaryPlace: Port Maren · linked to Port Maren, Drenford, Solmark · eventType: political
+- `thornwood-watch-abandoned.md` — `event-thornwood-watch-abandoned` · post-collapse · Year 17 PC · chronoPosition 0.93 · primaryPlace: Thornwood Watch · linked to Thornwood Watch and Vareth · eventType: collapse
+
+**Added (vault/Stories/):**
+- `the-last-road.md` — `story-the-last-road` · post-collapse · Year 9–12 PC · chronoPosition 0.80 · primaryPlace: Drenford · participant: char-mira-solhand · linked to both new political events
+
+**Updated (vault/Places/):**
+- `vareth.md` — added `event-collapse-of-the-compact`, `event-thornwood-watch-abandoned` to linkedEvents
+- `solmark.md` — added `event-collapse-of-the-compact`, `event-free-coast-declaration` to linkedEvents
+- `port-maren.md` — added `event-free-coast-declaration` to linkedEvents
+- `thornwood-watch.md` — added `event-thornwood-watch-abandoned` to linkedEvents
+- `drenford.md` — added `event-free-coast-declaration` to linkedEvents; added `story-the-last-road` to linkedStories
+
+**No-change:** `web/engine.js`, `web/style.css`, `web/index.html`, `scripts/vault-to-json.js`, `scripts/validate-vault.js`, `.github/workflows/parse-vault.yml`, data contract, parser logic all untouched.
+
+**Validation:** `node scripts/validate-vault.js` passes — 25 entities, 0 errors.
+
+**Effect (after CI regenerates JSON):** Drag cursor to Post-Collapse → 3 event dots appear in the 0.72–1.0 zone → Vareth, Solmark, Port Maren, Drenford, and Thornwood Watch markers all glow (era-active) → clicking any of those places shows Post-Collapse events with "now" badges in the detail panel.
+
+---
+
 ## [2026-04-25] Roadmap reevaluation after Phase 4A–4B
 
 **Branch:** `phase-roadmap-reevaluation`
