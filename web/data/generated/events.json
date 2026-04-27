@@ -7,7 +7,7 @@
       "The Ironwood Betrayal",
       "Breaking of the Neutral Ground"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "long-wars",
     "date": "Year 22, The Long Wars",
     "chronoPosition": 0.5,
@@ -27,7 +27,9 @@
       "War enters its most destructive phase",
       "The question of who ordered the ambush is never officially resolved"
     ],
-    "linkedStories": [],
+    "linkedStories": [
+      "story-last-sentinel"
+    ],
     "linkedEvents": []
   },
   {
@@ -70,7 +72,7 @@
       "The Fracture",
       "End of the Council"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "post-collapse",
     "date": "Year 3, Post-Collapse",
     "chronoPosition": 0.77,
@@ -136,7 +138,7 @@
     "aliases": [
       "The Keep's Silence"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "long-wars",
     "date": "Year 38, The Long Wars",
     "chronoPosition": 0.66,
@@ -289,7 +291,7 @@
       "The Harbor Refusal",
       "Declaration of the Coast"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "post-collapse",
     "date": "Year 9, Post-Collapse",
     "chronoPosition": 0.85,
@@ -323,7 +325,7 @@
       "The Vale-Keeper's Departure",
       "End of the Waiting"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "post-collapse",
     "date": "Year 11, Post-Collapse",
     "chronoPosition": 0.82,
@@ -355,7 +357,7 @@
       "The End of the East",
       "Morngate's Last Day"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "post-collapse",
     "date": "Year 1, Post-Collapse",
     "chronoPosition": 0.74,
@@ -392,7 +394,7 @@
       "The Pale Arrival",
       "What Happened at the Hold"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "long-wars",
     "date": "Year 38, The Long Wars",
     "chronoPosition": 0.68,
@@ -427,7 +429,7 @@
       "Eredan's Last Walk",
       "The Grey Ending"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "post-collapse",
     "date": "Year 19, Post-Collapse",
     "chronoPosition": 0.97,
@@ -530,7 +532,7 @@
       "Solan's Charge",
       "The Fieldborn Stand"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "long-wars",
     "date": "Year 28, The Long Wars",
     "chronoPosition": 0.6,
@@ -563,7 +565,7 @@
       "The Dark Watch",
       "When the Fires Went Out"
     ],
-    "canonState": "draft",
+    "canonState": "canon",
     "era": "post-collapse",
     "date": "Year 17, Post-Collapse",
     "chronoPosition": 0.93,
