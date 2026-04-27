@@ -5,7 +5,7 @@ title: Last Sentinel
 aliases:
   - The Sixty Days
   - Durn at Stonecrown
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 8–9, The Long Wars"
@@ -43,7 +43,6 @@ tags:
   - durn
   - eredan
   - long-wars
-  - draft
 notes: ""
 ---
 

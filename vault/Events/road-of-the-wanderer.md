@@ -5,7 +5,7 @@ title: The Road of the Wanderer
 aliases:
   - Eredan's Last Walk
   - The Grey Ending
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 19, Post-Collapse"

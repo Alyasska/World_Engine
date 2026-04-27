@@ -5,7 +5,7 @@ title: The Fall of Morngate
 aliases:
   - The End of the East
   - Morngate's Last Day
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 1, Post-Collapse"

@@ -1,7 +1,7 @@
 ---
 type: index
 title: World Engine — Project Index
-updated: 2026-04-25
+updated: 2026-04-27
 ---
 
 # World Engine — Project Index
@@ -17,7 +17,7 @@ Open `C:\mirror\мое\world_engine` as a vault in Obsidian to use this index wi
 
 | Item | Value |
 |---|---|
-| Phase | **4B complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
+| Phase | **4F complete** → see [tracking/MILESTONES.md](tracking/MILESTONES.md) |
 | Next action | [tracking/NEXT_ACTIONS.md](tracking/NEXT_ACTIONS.md) |
 | Preview URL | https://alyasska.github.io/World_Engine/ |
 | CI pipeline | Obsidian edit → git push → GitHub Actions → GitHub Pages (fully automated) |

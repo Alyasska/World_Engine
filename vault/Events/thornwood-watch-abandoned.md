@@ -5,7 +5,7 @@ title: Thornwood Watch Abandoned
 aliases:
   - The Dark Watch
   - When the Fires Went Out
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 17, Post-Collapse"

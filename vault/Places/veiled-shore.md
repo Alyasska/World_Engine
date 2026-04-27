@@ -5,7 +5,7 @@ title: Veiled Shore
 aliases:
   - The Shore Village
   - Veilside
-canonState: draft
+canonState: canon
 
 region: free-coast
 placeType: village

@@ -1,25 +1,23 @@
 # Next Actions
 
-*Updated 2026-04-27 after Phase 4E completion.*  
+*Updated 2026-04-27 after Phase 4 complete closure.*  
 Keep this file current. The single most important action is always listed first.
 
 ---
 
 ## 1. Immediate Next Action
 
-### [CONTENT] Promote Draft Vault Entries
+### [CONTENT] Write body text for remaining draft stories
 
-Phase 4E is complete. Empty-era state now shows a clear message.
+Phase 4F promoted 17 entries. Four stories remain draft because their body text is a placeholder (`[Story content begins here]`). These are otherwise complete in frontmatter.
 
-**Priority:** Medium — content quality, no code needed.
+**Stories to write:**
+- `story-merchant-roads` — Mira Solhand carries undiplomated messages through the Long Wars
+- `story-the-first-winter` — Aran Voss inherits the Siege of Vareth on day three of his rule
+- `story-the-last-road` — Post-Collapse merchant routes, Mira Solhand returns
+- `story-the-silence-after` — the first outsider at Ashveil after the burning
 
-Current draft entities:
-- `place-veiled-shore` (draft)
-- `char-the-wanderer` (draft)
-- `event-fall-of-grey-keep` (draft)
-- All 3 stories (`story-merchant-roads`, `story-the-first-winter`, `story-the-silence-after`) are draft
-
-Review and promote to `canon` those that are lore-stable. Update cross-references and descriptions as needed. Stories especially benefit from promotion — the story detail panel (Phase 4D) will render them prominently.
+Write at minimum a `## Structure` section (like the promoted stories have) and a closing `## Notes` section. Then promote to canon.
 
 No code change. CI validates and publishes automatically.
 
@@ -31,8 +29,8 @@ These are valid future phases but should not start until the immediate items abo
 
 | Phase | Description | Why deferred |
 |---|---|---|
-| Phase 4F | Story path layer (data-driven SVG paths from linkedPlaces) | Depends on 4D being complete; currently 1 hardcoded path in index.html, acceptable for now |
-| Phase 5A | Chronology depth — era dates, in-world calendar, event count per era | Needs content (4C) and calendar design before implementation |
+| Phase 4G | Story path layer (data-driven SVG paths from linkedPlaces) | Currently 1 hardcoded path in index.html; acceptable until more stories canon |
+| Phase 5A | Chronology depth — era dates, in-world calendar, event count per era | Calendar design is a worldbuilding decision that precedes implementation |
 | Phase 5B | Data-driven era map overlays (replace CSS-hardcoded territory rules) | Needs era metadata design (5A) first |
 
 ---
@@ -57,7 +55,7 @@ Run this before treating any phase as complete:
 
 - [ ] `node scripts/validate-vault.js` exits 0
 - [ ] `node scripts/vault-to-json.js` runs without `[skip]` warnings for active (non-retired) entries
-- [ ] All 8 place markers visible on the map at `https://alyasska.github.io/World_Engine/`
+- [ ] All 16 place markers visible on the map at `https://alyasska.github.io/World_Engine/`
 - [ ] Chronology cursor draggable; all three era zones functional
 - [ ] Era-aware marker emphasis and political overlays working for Age of Founding and Long Wars
 - [ ] Post-Collapse: markers return to neutral (or glow once 4C content exists)
@@ -71,15 +69,16 @@ Run this before treating any phase as complete:
 
 ## 6. Branch Naming Plan
 
-| Phase | Branch name |
-|---|---|
-| 4C (content) | `phase-4c-post-collapse-content` |
-| 4D (char/story panels) | `phase-4d-character-story-panels` |
-| 4E (empty era feedback) | `phase-4e-empty-era-feedback` |
-| 4F (story path layer) | `phase-4f-story-path-layer` |
-| 5A (chronology depth) | `phase-5a-chronology-depth` |
-| 5B (data-driven overlays) | `phase-5b-data-driven-overlays` |
-| 6 (MapLibre) | `phase-6-maplibre-azgaar` |
+| Phase | Branch name | Status |
+|---|---|---|
+| 4C (content) | `phase-4c-post-collapse-content` | ✅ merged |
+| 4D (char/story panels) | `phase-4d-character-story-panels` | ✅ merged |
+| 4E (empty era feedback) | `phase-4e-empty-era-state` | ✅ merged |
+| 4F (content promotion) | `phase-4f-content-promotion` | ✅ merged |
+| 4G (story path layer) | `phase-4g-story-path-layer` | 🔲 not started |
+| 5A (chronology depth) | `phase-5a-chronology-depth` | 🔲 not started |
+| 5B (data-driven overlays) | `phase-5b-data-driven-overlays` | 🔲 not started |
+| 6 (MapLibre) | `phase-6-maplibre-azgaar` | 🔲 not started |
 
 ---
 

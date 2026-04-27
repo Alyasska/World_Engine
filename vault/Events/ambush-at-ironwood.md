@@ -5,7 +5,7 @@ title: The Ambush at Ironwood Hall
 aliases:
   - The Ironwood Betrayal
   - Breaking of the Neutral Ground
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 22, The Long Wars"
@@ -31,7 +31,8 @@ consequences:
   - War enters its most destructive phase
   - The question of who ordered the ambush is never officially resolved
 
-linkedStories: []
+linkedStories:
+  - story-last-sentinel
 linkedEvents: []
 
 duration: "One afternoon"

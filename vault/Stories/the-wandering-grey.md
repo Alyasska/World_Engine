@@ -5,7 +5,7 @@ title: The Wandering Grey
 aliases:
   - Eredan's Road
   - From the North to the End
-canonState: draft
+canonState: canon
 
 era: age-founding
 date: "Year 12 to Year 19, Post-Collapse"
@@ -29,6 +29,7 @@ description: "The full arc of Eredan the Grey, assembled from fragments: his arr
 linkedEvents:
   - event-coming-of-eredan
   - event-first-council-of-kings
+  - event-siege-of-stonecrown
   - event-road-of-the-wanderer
 linkedCharacters:
   - char-eredan-the-grey
@@ -45,7 +46,6 @@ tags:
   - multi-era
   - non-linear
   - mystery
-  - draft
 notes: ""
 ---
 

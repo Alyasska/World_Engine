@@ -397,7 +397,50 @@ They reflect what was actually built, what gaps exist, and what the next safe st
 
 ---
 
-## Phase 4F — Story Path Layer (Data-Driven)
+## Phase 4F — Draft Content Promotion
+**Status:** ✅ Complete
+**Branch:** `phase-4f-content-promotion`
+**Type:** Content work (vault authoring only — zero code changes)
+**Goal:** Promote stable draft vault entries to canon, fix cross-reference gaps, improve character descriptions where needed.
+
+**Checklist:**
+- [x] 5 stories promoted to canon: `beyond-the-vale`, `last-sentinel`, `solan-and-the-pale-throne`, `the-pale-kings-hunger`, `the-wandering-grey`
+- [x] 10 events promoted to canon (all 10 draft events — all fully formed)
+- [x] `char-the-pale-king` promoted; self-referential `linkedCharacters` bug fixed; `char-kessa-of-saltmere` added
+- [x] `place-veiled-shore` promoted
+- [x] `event-ambush-at-ironwood`: `linkedStories` back-link to `story-last-sentinel` added
+- [x] `story-the-wandering-grey`: `event-siege-of-stonecrown` added to `linkedEvents`
+- [x] `char-the-wanderer`: arc and description improved; remains draft
+- [x] 4 stories kept draft: `merchant-roads`, `the-first-winter`, `the-last-road`, `the-silence-after` (placeholder body text)
+- [x] `- draft` tag removed from promoted story `tags` arrays (tags is web-facing for stories)
+- [x] `node scripts/validate-vault.js` → 54 entities, 0 errors
+- [x] Parser, data contract, CI workflow, and all web files untouched
+
+**Visual Confirmation (after CI regenerates JSON):** Character and story detail panels for canon entries will now show complete, well-linked content. The Pale King's character panel will show Kessa of Saltmere in linked characters. The Wandering Grey story will link to the Siege of Stonecrown.
+
+---
+
+## Phase 4 — Complete Summary
+**Status:** ✅ Phase 4 fully complete as of 2026-04-27
+
+| Sub-phase | Description | Branch |
+|---|---|---|
+| 4A | CI auto-parser | `phase-4a-ci-auto-parser` |
+| 4B | Vault data validation | `phase-4b-vault-validation` |
+| 4C | Post-Collapse content seed | `phase-4c-post-collapse-content-seed` |
+| 4D | Character + story detail panels | `phase-4d-character-story-panels` |
+| 4E | Empty era state feedback | `phase-4e-empty-era-state` |
+| 4F | Draft content promotion + Phase 4 closure | `phase-4f-content-promotion` |
+
+**Vault inventory at Phase 4 close:**
+- 16 places (15 canon, 1 draft)
+- 10 characters (8 canon, 2 draft)
+- 19 events (19 canon, 0 draft)
+- 9 stories (5 canon, 4 draft)
+
+---
+
+## Phase 4G — Story Path Layer (Data-Driven)
 **Status:** 🔲 Not started
 **Type:** Engineering work (medium — engine.js + index.html)
 **Goal:** Render story paths as a dynamic map overlay driven by story data, replacing the hardcoded SVG path in `index.html`.
@@ -409,7 +452,7 @@ There is currently a hardcoded SVG path for "Merchant Roads" drawn in `index.htm
 
 **What must not change:** No new vault fields needed. `linkedPlaces` already provides the place IDs; `mapRef.x/y` provides coordinates.
 
-**Risk:** Medium. Requires coordinate interpolation and SVG path generation. Defer until 4C and 4D are complete.
+**Risk:** Medium. Requires coordinate interpolation and SVG path generation.
 
 ---
 
@@ -418,7 +461,7 @@ There is currently a hardcoded SVG path for "Merchant Roads" drawn in `index.htm
 **Type:** Engineering + content design
 **Goal:** Richer chronology display: era dates/in-world years, event count per era, era tooltips. Define the canonical in-world calendar system.
 
-**Depends on:** Phase 4C (content must exist before calendar design makes sense)
+**Depends on:** Phase 4 complete ✓ (content exists; calendar design is the next step)
 **Risk:** Medium. Calendar design is a worldbuilding decision that should precede implementation.
 
 ---

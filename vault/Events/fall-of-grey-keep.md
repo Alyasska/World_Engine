@@ -4,7 +4,7 @@ type: event
 title: The Fall of the Grey Keep
 aliases:
   - The Keep's Silence
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 38, The Long Wars"

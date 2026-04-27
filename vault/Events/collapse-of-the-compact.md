@@ -5,7 +5,7 @@ title: Collapse of the Compact
 aliases:
   - The Fracture
   - End of the Council
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 3, Post-Collapse"

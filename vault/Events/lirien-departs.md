@@ -5,7 +5,7 @@ title: Lirien Leaves the Vale
 aliases:
   - The Vale-Keeper's Departure
   - End of the Waiting
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 11, Post-Collapse"

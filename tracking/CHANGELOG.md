@@ -4,6 +4,60 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-27] Phase 4 closure — UI status labels + roadmap update
+
+**Branch:** `phase-4f-content-promotion`
+
+**Changed:**
+- `web/index.html`: topbar badge `Phase 3 Preview` → `Phase 4 Preview`
+- `web/index.html`: chrono bar note `Phase 3A–3E ✓` → `Phase 4A–4F ✓`
+- `web/index.html`: status bar `World Engine — Phase 3` → `World Engine — Phase 4`
+- `PROJECT_INDEX.md`: phase status `4B complete` → `4F complete`; updated date
+- `tracking/MILESTONES.md`: Phase 4G (Story Path Layer) placeholder added; Phase 4 summary block added
+- `tracking/NEXT_ACTIONS.md`: deferred actions table updated; Phase 5 section updated
+
+---
+
+## [2026-04-27] Phase 4F — Draft vault content promotion
+
+**Branch:** `phase-4f-content-promotion`
+
+**Summary:** Promoted 17 vault entries from `draft` to `canon`. Three cross-reference gaps fixed. One character description improved. Parser and data contract untouched.
+
+**Promoted to canon:**
+
+*Stories (5):*
+- `story-beyond-the-vale` — Lirien's departure, Post-Collapse
+- `story-last-sentinel` — Siege of Stonecrown, Long Wars
+- `story-solan-and-the-pale-throne` — Solan vs the Pale King, Long Wars → Post-Collapse
+- `story-the-pale-kings-hunger` — The Pale King's arrival, fragmentary narrative
+- `story-the-wandering-grey` — Eredan the Grey's full arc, multi-era
+
+*Events (10):*
+- `event-ambush-at-ironwood`, `event-collapse-of-the-compact`, `event-fall-of-grey-keep`
+- `event-free-coast-declaration`, `event-lirien-departs`, `event-morngate-falls`
+- `event-pale-king-emerges`, `event-road-of-the-wanderer`, `event-solan-leads-charge`
+- `event-thornwood-watch-abandoned`
+
+*Character (1):* `char-the-pale-king`
+
+*Place (1):* `place-veiled-shore`
+
+**Cross-reference fixes:**
+- `event-ambush-at-ironwood`: added `story-last-sentinel` to `linkedStories` (was `[]`; story already linked back)
+- `story-the-wandering-grey`: added `event-siege-of-stonecrown` to `linkedEvents` (described in body but missing from frontmatter)
+- `char-the-pale-king`: removed self-referential `char-the-pale-king` from `linkedCharacters`; replaced with `char-kessa-of-saltmere` (the first outside witness to his emergence)
+
+**Improved, kept draft:**
+- `char-the-wanderer`: arc and description rewritten to be more evocative while preserving the intentional ambiguity about his nature
+
+**Kept draft unchanged (4 stories):**
+- `story-merchant-roads`, `story-the-first-winter`, `story-the-last-road`, `story-the-silence-after` — all have placeholder body content; will promote in a future pass once body text is written
+
+**Validation:** `node scripts/validate-vault.js` → 54 entities, 0 errors. Parser runs cleanly.
+
+---
+
 ## [2026-04-27] Phase 4E — Empty era state feedback
 
 **Branch:** `phase-4e-empty-era-state`
