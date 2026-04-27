@@ -1,25 +1,23 @@
 # Next Actions
 
-*Updated 2026-04-27 after Phase 4E completion.*  
+*Updated 2026-04-27 after Phase 4F completion.*  
 Keep this file current. The single most important action is always listed first.
 
 ---
 
 ## 1. Immediate Next Action
 
-### [CONTENT] Promote Draft Vault Entries
+### [CONTENT] Write body text for remaining draft stories
 
-Phase 4E is complete. Empty-era state now shows a clear message.
+Phase 4F promoted 17 entries. Four stories remain draft because their body text is a placeholder (`[Story content begins here]`). These are otherwise complete in frontmatter.
 
-**Priority:** Medium — content quality, no code needed.
+**Stories to write:**
+- `story-merchant-roads` — Mira Solhand carries undiplomated messages through the Long Wars
+- `story-the-first-winter` — Aran Voss inherits the Siege of Vareth on day three of his rule
+- `story-the-last-road` — Post-Collapse merchant routes, Mira Solhand returns
+- `story-the-silence-after` — the first outsider at Ashveil after the burning
 
-Current draft entities:
-- `place-veiled-shore` (draft)
-- `char-the-wanderer` (draft)
-- `event-fall-of-grey-keep` (draft)
-- All 3 stories (`story-merchant-roads`, `story-the-first-winter`, `story-the-silence-after`) are draft
-
-Review and promote to `canon` those that are lore-stable. Update cross-references and descriptions as needed. Stories especially benefit from promotion — the story detail panel (Phase 4D) will render them prominently.
+Write at minimum a `## Structure` section (like the promoted stories have) and a closing `## Notes` section. Then promote to canon.
 
 No code change. CI validates and publishes automatically.
 

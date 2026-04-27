@@ -5,7 +5,7 @@ title: The Emergence at Eastern Hold
 aliases:
   - The Pale Arrival
   - What Happened at the Hold
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 38, The Long Wars"

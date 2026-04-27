@@ -5,7 +5,7 @@ title: The Free Coast Declaration
 aliases:
   - The Harbor Refusal
   - Declaration of the Coast
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 9, Post-Collapse"

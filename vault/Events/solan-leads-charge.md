@@ -5,7 +5,7 @@ title: The Defense of Amber Fields
 aliases:
   - Solan's Charge
   - The Fieldborn Stand
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 28, The Long Wars"

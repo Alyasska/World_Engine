@@ -5,7 +5,7 @@ title: Beyond the Vale
 aliases:
   - Lirien's Road
   - The Departure
-canonState: draft
+canonState: canon
 
 era: post-collapse
 date: "Year 11–12, Post-Collapse"
@@ -40,7 +40,6 @@ tags:
   - vale
   - departure
   - post-collapse
-  - draft
 notes: ""
 ---
 

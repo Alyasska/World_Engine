@@ -5,7 +5,7 @@ title: The Pale King's Hunger
 aliases:
   - From the East
   - The Unmade Record
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 38, Long Wars to Year 1, Post-Collapse"
@@ -42,7 +42,6 @@ tags:
   - fragmentary
   - long-wars
   - post-collapse
-  - draft
 notes: ""
 ---
 

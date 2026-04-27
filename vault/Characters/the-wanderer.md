@@ -20,8 +20,8 @@ traits:
   - appears elderly
   - speaks in questions
   - never sleeps inside
-arc: "Unknown. Possibly has witnessed events across multiple eras."
-description: "An elderly figure seen in Drenford, Veiled Shore, and reportedly near Ashveil. No one knows his origins. He has been described in documents spanning at least sixty years, always looking approximately the same age."
+arc: "A figure who appears at the edges of events he should not know about, says less than he knows, and leaves before questions can be asked. Whether he is one person, many, or something else entirely is the arc — and it is not resolved."
+description: "An elderly figure documented in Drenford, Veiled Shore, and near the ruins of Ashveil across records spanning at least sixty years, always looking the same age. He exists in no census and no tax ledger — only as a bystander in other people's accounts. He was at Ashveil three days after the burning, before the record-keepers arrived. He has not been reliably seen since the Free Coast Declaration."
 
 linkedPlaces:
   - place-drenford

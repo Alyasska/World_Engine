@@ -6,7 +6,7 @@ aliases:
   - The Eastern Shadow
   - He Who Returned
   - The Unmade Lord
-canonState: draft
+canonState: canon
 
 species: unknown
 role: antagonist
@@ -41,7 +41,7 @@ flaws: []
 allegiances: []
 linkedCharacters:
   - char-solan-vorne
-  - char-the-pale-king
+  - char-kessa-of-saltmere
 
 sourceStatus: authored
 tags:

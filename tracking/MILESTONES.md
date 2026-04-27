@@ -397,7 +397,30 @@ They reflect what was actually built, what gaps exist, and what the next safe st
 
 ---
 
-## Phase 4F — Story Path Layer (Data-Driven)
+## Phase 4F — Draft Content Promotion
+**Status:** ✅ Complete
+**Branch:** `phase-4f-content-promotion`
+**Type:** Content work (vault authoring only — zero code changes)
+**Goal:** Promote stable draft vault entries to canon, fix cross-reference gaps, improve character descriptions where needed.
+
+**Checklist:**
+- [x] 5 stories promoted to canon: `beyond-the-vale`, `last-sentinel`, `solan-and-the-pale-throne`, `the-pale-kings-hunger`, `the-wandering-grey`
+- [x] 10 events promoted to canon (all 10 draft events — all fully formed)
+- [x] `char-the-pale-king` promoted; self-referential `linkedCharacters` bug fixed; `char-kessa-of-saltmere` added
+- [x] `place-veiled-shore` promoted
+- [x] `event-ambush-at-ironwood`: `linkedStories` back-link to `story-last-sentinel` added
+- [x] `story-the-wandering-grey`: `event-siege-of-stonecrown` added to `linkedEvents`
+- [x] `char-the-wanderer`: arc and description improved; remains draft
+- [x] 4 stories kept draft: `merchant-roads`, `the-first-winter`, `the-last-road`, `the-silence-after` (placeholder body text)
+- [x] `- draft` tag removed from promoted story `tags` arrays (tags is web-facing for stories)
+- [x] `node scripts/validate-vault.js` → 54 entities, 0 errors
+- [x] Parser, data contract, CI workflow, and all web files untouched
+
+**Visual Confirmation (after CI regenerates JSON):** Character and story detail panels for canon entries will now show complete, well-linked content. The Pale King's character panel will show Kessa of Saltmere in linked characters. The Wandering Grey story will link to the Siege of Stonecrown.
+
+---
+
+## Phase 4G — Story Path Layer (Data-Driven)
 **Status:** 🔲 Not started
 **Type:** Engineering work (medium — engine.js + index.html)
 **Goal:** Render story paths as a dynamic map overlay driven by story data, replacing the hardcoded SVG path in `index.html`.

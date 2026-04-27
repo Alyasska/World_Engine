@@ -5,7 +5,7 @@ title: Solan and the Pale Throne
 aliases:
   - The Fieldborn's War
   - Against the Pale
-canonState: draft
+canonState: canon
 
 era: long-wars
 date: "Year 28–1 PC, Long Wars to Post-Collapse"
@@ -48,7 +48,6 @@ tags:
   - morngate
   - long-wars
   - post-collapse
-  - draft
 notes: ""
 ---
 
