@@ -4,6 +4,38 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-27] Phase 4D — Character and story detail panels
+
+**Branch:** `phase-4d-character-story-panels`
+
+**Changed:**
+- `web/engine.js`:
+  - `state.detailMode` — extended to support `'character'` and `'story'` (was `'place'` | `'event'` | `null`)
+  - `showCharacterDetail(charId)` — new function: renders character panel with description, traits, arc, faction, linked places (clickable), linked events (clickable), linked stories (clickable), `?author=1` VS Code link
+  - `showStoryDetail(storyId)` — new function: renders story panel with logline, description, era badge, date, linked places (clickable), linked events (clickable), linked characters (clickable), `?author=1` VS Code link
+  - `showPlaceDetail()` — added click listeners for `[data-char-id]` and `[data-story-id]` items in the characters and stories sections
+  - `showEventDetail()` — added `data-char-id` attribute + role sub-label to participant items; added linked-stories section with `data-story-id` items; added click listeners for chars and stories; removed now-unused `.clickable` class override (place items use `data-place-id` cursor rule)
+  - `eraLabel(eraId)` — new helper returning display name for era slugs; replaces inline ternary chain in `showEventDetail`
+  - `refreshOpenPanel()` — comment updated; behavior unchanged (already no-ops for character/story modes)
+- `web/style.css`:
+  - `.badge-character` — blue-gray type badge for character panels
+  - `.badge-story` — green type badge for story panels (matches free-coast palette)
+  - `.detail-link-item[data-char-id]` — pointer cursor + blue-gray hover highlight
+  - `.detail-link-item[data-story-id]` — pointer cursor + green hover highlight
+  - `.detail-link-item[data-place-id]` — pointer cursor + gold hover highlight (consistent with event items)
+
+**Behaviour:**
+- Clicking a character in any detail panel opens the character detail; back button returns to the place panel (or clears if no place was selected)
+- Clicking a story in any detail panel opens the story detail; same back navigation
+- All linked items in character and story panels are clickable (places → place detail, events → event detail, characters/stories → respective detail)
+- `?author=1` mode shows VS Code vault links for characters and stories (extends Phase 3E authoring links)
+- Era dragging, political overlays, marker dimming/glow, live panel refresh, event dot clicks — all intact
+- `refreshOpenPanel()` no-ops for character/story modes (no era-sensitive content in those panels)
+
+**No-change:** Parser untouched. Data contract untouched. Vault content untouched. CI workflow untouched. No new dependencies.
+
+---
+
 ## [2026-04-25] Phase 4C — Post-Collapse content seed
 
 **Branch:** `phase-4c-post-collapse-content-seed`

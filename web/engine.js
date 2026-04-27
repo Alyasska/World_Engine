@@ -22,7 +22,7 @@ const state = {
   panStartY: 0,
   activeLayers: new Set(['geography', 'political', 'narrative']),
   selectedId: null,
-  detailMode: null,   // 'place' | 'event' | null — tracks which panel is visible
+  detailMode: null,   // 'place' | 'event' | 'character' | 'story' | null
   activeEra: 'long-wars',
   data: { places: [], characters: [], events: [], stories: [] }
 };
@@ -478,6 +478,12 @@ function showPlaceDetail(placeId) {
   panelDetail.querySelectorAll('[data-event-id]').forEach(el => {
     el.addEventListener('click', () => showEventDetail(el.dataset.eventId));
   });
+  panelDetail.querySelectorAll('[data-char-id]').forEach(el => {
+    el.addEventListener('click', () => showCharacterDetail(el.dataset.charId));
+  });
+  panelDetail.querySelectorAll('[data-story-id]').forEach(el => {
+    el.addEventListener('click', () => showStoryDetail(el.dataset.storyId));
+  });
 }
 
 function showEventDetail(eventId) {
@@ -491,6 +497,9 @@ function showEventDetail(eventId) {
   const linkedChars  = ev.participants
     ? state.data.characters.filter(c => ev.participants.includes(c.id))
     : [];
+  const linkedStories = ev.linkedStories
+    ? state.data.stories.filter(s => ev.linkedStories.includes(s.id))
+    : [];
 
   const canonBadge = canonBadgeHTML(ev.canonState);
 
@@ -502,7 +511,7 @@ function showEventDetail(eventId) {
         <span class="detail-type-badge badge-event">${ev.eventType}</span>
         ${canonBadge}
       </div>
-      <p class="detail-era">${ev.date} · ${ev.era === 'age-founding' ? 'Age of Founding' : ev.era === 'long-wars' ? 'The Long Wars' : 'Post-Collapse'}</p>
+      <p class="detail-era">${ev.date} · ${eraLabel(ev.era)}</p>
       ${authoringLinkHTML(ev)}
     </div>
     <p class="detail-description">${ev.description}</p>
@@ -520,9 +529,10 @@ function showEventDetail(eventId) {
       <h3 class="detail-section-heading">Participants</h3>
       <ul class="detail-link-list">
         ${linkedChars.map(c => `
-          <li class="detail-link-item">
+          <li class="detail-link-item" data-char-id="${c.id}">
             <span class="link-icon">👤</span>
             <span class="link-name">${c.title}</span>
+            <span class="link-sub">${c.role}</span>
           </li>`).join('')}
       </ul>
     </div>` : ''}
@@ -532,9 +542,22 @@ function showEventDetail(eventId) {
       <h3 class="detail-section-heading">Locations</h3>
       <ul class="detail-link-list">
         ${linkedPlaces.map(p => `
-          <li class="detail-link-item clickable" data-place-id="${p.id}">
+          <li class="detail-link-item" data-place-id="${p.id}">
             <span class="link-icon">📍</span>
             <span class="link-name">${p.title}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedStories.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Stories</h3>
+      <ul class="detail-link-list">
+        ${linkedStories.map(s => `
+          <li class="detail-link-item" data-story-id="${s.id}">
+            <span class="link-icon">📖</span>
+            <span class="link-name">${s.title}</span>
+            <span class="link-sub muted">${s.logline || ''}</span>
           </li>`).join('')}
       </ul>
     </div>` : ''}
@@ -546,8 +569,13 @@ function showEventDetail(eventId) {
   });
 
   panelDetail.querySelectorAll('[data-place-id]').forEach(el => {
-    el.style.cursor = 'pointer';
     el.addEventListener('click', () => showPlaceDetail(el.dataset.placeId));
+  });
+  panelDetail.querySelectorAll('[data-char-id]').forEach(el => {
+    el.addEventListener('click', () => showCharacterDetail(el.dataset.charId));
+  });
+  panelDetail.querySelectorAll('[data-story-id]').forEach(el => {
+    el.addEventListener('click', () => showStoryDetail(el.dataset.storyId));
   });
 
   panelDetail.hidden  = false;
@@ -560,6 +588,211 @@ function clearDetail() {
   updateMarkerSelection(null);
   panelDetail.hidden  = true;
   panelWelcome.hidden = false;
+}
+
+function showCharacterDetail(charId) {
+  const char = state.data.characters.find(c => c.id === charId);
+  if (!char) return;
+  state.detailMode = 'character';
+  // state.selectedId stays set so back button returns to the linked place
+
+  const linkedPlaces = char.linkedPlaces
+    ? state.data.places.filter(p => char.linkedPlaces.includes(p.id))
+    : [];
+  const linkedEvents = char.linkedEvents
+    ? state.data.events.filter(e => char.linkedEvents.includes(e.id))
+    : [];
+  const linkedStories = char.linkedStories
+    ? state.data.stories.filter(s => char.linkedStories.includes(s.id))
+    : [];
+
+  const canonBadge = canonBadgeHTML(char.canonState);
+  const factionLabel = char.faction
+    ? `<span class="detail-faction" style="color:${FACTION_COLORS[char.faction]}">${factionName(char.faction)}</span>`
+    : '';
+
+  panelDetail.innerHTML = `
+    <button class="detail-back" id="detailBack">${state.selectedId ? '← Back to place' : '← Back'}</button>
+    <div class="detail-header">
+      <h2 class="detail-title">${char.title}</h2>
+      <div class="detail-meta">
+        <span class="detail-type-badge badge-character">${char.role || 'character'}</span>
+        ${canonBadge}
+      </div>
+      ${factionLabel}
+      ${authoringLinkHTML(char)}
+    </div>
+    ${char.description ? `<p class="detail-description">${char.description}</p>` : ''}
+
+    ${char.traits?.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Traits</h3>
+      <p class="detail-description muted">${char.traits.join(' · ')}</p>
+    </div>` : ''}
+
+    ${char.arc ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Arc</h3>
+      <p class="detail-description">${char.arc}</p>
+    </div>` : ''}
+
+    ${linkedPlaces.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Places</h3>
+      <ul class="detail-link-list">
+        ${linkedPlaces.map(p => `
+          <li class="detail-link-item" data-place-id="${p.id}">
+            <span class="link-icon">📍</span>
+            <span class="link-name">${p.title}</span>
+            <span class="link-sub">${placeTypeLabel(p.placeType)}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedEvents.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Events</h3>
+      <ul class="detail-link-list">
+        ${linkedEvents.map(ev => `
+          <li class="detail-link-item" data-event-id="${ev.id}">
+            <span class="link-icon">⚡</span>
+            <span class="link-name">${ev.title}</span>
+            <span class="link-sub">${ev.date}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedStories.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Stories</h3>
+      <ul class="detail-link-list">
+        ${linkedStories.map(s => `
+          <li class="detail-link-item" data-story-id="${s.id}">
+            <span class="link-icon">📖</span>
+            <span class="link-name">${s.title}</span>
+            <span class="link-sub muted">${s.logline || ''}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${char.aliases?.length ? `
+    <div class="detail-section detail-aliases">
+      <span class="muted">Also known as: </span>${char.aliases.join(' · ')}
+    </div>` : ''}
+  `;
+
+  panelDetail.hidden  = false;
+  panelWelcome.hidden = true;
+  panelDetail.scrollTop = 0;
+
+  document.getElementById('detailBack')?.addEventListener('click', () => {
+    if (state.selectedId) showPlaceDetail(state.selectedId);
+    else clearDetail();
+  });
+  panelDetail.querySelectorAll('[data-place-id]').forEach(el => {
+    el.addEventListener('click', () => showPlaceDetail(el.dataset.placeId));
+  });
+  panelDetail.querySelectorAll('[data-event-id]').forEach(el => {
+    el.addEventListener('click', () => showEventDetail(el.dataset.eventId));
+  });
+  panelDetail.querySelectorAll('[data-story-id]').forEach(el => {
+    el.addEventListener('click', () => showStoryDetail(el.dataset.storyId));
+  });
+}
+
+function showStoryDetail(storyId) {
+  const story = state.data.stories.find(s => s.id === storyId);
+  if (!story) return;
+  state.detailMode = 'story';
+
+  const linkedPlaces = story.linkedPlaces
+    ? state.data.places.filter(p => story.linkedPlaces.includes(p.id))
+    : [];
+  const linkedEvents = story.linkedEvents
+    ? state.data.events.filter(e => story.linkedEvents.includes(e.id))
+    : [];
+  const linkedChars = story.linkedCharacters
+    ? state.data.characters.filter(c => story.linkedCharacters.includes(c.id))
+    : [];
+
+  const canonBadge = canonBadgeHTML(story.canonState);
+
+  panelDetail.innerHTML = `
+    <button class="detail-back" id="detailBack">${state.selectedId ? '← Back to place' : '← Back'}</button>
+    <div class="detail-header">
+      <h2 class="detail-title">${story.title}</h2>
+      <div class="detail-meta">
+        <span class="detail-type-badge badge-story">${eraLabel(story.era)}</span>
+        ${canonBadge}
+      </div>
+      ${story.date ? `<p class="detail-era">${story.date}</p>` : ''}
+      ${authoringLinkHTML(story)}
+    </div>
+    ${story.logline ? `<p class="detail-description" style="font-style:italic">${story.logline}</p>` : ''}
+    ${story.description ? `<p class="detail-description">${story.description}</p>` : ''}
+
+    ${linkedPlaces.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Places</h3>
+      <ul class="detail-link-list">
+        ${linkedPlaces.map(p => `
+          <li class="detail-link-item" data-place-id="${p.id}">
+            <span class="link-icon">📍</span>
+            <span class="link-name">${p.title}</span>
+            <span class="link-sub">${placeTypeLabel(p.placeType)}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedEvents.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Events</h3>
+      <ul class="detail-link-list">
+        ${linkedEvents.map(ev => `
+          <li class="detail-link-item" data-event-id="${ev.id}">
+            <span class="link-icon">⚡</span>
+            <span class="link-name">${ev.title}</span>
+            <span class="link-sub">${ev.date}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${linkedChars.length ? `
+    <div class="detail-section">
+      <h3 class="detail-section-heading">Characters</h3>
+      <ul class="detail-link-list">
+        ${linkedChars.map(c => `
+          <li class="detail-link-item" data-char-id="${c.id}">
+            <span class="link-icon">👤</span>
+            <span class="link-name">${c.title}</span>
+            <span class="link-sub">${c.role}</span>
+          </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${story.aliases?.length ? `
+    <div class="detail-section detail-aliases">
+      <span class="muted">Also known as: </span>${story.aliases.join(' · ')}
+    </div>` : ''}
+  `;
+
+  panelDetail.hidden  = false;
+  panelWelcome.hidden = true;
+  panelDetail.scrollTop = 0;
+
+  document.getElementById('detailBack')?.addEventListener('click', () => {
+    if (state.selectedId) showPlaceDetail(state.selectedId);
+    else clearDetail();
+  });
+  panelDetail.querySelectorAll('[data-place-id]').forEach(el => {
+    el.addEventListener('click', () => showPlaceDetail(el.dataset.placeId));
+  });
+  panelDetail.querySelectorAll('[data-event-id]').forEach(el => {
+    el.addEventListener('click', () => showEventDetail(el.dataset.eventId));
+  });
+  panelDetail.querySelectorAll('[data-char-id]').forEach(el => {
+    el.addEventListener('click', () => showCharacterDetail(el.dataset.charId));
+  });
 }
 
 // ══════════════════════════════════════════════════════════
@@ -645,7 +878,7 @@ function applyEra(eraId) {
 }
 
 // Re-render the place detail panel so era badges reflect the current era.
-// No-ops if the panel is closed or showing an event detail.
+// No-ops if the panel is closed or showing event, character, or story details.
 function refreshOpenPanel() {
   if (state.detailMode === 'place' && state.selectedId) {
     showPlaceDetail(state.selectedId);
@@ -763,6 +996,10 @@ function setupChronoEvents() {
 // ══════════════════════════════════════════════════════════
 function placeTypeLabel(t) {
   return { city: 'City', fortress: 'Fortress', town: 'Town', ruins: 'Ruins', village: 'Village', landmark: 'Landmark' }[t] || t;
+}
+
+function eraLabel(eraId) {
+  return { 'age-founding': 'Age of Founding', 'long-wars': 'The Long Wars', 'post-collapse': 'Post-Collapse' }[eraId] || eraId || '';
 }
 
 function factionName(f) {
