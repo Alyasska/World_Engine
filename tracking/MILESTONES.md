@@ -420,6 +420,26 @@ They reflect what was actually built, what gaps exist, and what the next safe st
 
 ---
 
+## Phase 4 — Complete Summary
+**Status:** ✅ Phase 4 fully complete as of 2026-04-27
+
+| Sub-phase | Description | Branch |
+|---|---|---|
+| 4A | CI auto-parser | `phase-4a-ci-auto-parser` |
+| 4B | Vault data validation | `phase-4b-vault-validation` |
+| 4C | Post-Collapse content seed | `phase-4c-post-collapse-content-seed` |
+| 4D | Character + story detail panels | `phase-4d-character-story-panels` |
+| 4E | Empty era state feedback | `phase-4e-empty-era-state` |
+| 4F | Draft content promotion + Phase 4 closure | `phase-4f-content-promotion` |
+
+**Vault inventory at Phase 4 close:**
+- 16 places (15 canon, 1 draft)
+- 10 characters (8 canon, 2 draft)
+- 19 events (19 canon, 0 draft)
+- 9 stories (5 canon, 4 draft)
+
+---
+
 ## Phase 4G — Story Path Layer (Data-Driven)
 **Status:** 🔲 Not started
 **Type:** Engineering work (medium — engine.js + index.html)
@@ -432,7 +452,7 @@ There is currently a hardcoded SVG path for "Merchant Roads" drawn in `index.htm
 
 **What must not change:** No new vault fields needed. `linkedPlaces` already provides the place IDs; `mapRef.x/y` provides coordinates.
 
-**Risk:** Medium. Requires coordinate interpolation and SVG path generation. Defer until 4C and 4D are complete.
+**Risk:** Medium. Requires coordinate interpolation and SVG path generation.
 
 ---
 
@@ -441,7 +461,7 @@ There is currently a hardcoded SVG path for "Merchant Roads" drawn in `index.htm
 **Type:** Engineering + content design
 **Goal:** Richer chronology display: era dates/in-world years, event count per era, era tooltips. Define the canonical in-world calendar system.
 
-**Depends on:** Phase 4C (content must exist before calendar design makes sense)
+**Depends on:** Phase 4 complete ✓ (content exists; calendar design is the next step)
 **Risk:** Medium. Calendar design is a worldbuilding decision that should precede implementation.
 
 ---

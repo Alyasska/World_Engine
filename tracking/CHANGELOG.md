@@ -4,6 +4,20 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-27] Phase 4 closure — UI status labels + roadmap update
+
+**Branch:** `phase-4f-content-promotion`
+
+**Changed:**
+- `web/index.html`: topbar badge `Phase 3 Preview` → `Phase 4 Preview`
+- `web/index.html`: chrono bar note `Phase 3A–3E ✓` → `Phase 4A–4F ✓`
+- `web/index.html`: status bar `World Engine — Phase 3` → `World Engine — Phase 4`
+- `PROJECT_INDEX.md`: phase status `4B complete` → `4F complete`; updated date
+- `tracking/MILESTONES.md`: Phase 4G (Story Path Layer) placeholder added; Phase 4 summary block added
+- `tracking/NEXT_ACTIONS.md`: deferred actions table updated; Phase 5 section updated
+
+---
+
 ## [2026-04-27] Phase 4F — Draft vault content promotion
 
 **Branch:** `phase-4f-content-promotion`
