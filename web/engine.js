@@ -450,6 +450,7 @@ function showPlaceDetail(placeId) {
             ${ev.era === state.activeEra ? '<span class="era-badge-active">now</span>' : ''}
           </li>`).join('')}
       </ul>
+      ${linkedEvts.every(ev => ev.era !== state.activeEra) ? `<p class="place-era-empty-note">None of these events occurred in the ${eraLabel(state.activeEra)}.</p>` : ''}
     </div>` : ''}
 
     ${linkedStories.length ? `
@@ -861,6 +862,14 @@ function eraAtPosition(fraction) {
   return ERAS.find(e => fraction >= e.start && fraction < e.end) || ERAS[ERAS.length - 1];
 }
 
+function getEventsForEra(eraId) {
+  return state.data.events.filter(ev => ev.era === eraId);
+}
+
+function eraHasEvents(eraId) {
+  return getEventsForEra(eraId).length > 0;
+}
+
 // Update era display, band highlights, dot dimming, map overlays, marker emphasis,
 // and refresh the open detail panel if it is showing a place.
 function applyEra(eraId) {
@@ -875,6 +884,8 @@ function applyEra(eraId) {
   applyEraOverlays(eraId);
   applyNarrativeFilter(eraId);
   refreshOpenPanel();
+  const eraEmptyMsg = document.getElementById('eraEmptyMsg');
+  if (eraEmptyMsg) eraEmptyMsg.hidden = eraHasEvents(eraId);
 }
 
 // Re-render the place detail panel so era badges reflect the current era.

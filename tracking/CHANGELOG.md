@@ -4,6 +4,29 @@ Format: `[YYYY-MM-DD] Phase N — Description`
 
 ---
 
+## [2026-04-27] Phase 4E — Empty era state feedback
+
+**Branch:** `phase-4e-empty-era-state`
+
+**Changed:**
+- `web/index.html`:
+  - Added `<span class="chrono-empty-era" id="eraEmptyMsg" hidden>` to `.chrono-left` in the chronology bar
+- `web/engine.js`:
+  - `getEventsForEra(eraId)` — new helper returning all events whose `era` matches the given id
+  - `eraHasEvents(eraId)` — new helper returning boolean; used by `applyEra` to toggle the message
+  - `applyEra()` — shows/hides `#eraEmptyMsg` based on whether the selected era has any events
+  - `showPlaceDetail()` events section — adds a subtle note "None of these events occurred in the [era]." when a place has linked events but none match the active era
+- `web/style.css`:
+  - `.chrono-empty-era` — small muted italic label in the chrono-left column (no layout shift)
+  - `.place-era-empty-note` — small muted italic note inside the place events section
+
+**Behaviour:**
+- When no events exist for the selected era, `#eraEmptyMsg` becomes visible in the chronology bar beside the era name
+- When a place panel is open and none of its linked events fall in the active era, a subtle note appears below the events list
+- All behaviour is data-driven; no hardcoded era IDs outside of `ERAS` array
+
+---
+
 ## [2026-04-27] Phase 4D — Character and story detail panels
 
 **Branch:** `phase-4d-character-story-panels`
