@@ -1,50 +1,15 @@
 # Next Actions
 
-*Updated 2026-04-27 after Phase 4D completion.*  
+*Updated 2026-04-27 after Phase 4E completion.*  
 Keep this file current. The single most important action is always listed first.
 
 ---
 
 ## 1. Immediate Next Action
 
-**[ENGINEERING] Phase 4E — Empty Era State Feedback**
-
-Phase 4D is complete. Characters and stories are now clickable in all detail panels.
-
-The next improvement is a small UX polish: when the chronology cursor is in an era with no events (Post-Collapse currently has 3 events so this applies only to custom future eras, but the silent neutral-marker state is still confusing to first-time users), show a brief contextual message. This is low-effort, high-clarity-value.
-
-**What to implement:**
-- Detect zero-event eras in `applyNarrativeFilter` or `applyEra`
-- Show a subtle "No events recorded in this era" message (in era display area or welcome panel)
-- Remove the message when cursor moves to a populated era
-
-**Branch:** `phase-4e-empty-era-feedback`  
-**Files:** `web/engine.js`, `web/style.css` (small changes only)  
-**No:** data contract change, new JSON fields, parser change.
-
----
-
-## 2. Next 3 Safe Actions
-
-### [ENGINEERING] Phase 4E — Empty Era State Feedback
-
-**Priority:** Medium — small fix, high clarity value for first-time users.
-
-When the cursor is in an era with no events, all markers return to neutral silently. A one-line contextual message resolves user confusion.
-
-- Detect zero-event eras in `applyNarrativeFilter` or `applyEra`
-- Show "No events recorded in this era" as a subtle inline message
-- Remove the message when cursor moves to a populated era
-- No layout shift
-
-Files: `web/engine.js`, `web/style.css` (small).  
-No data contract change. No new JSON fields.
-
-**Branch:** `phase-4e-empty-era-feedback`
-
----
-
 ### [CONTENT] Promote Draft Vault Entries
+
+Phase 4E is complete. Empty-era state now shows a clear message.
 
 **Priority:** Medium — content quality, no code needed.
 
