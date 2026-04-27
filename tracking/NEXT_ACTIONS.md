@@ -1,59 +1,41 @@
 # Next Actions
 
-*Updated 2026-04-25 after Phase 4C completion.*  
+*Updated 2026-04-27 after Phase 4D completion.*  
 Keep this file current. The single most important action is always listed first.
 
 ---
 
 ## 1. Immediate Next Action
 
-**[ENGINEERING] Phase 4D — Character and Story Detail Panels**
+**[ENGINEERING] Phase 4E — Empty Era State Feedback**
 
-Phase 4C is complete. The Post-Collapse era now has 3 events and 1 story. The chronology scrubber is meaningful across all three eras.
+Phase 4D is complete. Characters and stories are now clickable in all detail panels.
 
-The next highest-value improvement is character and story detail panels. Currently, characters and stories appear in place detail panels as list items but clicking them does nothing — no `showCharacterDetail` or `showStoryDetail` function exists in `engine.js`.
+The next improvement is a small UX polish: when the chronology cursor is in an era with no events (Post-Collapse currently has 3 events so this applies only to custom future eras, but the silent neutral-marker state is still confusing to first-time users), show a brief contextual message. This is low-effort, high-clarity-value.
 
 **What to implement:**
-- `showCharacterDetail(charId)` — description, role, faction, traits, arc, linked places/events/stories
-- `showStoryDetail(storyId)` — logline, description, era, primary place (clickable → selects marker), linked events/characters
-- Click listeners on `[data-char-id]` and `[data-story-id]` items in `showPlaceDetail`
-- Back button returns to the place panel that linked here
+- Detect zero-event eras in `applyNarrativeFilter` or `applyEra`
+- Show a subtle "No events recorded in this era" message (in era display area or welcome panel)
+- Remove the message when cursor moves to a populated era
 
-**Branch:** `phase-4d-character-story-panels`  
-**Files:** `web/engine.js` only (plus minor `web/style.css` if needed)  
-**No:** schema change, new dependencies, parser change, CI change.
+**Branch:** `phase-4e-empty-era-feedback`  
+**Files:** `web/engine.js`, `web/style.css` (small changes only)  
+**No:** data contract change, new JSON fields, parser change.
 
 ---
 
 ## 2. Next 3 Safe Actions
 
-### [ENGINEERING] Phase 4D — Character and Story Detail Panels
-
-**Priority:** High — this is the most visible UX gap.
-
-Characters and stories appear as list items in place detail panels but clicking them does nothing. `engine.js` renders them with no click listeners.
-
-- Add `showCharacterDetail(charId)` — description, role, faction, traits, arc, linked places/events/stories
-- Add `showStoryDetail(storyId)` — logline, description, era, linked events/characters/places (primary place clickable → selects marker on map)
-- Add click listeners in `showPlaceDetail` for `[data-char-id]` and `[data-story-id]` items
-- Back navigation: ← returns to the place panel that linked here
-
-Files: `web/engine.js` only (plus minor `web/style.css` if needed).  
-No schema change. No new dependencies. No parser change.
-
-**Branch:** `phase-4d-character-story-panels`
-
----
-
 ### [ENGINEERING] Phase 4E — Empty Era State Feedback
 
-**Priority:** Medium — small fix, high clarity value.
+**Priority:** Medium — small fix, high clarity value for first-time users.
 
-When the cursor is in an era with no events, all markers return to neutral silently. Users may think the feature is broken. A one-line contextual message resolves this.
+When the cursor is in an era with no events, all markers return to neutral silently. A one-line contextual message resolves user confusion.
 
 - Detect zero-event eras in `applyNarrativeFilter` or `applyEra`
-- Show a subtle "No events recorded in this era" message (in era display, welcome panel, or chronology hint)
+- Show "No events recorded in this era" as a subtle inline message
 - Remove the message when cursor moves to a populated era
+- No layout shift
 
 Files: `web/engine.js`, `web/style.css` (small).  
 No data contract change. No new JSON fields.

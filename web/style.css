@@ -554,7 +554,9 @@ html, body {
 .badge-ruins    { background: rgba(140,80,60,0.12);   color: #b87868; border: 1px solid rgba(140,80,60,0.2); }
 .badge-village  { background: rgba(100,120,80,0.1);   color: #80a070; border: 1px solid rgba(100,120,80,0.2); }
 .badge-landmark { background: rgba(100,100,140,0.1);  color: #9090b8; border: 1px solid rgba(100,100,140,0.2); }
-.badge-event    { background: rgba(160,100,60,0.12);  color: #c09060; border: 1px solid rgba(160,100,60,0.2); }
+.badge-event     { background: rgba(160,100,60,0.12);  color: #c09060; border: 1px solid rgba(160,100,60,0.2); }
+.badge-character { background: rgba(90,120,180,0.12);  color: #8aabcc; border: 1px solid rgba(90,120,180,0.25); }
+.badge-story     { background: rgba(80,140,110,0.12);  color: #78b898; border: 1px solid rgba(80,140,110,0.22); }
 
 .canon-badge  { font-size: 10px; font-family: var(--font-mono); padding: 2px 6px; border-radius: 2px; background: rgba(106,154,90,0.1); color: #80b878; border: 1px solid rgba(106,154,90,0.2); }
 .draft-badge  { font-size: 10px; font-family: var(--font-mono); padding: 2px 6px; border-radius: 2px; background: rgba(150,140,80,0.1); color: #a8a060; border: 1px solid rgba(150,140,80,0.2); }
@@ -621,6 +623,12 @@ html, body {
 
 .detail-link-item[data-event-id] { cursor: pointer; }
 .detail-link-item[data-event-id]:hover { background: rgba(200,169,110,0.05); border-color: rgba(200,169,110,0.15); }
+.detail-link-item[data-char-id] { cursor: pointer; }
+.detail-link-item[data-char-id]:hover { background: rgba(90,120,180,0.06); border-color: rgba(90,120,180,0.2); }
+.detail-link-item[data-story-id] { cursor: pointer; }
+.detail-link-item[data-story-id]:hover { background: rgba(80,140,110,0.06); border-color: rgba(80,140,110,0.2); }
+.detail-link-item[data-place-id] { cursor: pointer; }
+.detail-link-item[data-place-id]:hover { background: rgba(200,169,110,0.04); border-color: rgba(200,169,110,0.12); }
 
 /* Phase 3C: active-era highlight in the detail panel event list */
 .detail-link-item.era-current {

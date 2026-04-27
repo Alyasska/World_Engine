@@ -354,30 +354,27 @@ They reflect what was actually built, what gaps exist, and what the next safe st
 ---
 
 ## Phase 4D — Character and Story Detail Panels
-**Status:** 🔲 Not started
-**Type:** Engineering work (engine.js only)
-**Goal:** Clicking a character or story in a place detail panel opens a detail view for that entity. Currently these items are listed but clicking them does nothing.
+**Status:** ✅ Complete
+**Branch:** `phase-4d-character-story-panels`
+**Type:** Engineering work (engine.js + style.css only)
+**Goal:** Characters and stories are now first-class clickable entities in the detail panel, matching places and events.
 
-**Why it matters:**  
-`showPlaceDetail` renders characters and stories as list items with no click listeners attached. This is the most visible UX gap in the current app. The entity data is already in the generated JSON — no schema change is needed.
+**Checklist:**
+- [x] `showCharacterDetail(charId)` — description, role badge, faction, traits, arc, linked places/events/stories (all clickable)
+- [x] `showStoryDetail(storyId)` — logline (italic), description, era badge, date, linked places/events/characters (all clickable)
+- [x] `eraLabel(eraId)` — new helper; replaces inline ternary chain in `showEventDetail`
+- [x] `showPlaceDetail()` — click listeners wired for `[data-char-id]` and `[data-story-id]`
+- [x] `showEventDetail()` — participants now have `data-char-id` + role; linked stories section added with `data-story-id`; click listeners wired for chars and stories
+- [x] `state.detailMode` — extended to `'character'` | `'story'`
+- [x] `refreshOpenPanel()` — already no-ops for character/story; comment updated
+- [x] Back button — returns to place (`state.selectedId`) or clears if no place was selected
+- [x] Authoring links — `?author=1` shows VS Code vault links for characters and stories (extends Phase 3E)
+- [x] `.badge-character`, `.badge-story` — new type badge styles
+- [x] `.detail-link-item[data-char-id/story-id/place-id]` — pointer cursor + per-entity-type hover highlight
+- [x] All Phase 3A–3E and Phase 4A–4C features intact
+- [x] No parser change. No data contract change. No vault content change. No new dependencies.
 
-**What it touches:**
-- `web/engine.js` — add `showCharacterDetail(charId)` and `showStoryDetail(storyId)`; add click listeners in `showPlaceDetail`; extend back-navigation
-- `web/style.css` — minor additions for any new panel layout needs
-
-**Character detail should show:** title, role, faction, description, traits, arc, linked places (clickable), linked events, linked stories  
-**Story detail should show:** title, logline, description, era, primary place (clickable to select marker), linked events, linked characters
-
-**What must not change:** No new dependencies. No schema change. No parser change. No CI change.
-
-**Acceptance criteria:**
-- Clicking a character in a place panel → character detail opens
-- Clicking a story in a place panel → story detail opens
-- Back button in character/story detail returns to the place panel
-- Clicking a linked place in a character detail → that place detail opens and marker selects on map
-- All Phase 3 and 4A/4B features intact
-
-**Risk:** Low. Engine.js only. No data contract impact.
+**Visual Confirmation:** Open any place marker → click a character in the Characters section → character detail opens (role badge, traits, arc, linked entities all clickable) → click "← Back to place" → place detail restores. Repeat for stories. In event detail, click a participant or linked story. In `?author=1` mode, Open in VS Code link appears for characters and stories.
 
 ---
 
