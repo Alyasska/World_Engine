@@ -378,24 +378,22 @@ They reflect what was actually built, what gaps exist, and what the next safe st
 
 ---
 
-## Phase 4E — Empty Era State Feedback
-**Status:** 🔲 Not started
-**Type:** Engineering work (small — engine.js + style.css)
-**Goal:** When the active era has no events, show a subtle informational state so users understand the era is intentionally sparse, not broken.
+### Phase 4E — Empty Era State Feedback
 
-**Why it matters:**  
-Post-Collapse currently transitions markers to neutral silently. A first-time user may think the map stopped working. A single line of contextual text ("No recorded events in this era") in the detail panel welcome state or chronology display resolves the confusion.
+**Status:** Complete  
+**Type:** Engineering, small UI feedback layer  
+**Risk:** Low  
 
-**What it touches:** `web/engine.js` (detect zero-event eras in `applyNarrativeFilter` or `applyEra`), `web/style.css` (optional style for the empty state message)
+**Goal:** Make the chronology system explain empty eras instead of silently showing a neutral state.
 
-**What must not change:** No data contract change. No new JSON fields. No parser change.
+**Proof of completion:**
+- Empty-era feedback is data-driven through `getEventsForEra()` and `eraHasEvents()`.
+- `#eraEmptyMsg` appears when the selected era has zero recorded events.
+- Place detail panels can show a subtle note when the selected place has linked events, but none occurred in the active era.
+- Existing chronology drag, era overlays, marker dimming/glow, event dots, and detail panels remain unchanged.
+- Parser, data contract, generated JSON structure, and vault content were untouched.
 
-**Acceptance criteria:**
-- Drag cursor to an era with 0 events → visible, non-alarming feedback indicates the sparse state
-- Drag back to a populated era → feedback disappears
-- No layout shift
-
-**Risk:** Low.
+**Files touched:** `web/engine.js`, `web/style.css`, `web/index.html`, tracking files.
 
 ---
 
