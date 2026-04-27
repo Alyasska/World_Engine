@@ -69,7 +69,8 @@ const WEB_FIELDS = {
 
 // ─── Minimal YAML frontmatter parser ──────────────────────────────────────────
 
-function parseFrontmatter(content) {
+function parseFrontmatter(raw) {
+  const content = raw.replace(/\r\n/g, '\n');  // CRLF-safe
   if (!content.startsWith('---\n')) return null;
   const end = content.indexOf('\n---', 4);
   if (end === -1) return null;

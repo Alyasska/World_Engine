@@ -34,6 +34,40 @@
     ]
   },
   {
+    "id": "char-durn-stoneshield",
+    "type": "character",
+    "title": "Durn Stoneshield",
+    "aliases": [
+      "Commander of Stonecrown",
+      "The Stone Commander"
+    ],
+    "canonState": "canon",
+    "role": "supporting",
+    "faction": "northern-reach",
+    "species": "human",
+    "birthPlace": "place-stonecrown",
+    "currentPlace": "place-stonecrown",
+    "traits": [
+      "speaks in imperatives",
+      "knows every stone in his fortress personally",
+      "trusts engineers more than generals",
+      "carries the weight of the siege without drama"
+    ],
+    "arc": "A garrison commander who holds an impossible position by refusing to consider that it is impossible — and must decide whether that approach can survive a world where the old certainties are gone.",
+    "description": "Commander of the Stonecrown garrison and the only person who has successfully defended it against a full siege assault. Third-generation soldier; his grandfather helped cut the lower chambers. He views Stonecrown not as a posting but as a responsibility that happens to also be a home.",
+    "linkedPlaces": [
+      "place-stonecrown",
+      "place-eastern-hold"
+    ],
+    "linkedEvents": [
+      "event-siege-of-stonecrown",
+      "event-ambush-at-ironwood"
+    ],
+    "linkedStories": [
+      "story-last-sentinel"
+    ]
+  },
+  {
     "id": "char-elder-council",
     "type": "character",
     "title": "The Compact Council",
@@ -64,6 +98,114 @@
     ],
     "linkedStories": [
       "story-merchant-roads"
+    ]
+  },
+  {
+    "id": "char-eredan-the-grey",
+    "type": "character",
+    "title": "Eredan the Grey",
+    "aliases": [
+      "The Grey Wanderer",
+      "Eredan of Nowhere",
+      "Old Grey"
+    ],
+    "canonState": "canon",
+    "role": "supporting",
+    "faction": null,
+    "species": "unknown",
+    "birthPlace": null,
+    "currentPlace": "place-ironwood-hall",
+    "traits": [
+      "appears ancient but ageless",
+      "speaks seldom and precisely",
+      "arrives at the right moment, never early",
+      "carries no weapon anyone has seen him use"
+    ],
+    "arc": "A wanderer who has witnessed every age of the Known Lands and chooses, at the very end, to intervene directly for the first time.",
+    "description": "An elderly traveler known across every era of the Known Lands — descriptions of him in Age of Founding records look identical to reports filed during the Long Wars. He offers counsel to those who ask and sometimes to those who don't. His purposes are unknown. His knowledge is not.",
+    "linkedPlaces": [
+      "place-vale-of-whispers",
+      "place-morngate",
+      "place-ironwood-hall"
+    ],
+    "linkedEvents": [
+      "event-coming-of-eredan",
+      "event-first-council-of-kings",
+      "event-siege-of-stonecrown",
+      "event-road-of-the-wanderer"
+    ],
+    "linkedStories": [
+      "story-the-wandering-grey",
+      "story-last-sentinel"
+    ]
+  },
+  {
+    "id": "char-kessa-of-saltmere",
+    "type": "character",
+    "title": "Kessa of Saltmere",
+    "aliases": [
+      "The Salt Merchant",
+      "Kessa Harborside"
+    ],
+    "canonState": "canon",
+    "role": "protagonist",
+    "faction": "free-coast",
+    "species": "human",
+    "birthPlace": "place-saltmere",
+    "currentPlace": "place-deepwater-docks",
+    "traits": [
+      "reads people faster than she reads contracts",
+      "genuinely comfortable in uncertainty",
+      "loyal to a small set of people; indifferent to causes",
+      "has a route for everywhere and a contact at every stop"
+    ],
+    "arc": "A coastal trader who understands the Post-Collapse better than anyone with a title, because she moves through it at the level of supply and demand, and that never stops even when governments do.",
+    "description": "Born in Saltmere, operating independently across the Free Coast and into the Compact's former territories. Her trading network survived the Long Wars because she never officially picked a side, and survived the Post-Collapse because she had anticipated it by three years.",
+    "linkedPlaces": [
+      "place-saltmere",
+      "place-deepwater-docks",
+      "place-amber-fields"
+    ],
+    "linkedEvents": [
+      "event-pale-king-emerges"
+    ],
+    "linkedStories": [
+      "story-solan-and-the-pale-throne"
+    ]
+  },
+  {
+    "id": "char-lirien-of-the-vale",
+    "type": "character",
+    "title": "Lirien of the Vale",
+    "aliases": [
+      "The Vale-Keeper",
+      "The Ancient One",
+      "She Who Waits"
+    ],
+    "canonState": "canon",
+    "role": "supporting",
+    "faction": null,
+    "species": "unknown",
+    "birthPlace": "place-vale-of-whispers",
+    "currentPlace": "place-vale-of-whispers",
+    "traits": [
+      "completely unhurried",
+      "remembers things no living person witnessed",
+      "asks questions that take years to answer",
+      "does not age visibly; never has"
+    ],
+    "arc": "A being of ancient origin who has waited in the Vale for an event she has foreseen. In the Post-Collapse she leaves the Vale for the first time in recorded memory — and then departs the Known Lands entirely.",
+    "description": "The sole permanent resident of the Vale of Whispers. Her origins are unknown; her age is a matter of speculation across multiple scholarly traditions. She receives visitors occasionally, speaks to them at length about things that turn out to be relevant years later, and has never been known to lie.",
+    "linkedPlaces": [
+      "place-vale-of-whispers"
+    ],
+    "linkedEvents": [
+      "event-coming-of-eredan",
+      "event-lirien-departs"
+    ],
+    "linkedStories": [
+      "story-the-wandering-grey",
+      "story-beyond-the-vale"
     ]
   },
   {
@@ -98,6 +240,76 @@
     ],
     "linkedStories": [
       "story-merchant-roads"
+    ]
+  },
+  {
+    "id": "char-solan-vorne",
+    "type": "character",
+    "title": "Solan Vorne",
+    "aliases": [
+      "The Fieldborn",
+      "Solan of Amber Fields"
+    ],
+    "canonState": "canon",
+    "role": "protagonist",
+    "faction": "northern-reach",
+    "species": "human",
+    "birthPlace": "place-amber-fields",
+    "currentPlace": "place-morngate",
+    "traits": [
+      "stubborn without being stupid",
+      "underestimated consistently",
+      "trusts the people in front of him; distrusts institutions",
+      "better at improvising than planning"
+    ],
+    "arc": "A farmer's son who enters the war for reasons that make sense locally and finds himself at the center of something much larger — and has to decide whether to keep going or go home.",
+    "description": "Born in Amber Fields, trained by no one in particular, and in possession of an unfashionable belief that problems can be solved by the people experiencing them. He arrived in Morngate during the Long Wars as a scout messenger and never quite left.",
+    "linkedPlaces": [
+      "place-amber-fields",
+      "place-morngate"
+    ],
+    "linkedEvents": [
+      "event-solan-leads-charge",
+      "event-morngate-falls"
+    ],
+    "linkedStories": [
+      "story-solan-and-the-pale-throne"
+    ]
+  },
+  {
+    "id": "char-the-pale-king",
+    "type": "character",
+    "title": "The Pale King",
+    "aliases": [
+      "The Eastern Shadow",
+      "He Who Returned",
+      "The Unmade Lord"
+    ],
+    "canonState": "draft",
+    "role": "antagonist",
+    "faction": null,
+    "species": "unknown",
+    "birthPlace": null,
+    "currentPlace": "place-eastern-hold",
+    "traits": [
+      "does not speak in public; communicates through intermediaries",
+      "arrived from beyond the eastern plains with no recorded origin",
+      "those who have served him describe a calmness that is worse than anger",
+      "his purposes are coherent but not human"
+    ],
+    "arc": "An antagonist whose motivation is not conquest in the conventional sense — he is not gathering power, he is completing something. What he is completing is the central mystery of the Post-Collapse arc.",
+    "description": "An entity of unknown origin that arrived at Eastern Hold at the beginning of the Post-Collapse era, transformed the garrison without violence, and used it as the base from which Morngate fell. No record of him exists prior to the Post-Collapse. Scholars disagree on whether he is human.",
+    "linkedPlaces": [
+      "place-eastern-hold",
+      "place-morngate"
+    ],
+    "linkedEvents": [
+      "event-pale-king-emerges",
+      "event-morngate-falls"
+    ],
+    "linkedStories": [
+      "story-the-pale-kings-hunger",
+      "story-solan-and-the-pale-throne"
     ]
   },
   {

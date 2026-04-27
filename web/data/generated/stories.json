@@ -1,5 +1,85 @@
 [
   {
+    "id": "story-beyond-the-vale",
+    "type": "story",
+    "title": "Beyond the Vale",
+    "aliases": [
+      "Lirien's Road",
+      "The Departure"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 11–12, Post-Collapse",
+    "chronoPosition": 0.89,
+    "primaryPlace": "place-vale-of-whispers",
+    "linkedPlaces": [
+      "place-vale-of-whispers",
+      "place-ironwood-hall"
+    ],
+    "protagonists": [
+      "char-lirien-of-the-vale"
+    ],
+    "participants": [],
+    "logline": "The keeper of the Vale of Whispers leaves for the first time in recorded memory — and the story is about what she sees, not where she goes.",
+    "description": "Lirien of the Vale's perspective during the Post-Collapse: why she waited so long, what she was waiting for, and what she found when she finally walked out of the Vale. Told from a perspective that is neither human nor inhuman — something older and quieter. The destination is never revealed. The story ends when she passes the last boundary stone of the Known Lands.",
+    "linkedEvents": [
+      "event-lirien-departs"
+    ],
+    "linkedCharacters": [
+      "char-lirien-of-the-vale"
+    ],
+    "tags": [
+      "mystery",
+      "lirien",
+      "vale",
+      "departure",
+      "post-collapse",
+      "draft"
+    ]
+  },
+  {
+    "id": "story-last-sentinel",
+    "type": "story",
+    "title": "Last Sentinel",
+    "aliases": [
+      "The Sixty Days",
+      "Durn at Stonecrown"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 8–9, The Long Wars",
+    "chronoPosition": 0.39,
+    "primaryPlace": "place-stonecrown",
+    "linkedPlaces": [
+      "place-stonecrown",
+      "place-eastern-hold"
+    ],
+    "protagonists": [
+      "char-durn-stoneshield"
+    ],
+    "participants": [
+      "char-eredan-the-grey"
+    ],
+    "logline": "A garrison commander with three hundred soldiers, a sixty-day siege, and a strange old man who keeps offering advice he refuses to take — all of which turns out to be correct.",
+    "description": "The story of the Siege of Stonecrown told from inside the walls. Durn Stoneshield's daily logs, the difficult decisions about food and water, the moments when he almost gave the order to surrender, and the strange ongoing conversation with Eredan the Grey who arrived on day forty-three and never quite explained what he was doing there.",
+    "linkedEvents": [
+      "event-siege-of-stonecrown",
+      "event-ambush-at-ironwood"
+    ],
+    "linkedCharacters": [
+      "char-durn-stoneshield",
+      "char-eredan-the-grey"
+    ],
+    "tags": [
+      "siege",
+      "stonecrown",
+      "durn",
+      "eredan",
+      "long-wars",
+      "draft"
+    ]
+  },
+  {
     "id": "story-merchant-roads",
     "type": "story",
     "title": "Merchant Roads",
@@ -41,6 +121,52 @@
       "diplomacy",
       "Mira",
       "Compact"
+    ]
+  },
+  {
+    "id": "story-solan-and-the-pale-throne",
+    "type": "story",
+    "title": "Solan and the Pale Throne",
+    "aliases": [
+      "The Fieldborn's War",
+      "Against the Pale"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 28–1 PC, Long Wars to Post-Collapse",
+    "chronoPosition": 0.63,
+    "primaryPlace": "place-morngate",
+    "linkedPlaces": [
+      "place-amber-fields",
+      "place-morngate",
+      "place-eastern-hold"
+    ],
+    "protagonists": [
+      "char-solan-vorne"
+    ],
+    "participants": [
+      "char-kessa-of-saltmere"
+    ],
+    "logline": "A farmer's son from Amber Fields ends up as the last person standing between Morngate and something that arrived from the east and doesn't want to be understood.",
+    "description": "Follows Solan Vorne from the Defense of Amber Fields through his years in Morngate's garrison, his encounters with Kessa of Saltmere, and the night Morngate fell. A ground-level hero's story that refuses to make the heroism clean — Solan does what he can, which is sometimes enough and sometimes isn't.",
+    "linkedEvents": [
+      "event-solan-leads-charge",
+      "event-pale-king-emerges",
+      "event-morngate-falls"
+    ],
+    "linkedCharacters": [
+      "char-solan-vorne",
+      "char-kessa-of-saltmere",
+      "char-the-pale-king"
+    ],
+    "tags": [
+      "hero",
+      "solan",
+      "pale-king",
+      "morngate",
+      "long-wars",
+      "post-collapse",
+      "draft"
     ]
   },
   {
@@ -118,6 +244,46 @@
     ]
   },
   {
+    "id": "story-the-pale-kings-hunger",
+    "type": "story",
+    "title": "The Pale King's Hunger",
+    "aliases": [
+      "From the East",
+      "The Unmade Record"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 38, Long Wars to Year 1, Post-Collapse",
+    "chronoPosition": 0.69,
+    "primaryPlace": "place-eastern-hold",
+    "linkedPlaces": [
+      "place-eastern-hold",
+      "place-morngate"
+    ],
+    "protagonists": [
+      "char-the-pale-king"
+    ],
+    "participants": [],
+    "logline": "The arrival and first months of the Pale King, told from the perspective of those around him — because his own perspective is the one thing the story refuses to provide.",
+    "description": "A deliberate puzzle-box narrative: told entirely through the accounts of garrison soldiers, a single merchant, correspondence between Morngate and Eastern Hold, and a damaged journal of unknown authorship. The Pale King himself never speaks. The reader assembles an impression from fragments, none of which fully agree. The story ends the night Morngate falls.",
+    "linkedEvents": [
+      "event-pale-king-emerges",
+      "event-morngate-falls"
+    ],
+    "linkedCharacters": [
+      "char-the-pale-king"
+    ],
+    "tags": [
+      "mystery",
+      "pale-king",
+      "eastern-hold",
+      "fragmentary",
+      "long-wars",
+      "post-collapse",
+      "draft"
+    ]
+  },
+  {
     "id": "story-the-silence-after",
     "type": "story",
     "title": "The Silence After",
@@ -150,6 +316,50 @@
       "Ashveil",
       "wanderer",
       "aftermath"
+    ]
+  },
+  {
+    "id": "story-the-wandering-grey",
+    "type": "story",
+    "title": "The Wandering Grey",
+    "aliases": [
+      "Eredan's Road",
+      "From the North to the End"
+    ],
+    "canonState": "draft",
+    "era": "age-founding",
+    "date": "Year 12 to Year 19, Post-Collapse",
+    "chronoPosition": 0.08,
+    "primaryPlace": "place-ironwood-hall",
+    "linkedPlaces": [
+      "place-vale-of-whispers",
+      "place-ironwood-hall",
+      "place-morngate"
+    ],
+    "protagonists": [
+      "char-eredan-the-grey"
+    ],
+    "participants": [
+      "char-lirien-of-the-vale"
+    ],
+    "logline": "A wanderer who has seen every age of the Known Lands finally intervenes in the last one — a story told backwards from the moment he walks away.",
+    "description": "The full arc of Eredan the Grey, assembled from fragments: his arrival in the Age of Founding, his presence at every significant turning point, his uncharacteristic intervention at the Siege of Stonecrown, and his final walk in the Post-Collapse. Told in non-linear fashion — each section a different witness, a different era, a different version of the same figure who is always recognizably himself.",
+    "linkedEvents": [
+      "event-coming-of-eredan",
+      "event-first-council-of-kings",
+      "event-road-of-the-wanderer"
+    ],
+    "linkedCharacters": [
+      "char-eredan-the-grey",
+      "char-lirien-of-the-vale"
+    ],
+    "tags": [
+      "wanderer",
+      "eredan",
+      "multi-era",
+      "non-linear",
+      "mystery",
+      "draft"
     ]
   }
 ]

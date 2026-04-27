@@ -1,5 +1,36 @@
 [
   {
+    "id": "event-ambush-at-ironwood",
+    "type": "event",
+    "title": "The Ambush at Ironwood Hall",
+    "aliases": [
+      "The Ironwood Betrayal",
+      "Breaking of the Neutral Ground"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 22, The Long Wars",
+    "chronoPosition": 0.5,
+    "eventType": "battle",
+    "scale": "regional",
+    "primaryPlace": "place-ironwood-hall",
+    "linkedPlaces": [
+      "place-ironwood-hall"
+    ],
+    "participants": [
+      "char-durn-stoneshield"
+    ],
+    "description": "A diplomatic envoy traveling under neutral-ground protection was ambushed inside the bounds of Ironwood Hall. The attackers were never officially identified. Durn Stoneshield was present as part of the Northern Reach escort and survived. The tradition of neutral ground that had held since the First Council of Kings was effectively ended. No subsequent council has been held at Ironwood Hall.",
+    "consequences": [
+      "Ironwood Hall's neutral-ground status is broken",
+      "Diplomatic channels between Northern Reach and Compact collapse",
+      "War enters its most destructive phase",
+      "The question of who ordered the ambush is never officially resolved"
+    ],
+    "linkedStories": [],
+    "linkedEvents": []
+  },
+  {
     "id": "event-burning-of-ashveil",
     "type": "event",
     "title": "The Burning of Ashveil",
@@ -65,6 +96,40 @@
     ]
   },
   {
+    "id": "event-coming-of-eredan",
+    "type": "event",
+    "title": "The Arrival of Eredan",
+    "aliases": [
+      "Eredan's Coming",
+      "The First Grey Appearance"
+    ],
+    "canonState": "canon",
+    "era": "age-founding",
+    "date": "Year 12, Age of Founding",
+    "chronoPosition": 0.05,
+    "eventType": "cultural",
+    "scale": "local",
+    "primaryPlace": "place-vale-of-whispers",
+    "linkedPlaces": [
+      "place-vale-of-whispers",
+      "place-ironwood-hall"
+    ],
+    "participants": [
+      "char-eredan-the-grey",
+      "char-lirien-of-the-vale"
+    ],
+    "description": "The first recorded appearance of Eredan the Grey — entering the Known Lands from the northern highlands and making first contact with Lirien of the Vale. Contemporary accounts describe a meeting of several days in the Vale of Whispers, after which Eredan walked south toward Ironwood Hall and announced himself at the First Council.",
+    "consequences": [
+      "Eredan enters the historical record",
+      "Lirien confirms his arrival was expected",
+      "The Vale of Whispers is marked as a significant location in founding texts"
+    ],
+    "linkedStories": [
+      "story-the-wandering-grey"
+    ],
+    "linkedEvents": []
+  },
+  {
     "id": "event-fall-of-grey-keep",
     "type": "event",
     "title": "The Fall of the Grey Keep",
@@ -91,6 +156,71 @@
     ],
     "linkedStories": [],
     "linkedEvents": []
+  },
+  {
+    "id": "event-first-council-of-kings",
+    "type": "event",
+    "title": "The First Council of Kings",
+    "aliases": [
+      "The Ironwood Accord",
+      "The Great Council"
+    ],
+    "canonState": "canon",
+    "era": "age-founding",
+    "date": "Year 91, Age of Founding",
+    "chronoPosition": 0.31,
+    "eventType": "political",
+    "scale": "world",
+    "primaryPlace": "place-ironwood-hall",
+    "linkedPlaces": [
+      "place-ironwood-hall",
+      "place-morngate"
+    ],
+    "participants": [
+      "char-eredan-the-grey"
+    ],
+    "description": "The only recorded gathering of representatives from every known political entity in the Known Lands. Held in Ironwood Hall, which was chosen because every faction could agree it belonged to none of them. Eredan the Grey attended as an uninvited guest, offered three observations during the opening session, and was seated nonetheless. The Ironwood Accord defined the geographic boundaries that held until the Long Wars.",
+    "consequences": [
+      "Formal recognition of political boundaries across the Known Lands",
+      "Ironwood Hall established as permanent neutral ground",
+      "Eredan the Grey enters official political records for the first time"
+    ],
+    "linkedStories": [
+      "story-the-wandering-grey"
+    ],
+    "linkedEvents": [
+      "event-founding-morngate"
+    ]
+  },
+  {
+    "id": "event-founding-morngate",
+    "type": "event",
+    "title": "The Founding of Morngate",
+    "aliases": [
+      "Charter of the Eastern Reaches",
+      "Morngate's First Council"
+    ],
+    "canonState": "canon",
+    "era": "age-founding",
+    "date": "Year 55, Age of Founding",
+    "chronoPosition": 0.22,
+    "eventType": "founding",
+    "scale": "regional",
+    "primaryPlace": "place-morngate",
+    "linkedPlaces": [
+      "place-morngate"
+    ],
+    "participants": [],
+    "description": "Five trading families on the eastern ridge pooled resources to construct permanent walls around their settlement, drafting a founding charter that gave equal voice to each house. Unlike the Compact's later model, Morngate's charter explicitly included a clause dissolving the council if any single house accumulated majority control — a clause that was tested, and held, four times in the city's history.",
+    "consequences": [
+      "Morngate established as a permanent fortified city",
+      "Eastern trade routes anchored to a fixed point for the first time",
+      "The eastern reaches gain a recognized civic center"
+    ],
+    "linkedStories": [],
+    "linkedEvents": [
+      "event-first-council-of-kings"
+    ]
   },
   {
     "id": "event-founding-solmark",
@@ -186,6 +316,179 @@
     ]
   },
   {
+    "id": "event-lirien-departs",
+    "type": "event",
+    "title": "Lirien Leaves the Vale",
+    "aliases": [
+      "The Vale-Keeper's Departure",
+      "End of the Waiting"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 11, Post-Collapse",
+    "chronoPosition": 0.82,
+    "eventType": "cultural",
+    "scale": "world",
+    "primaryPlace": "place-vale-of-whispers",
+    "linkedPlaces": [
+      "place-vale-of-whispers"
+    ],
+    "participants": [
+      "char-lirien-of-the-vale"
+    ],
+    "description": "Lirien of the Vale left the Vale of Whispers for the first time in recorded memory. A traveler who passed through the vale three days later found the standing stones unchanged and the single unnamed tree intact, but Lirien gone and her belongings absent. She was seen twice afterward — once on the road to the northern coast, once near the ruins of Ashveil — and then not again. No account of her destination exists.",
+    "consequences": [
+      "The Vale of Whispers loses its only permanent resident",
+      "The end of an era of watchfulness that predates the Known Lands",
+      "Her destination and purpose unknown; this is deliberate"
+    ],
+    "linkedStories": [
+      "story-beyond-the-vale"
+    ],
+    "linkedEvents": []
+  },
+  {
+    "id": "event-morngate-falls",
+    "type": "event",
+    "title": "The Fall of Morngate",
+    "aliases": [
+      "The End of the East",
+      "Morngate's Last Day"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 1, Post-Collapse",
+    "chronoPosition": 0.74,
+    "eventType": "collapse",
+    "scale": "world",
+    "primaryPlace": "place-morngate",
+    "linkedPlaces": [
+      "place-morngate",
+      "place-eastern-hold"
+    ],
+    "participants": [
+      "char-the-pale-king",
+      "char-solan-vorne"
+    ],
+    "description": "Morngate fell in the first year of the Post-Collapse — not by siege, not by starvation, but by an event that witnesses describe inconsistently. The walls remained standing. The guild records were untouched. Solan Vorne was present and survived. He does not discuss what he saw, and no official account has been filed. The city is now under the Pale King's influence, though what that means in practical terms varies by the district and the day.",
+    "consequences": [
+      "Morngate falls under the Pale King's influence",
+      "Eastern trade routes collapse",
+      "Solan Vorne becomes one of the last independent witnesses of the event",
+      "The Known Lands enter genuine uncertainty about what the Post-Collapse means"
+    ],
+    "linkedStories": [
+      "story-solan-and-the-pale-throne"
+    ],
+    "linkedEvents": [
+      "event-pale-king-emerges"
+    ]
+  },
+  {
+    "id": "event-pale-king-emerges",
+    "type": "event",
+    "title": "The Emergence at Eastern Hold",
+    "aliases": [
+      "The Pale Arrival",
+      "What Happened at the Hold"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 38, The Long Wars",
+    "chronoPosition": 0.68,
+    "eventType": "mythic",
+    "scale": "world",
+    "primaryPlace": "place-eastern-hold",
+    "linkedPlaces": [
+      "place-eastern-hold",
+      "place-morngate"
+    ],
+    "participants": [
+      "char-the-pale-king",
+      "char-kessa-of-saltmere"
+    ],
+    "description": "Something arrived at Eastern Hold in the final years of the Long Wars. The garrison's reports changed in tone and content across three months, then stopped. When Kessa of Saltmere arrived on a routine delivery, she found the garrison still at their posts, the walls intact, the supply records perfectly maintained — and the garrison loyal to something other than the Northern Reach. She was the first outside person to observe this. She left without completing her delivery and rode to Morngate.",
+    "consequences": [
+      "The Pale King establishes a presence in the Known Lands",
+      "Eastern Hold's allegiance permanently transferred",
+      "Morngate placed on high alert; no military response mounted",
+      "Kessa of Saltmere becomes the most credible witness to a phenomenon no one wants to officially acknowledge"
+    ],
+    "linkedStories": [
+      "story-the-pale-kings-hunger"
+    ],
+    "linkedEvents": []
+  },
+  {
+    "id": "event-road-of-the-wanderer",
+    "type": "event",
+    "title": "The Road of the Wanderer",
+    "aliases": [
+      "Eredan's Last Walk",
+      "The Grey Ending"
+    ],
+    "canonState": "draft",
+    "era": "post-collapse",
+    "date": "Year 19, Post-Collapse",
+    "chronoPosition": 0.97,
+    "eventType": "mythic",
+    "scale": "world",
+    "primaryPlace": "place-ironwood-hall",
+    "linkedPlaces": [
+      "place-ironwood-hall",
+      "place-amber-fields"
+    ],
+    "participants": [
+      "char-eredan-the-grey"
+    ],
+    "description": "Eredan the Grey was seen walking the road between Ironwood Hall and Amber Fields in the nineteenth year of the Post-Collapse. He stopped at both places, spoke with those present, and continued north. He has not been reliably reported since. What he said at Amber Fields was recorded by a young farmer and preserved. What he said at Ironwood Hall was not written down — those present say they could not remember the words immediately after he left, only the feeling of having understood something.",
+    "consequences": [
+      "Eredan exits the historical record",
+      "His words at Amber Fields become a foundational text in several local traditions",
+      "Ironwood Hall is visited by pilgrims seeking to stand where he stood",
+      "The nature of his departure — like his arrival — is unexplained"
+    ],
+    "linkedStories": [
+      "story-the-wandering-grey"
+    ],
+    "linkedEvents": []
+  },
+  {
+    "id": "event-siege-of-stonecrown",
+    "type": "event",
+    "title": "The Siege of Stonecrown",
+    "aliases": [
+      "Durn's Siege",
+      "The Sixty Days"
+    ],
+    "canonState": "canon",
+    "era": "long-wars",
+    "date": "Year 8, The Long Wars",
+    "chronoPosition": 0.37,
+    "eventType": "battle",
+    "scale": "regional",
+    "primaryPlace": "place-stonecrown",
+    "linkedPlaces": [
+      "place-stonecrown",
+      "place-eastern-hold"
+    ],
+    "participants": [
+      "char-durn-stoneshield",
+      "char-eredan-the-grey"
+    ],
+    "description": "A Compact-aligned force besieged Stonecrown for sixty days in an attempt to control the western sea lanes. Durn Stoneshield, in his fourth year of command, held the fortress with a garrison of three hundred against a force of approximately two thousand. Eredan the Grey arrived on day forty-three and offered three pieces of advice. Durn took none of them. They were all correct. The siege was broken by a counter-raid on the attackers' supply column, which Durn planned and executed himself.",
+    "consequences": [
+      "Stonecrown's reputation as impregnable is established",
+      "Durn Stoneshield elevated to senior Northern Reach command",
+      "Compact forces redirected from western approach",
+      "Eredan and Durn's peculiar friendship begins"
+    ],
+    "linkedStories": [
+      "story-last-sentinel"
+    ],
+    "linkedEvents": []
+  },
+  {
     "id": "event-siege-of-vareth",
     "type": "event",
     "title": "The Siege of Vareth",
@@ -218,6 +521,39 @@
     "linkedEvents": [
       "event-fall-of-grey-keep"
     ]
+  },
+  {
+    "id": "event-solan-leads-charge",
+    "type": "event",
+    "title": "The Defense of Amber Fields",
+    "aliases": [
+      "Solan's Charge",
+      "The Fieldborn Stand"
+    ],
+    "canonState": "draft",
+    "era": "long-wars",
+    "date": "Year 28, The Long Wars",
+    "chronoPosition": 0.6,
+    "eventType": "battle",
+    "scale": "local",
+    "primaryPlace": "place-amber-fields",
+    "linkedPlaces": [
+      "place-amber-fields",
+      "place-morngate"
+    ],
+    "participants": [
+      "char-solan-vorne"
+    ],
+    "description": "A foraging column from a Compact-aligned mercenary band moved on Amber Fields during a supply shortage. Solan Vorne, then a courier attached to Morngate's garrison, was visiting his family. He organized the village's available men — twelve farmers, two retired soldiers, and a very angry miller — into a blocking force. The column retreated. Official records do not note the engagement. Solan was promoted twice in the following month, for reasons attributed to unrelated courier work.",
+    "consequences": [
+      "Amber Fields spared from destruction",
+      "Solan Vorne's reputation established in Morngate's garrison",
+      "Solan promoted; his village connection becomes a liability he manages carefully"
+    ],
+    "linkedStories": [
+      "story-solan-and-the-pale-throne"
+    ],
+    "linkedEvents": []
   },
   {
     "id": "event-thornwood-watch-abandoned",

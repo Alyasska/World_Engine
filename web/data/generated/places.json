@@ -1,5 +1,35 @@
 [
   {
+    "id": "place-amber-fields",
+    "type": "place",
+    "title": "Amber Fields",
+    "aliases": [
+      "The Fields",
+      "Solan's Village"
+    ],
+    "canonState": "canon",
+    "placeType": "village",
+    "region": "northern-reach",
+    "faction": null,
+    "layer": "geography",
+    "description": "A farming village on the southwestern lowlands, named for the color of its grain at harvest. Far from any political center, it has survived wars, famines, and the Post-Collapse by being too small to matter to armies and too productive to destroy. Solan Vorne was born here.",
+    "linkedCharacters": [
+      "char-solan-vorne",
+      "char-kessa-of-saltmere"
+    ],
+    "linkedEvents": [
+      "event-solan-leads-charge",
+      "event-road-of-the-wanderer"
+    ],
+    "linkedStories": [
+      "story-solan-and-the-pale-throne"
+    ],
+    "mapRef": {
+      "x": 168,
+      "y": 478
+    }
+  },
+  {
     "id": "place-ashveil",
     "type": "place",
     "title": "Ashveil",
@@ -23,6 +53,30 @@
     "mapRef": {
       "x": 460,
       "y": 432
+    }
+  },
+  {
+    "id": "place-deepwater-docks",
+    "type": "place",
+    "title": "Deepwater Docks",
+    "aliases": [
+      "The Deep Harbor",
+      "South Quays"
+    ],
+    "canonState": "canon",
+    "placeType": "town",
+    "region": "free-coast",
+    "faction": "free-coast",
+    "layer": "political",
+    "description": "A purpose-built harbor town on the southeastern coast, carved into a natural deep-water bay that can berth ships too large for Port Maren. The town has no civic identity beyond its function — it exists to load and unload cargo. Half the population works the docks; the other half exists to feed and shelter the first half.",
+    "linkedCharacters": [
+      "char-kessa-of-saltmere"
+    ],
+    "linkedEvents": [],
+    "linkedStories": [],
+    "mapRef": {
+      "x": 628,
+      "y": 505
     }
   },
   {
@@ -55,6 +109,36 @@
     }
   },
   {
+    "id": "place-eastern-hold",
+    "type": "place",
+    "title": "Eastern Hold",
+    "aliases": [
+      "The Far Hold",
+      "Pale Gate"
+    ],
+    "canonState": "canon",
+    "placeType": "fortress",
+    "region": "northern-reach",
+    "faction": "northern-reach",
+    "layer": "political",
+    "description": "The easternmost outpost of any known political entity — a bleak fortification on the edge of the unmapped eastern plains. For most of its history it served as a relay station for trade caravans and a deterrent against eastern raids. In the Post-Collapse, the Pale King made it his seat of power.",
+    "linkedCharacters": [
+      "char-durn-stoneshield",
+      "char-the-pale-king"
+    ],
+    "linkedEvents": [
+      "event-pale-king-emerges",
+      "event-morngate-falls"
+    ],
+    "linkedStories": [
+      "story-the-pale-kings-hunger"
+    ],
+    "mapRef": {
+      "x": 785,
+      "y": 290
+    }
+  },
+  {
     "id": "place-grey-keep",
     "type": "place",
     "title": "The Grey Keep",
@@ -76,6 +160,70 @@
     "mapRef": {
       "x": 175,
       "y": 148
+    }
+  },
+  {
+    "id": "place-ironwood-hall",
+    "type": "place",
+    "title": "Ironwood Hall",
+    "aliases": [
+      "The Hall",
+      "Council's Grove"
+    ],
+    "canonState": "canon",
+    "placeType": "landmark",
+    "region": "northern-reach",
+    "faction": null,
+    "layer": "geography",
+    "description": "A great hall built inside and around a grove of ironwood trees so old their trunks have grown through the walls. Neutral ground by tradition — no faction has ever garrisoned it, no army has marched through it, and no record exists of its original construction. The First Council of Kings was held here.",
+    "linkedCharacters": [
+      "char-eredan-the-grey"
+    ],
+    "linkedEvents": [
+      "event-coming-of-eredan",
+      "event-first-council-of-kings",
+      "event-ambush-at-ironwood",
+      "event-road-of-the-wanderer"
+    ],
+    "linkedStories": [
+      "story-the-wandering-grey"
+    ],
+    "mapRef": {
+      "x": 480,
+      "y": 85
+    }
+  },
+  {
+    "id": "place-morngate",
+    "type": "place",
+    "title": "Morngate",
+    "aliases": [
+      "The Eastern City",
+      "Gate of the Morning"
+    ],
+    "canonState": "canon",
+    "placeType": "city",
+    "region": "the-compact",
+    "faction": "the-compact",
+    "layer": "political",
+    "description": "The greatest trading city of the eastern reaches, built on a high ridge overlooking the plains below. Its white towers are visible from a day's ride in any direction. The city changed hands three times during the Long Wars, and each new ruler found the merchant guilds more powerful than the armies that claimed it.",
+    "linkedCharacters": [
+      "char-eredan-the-grey",
+      "char-solan-vorne",
+      "char-the-pale-king"
+    ],
+    "linkedEvents": [
+      "event-founding-morngate",
+      "event-solan-leads-charge",
+      "event-morngate-falls"
+    ],
+    "linkedStories": [
+      "story-solan-and-the-pale-throne",
+      "story-the-wandering-grey"
+    ],
+    "mapRef": {
+      "x": 720,
+      "y": 150
     }
   },
   {
@@ -104,6 +252,30 @@
     "mapRef": {
       "x": 685,
       "y": 455
+    }
+  },
+  {
+    "id": "place-saltmere",
+    "type": "place",
+    "title": "Saltmere",
+    "aliases": [
+      "The Salt Village",
+      "Kessa's Port"
+    ],
+    "canonState": "canon",
+    "placeType": "village",
+    "region": "free-coast",
+    "faction": "free-coast",
+    "layer": "geography",
+    "description": "A small fishing and salt-harvesting village at the mouth of a shallow coastal inlet. The salt pans here produce a distinctive grey salt prized by kitchens across the Known Lands. Kessa of Saltmere was born here and named after it, which she considers the most useful inheritance her family ever gave her.",
+    "linkedCharacters": [
+      "char-kessa-of-saltmere"
+    ],
+    "linkedEvents": [],
+    "linkedStories": [],
+    "mapRef": {
+      "x": 338,
+      "y": 528
     }
   },
   {
@@ -138,6 +310,34 @@
     }
   },
   {
+    "id": "place-stonecrown",
+    "type": "place",
+    "title": "Stonecrown",
+    "aliases": [
+      "The Crowned Rock",
+      "Western Bastion"
+    ],
+    "canonState": "canon",
+    "placeType": "fortress",
+    "region": "northern-reach",
+    "faction": "northern-reach",
+    "layer": "political",
+    "description": "A fortress carved directly into a coastal promontory, its battlements rising above the western cliffs like a crown of dark stone. Built to guard the sea lanes against raiders from beyond the western horizon. The garrison has never exceeded three hundred, but the position has held against forces ten times that size.",
+    "linkedCharacters": [
+      "char-durn-stoneshield"
+    ],
+    "linkedEvents": [
+      "event-siege-of-stonecrown"
+    ],
+    "linkedStories": [
+      "story-last-sentinel"
+    ],
+    "mapRef": {
+      "x": 110,
+      "y": 260
+    }
+  },
+  {
     "id": "place-thornwood-watch",
     "type": "place",
     "title": "Thornwood Watch",
@@ -159,6 +359,37 @@
     "mapRef": {
       "x": 425,
       "y": 152
+    }
+  },
+  {
+    "id": "place-vale-of-whispers",
+    "type": "place",
+    "title": "Vale of Whispers",
+    "aliases": [
+      "The Whispering Vale",
+      "Lirien's Vale"
+    ],
+    "canonState": "canon",
+    "placeType": "landmark",
+    "region": "northern-reach",
+    "faction": null,
+    "layer": "geography",
+    "description": "A hidden valley in the northern highlands where the wind through the standing stones sounds like conversation. No settlement exists here — only the stones, a cold stream, and a single ancient tree of a species no scholar has ever named. Lirien of the Vale is the only permanent resident anyone has ever recorded.",
+    "linkedCharacters": [
+      "char-lirien-of-the-vale",
+      "char-eredan-the-grey"
+    ],
+    "linkedEvents": [
+      "event-coming-of-eredan",
+      "event-lirien-departs"
+    ],
+    "linkedStories": [
+      "story-beyond-the-vale",
+      "story-the-wandering-grey"
+    ],
+    "mapRef": {
+      "x": 352,
+      "y": 90
     }
   },
   {
